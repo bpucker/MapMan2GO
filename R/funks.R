@@ -99,13 +99,11 @@ addAncestors <- function(go.terms, go.obo = getOption("MapMan2GO.go.obo", GO.OBO
 #' 'Shannon.Entropy' is the measured entropy of compound GO annotations
 #' retrieved for the genes related to \code{map.man.bin}. The second entry
 #' 'genes.goa' is a list with each genes' compound GO Annotations,
-#' 'mutual.information' holds the mutual information between the Bin's GOA and
-#' those found for the Bin's reference proteins, 'MapManBin.GO' is the
-#' intersection of the genes' compound GO Annotations to be used as the
-#' MapMan-Bin's compound GO Annotation, n.GO is the number of GO Terms in the
-#' MapMan-Bin's compound GO Annotation, median.n.GO is the median of the number
-#' of GO Terms in the genes' GOAs, and n.genes is the number of genes related
-#' to \code{map.man.bin}.
+#' 'MapManBin.GO' is the intersection of the genes' compound GO Annotations to
+#' be used as the MapMan-Bin's compound GO Annotation, n.GO is the number of GO
+#' Terms in the MapMan-Bin's compound GO Annotation, median.n.GO is the median
+#' of the number of GO Terms in the genes' GOAs, and n.genes is the number of
+#' genes related to \code{map.man.bin}.
 compoundGoAnnotationEntropy <- function(map.man.bin, mm.bins.vs.genes = getOption("MapMan2GO.seq.sim.tbl", 
     mm.bins.vs.sprot), mm.bin.col = getOption("MapMan2GO.seq.sim.tbl.bin.col", 
     "MapManBin"), mm.gene.col = getOption("MapMan2GO.seq.sim.tbl.gene.col", "Swissprot.Short.ID"), 
@@ -119,14 +117,13 @@ compoundGoAnnotationEntropy <- function(map.man.bin, mm.bins.vs.genes = getOptio
             compoundGoAnnotation(g.id, goa.tbl, gene.col, go.col)
         }), gene.ids)
         s.e <- shannonEntropy(table(as.character(unlist(lapply(genes.goa, paste, collapse = ",")))))
-        m.i <- mutualInformationBinGoaGenesGoas(genes.goa)
         bin.goa <- Reduce(intersect, genes.goa[which(as.logical(lapply(genes.goa, 
             function(x) length(x) > 0 && !is.na(x) && !is.null(x))))])
         if (extend.goas.with.ancestors) {
             bin.goa <- addAncestors(bin.goa)
         }
         bin.goa <- sort(bin.goa)
-        list(Shannon.Entropy = s.e, genes.goa = genes.goa, mutual.information = m.i, 
+        list(Shannon.Entropy = s.e, genes.goa = genes.goa, 
             MapManBin.GO = paste(bin.goa, collapse = ","), n.GO = length(bin.goa), 
             median.n.GO = median(unlist(lapply(genes.goa, length)), na.rm = TRUE), 
             n.genes = length(gene.ids))
@@ -152,27 +149,6 @@ goCounts <- function(go.sample.space, go.annos) {
     }, error = function(e) {
         browser()
     })
-}
-
-#' Compute the mutual information between a MapMan Bin's GOA and the GOAs found
-#' for it's reference genes. In this, regard each single GO Term as a event in
-#' the sample space. Because each GO Term can only have binary count values in
-#' the Bin's GOA the Bin's counts are normalized by multiplying with them with
-#' the number of reference genes.
-#'
-#' @param genes.goa A list of character vectors. Names are reference gene
-#' identifiers and values, the character vectors, represent each gene's GO Term
-#' Annotations. See \code{compoundGoAnnotationEntropy} for more details.
-#'
-#' @export
-#' @return A numeric value, the computed mutual information in bits (log2).
-mutualInformationBinGoaGenesGoas <- function(genes.goa) {
-    genes.gos <- Reduce(c, genes.goa)
-    bin.gos <- Reduce(intersect, genes.goa)
-    go.sample.space <- unique(genes.gos)
-    genes.go.counts <- goCounts(go.sample.space, genes.gos)
-    bin.go.counts.norm <- length(genes.goa) * goCounts(go.sample.space, bin.gos)
-    mi.plugin(rbind(genes.go.counts, bin.go.counts.norm), unit = "log2")
 }
 
 #' Generates a two row plot with the first one being a Histogram and the second

@@ -163,11 +163,6 @@ plot(mm.2.go.df$n.genes, mm.2.go.df$n.GO, xlab = "Number of genes per MapMan-Bin
     ylab = "Number of GO Terms in MapMan-Bin-GOA", pch = 20)
 dev.off()
 
-##' - Mutual information Histogram
-pdf(file.path(input.args[[1]], "inst", "DistributionOfMutualInformationBetweenBinGoaAndReferenceGoas.pdf"))
-plotDistAsHistAndBox(mm.2.go.df$mutual.information, "Mutual Information between Bin GOA and reference GOAs [bits]")
-dev.off()
-
 #' Plot the percent of shared words among the MapMan-Bins and GOAs descriptions
 pdf(file.path(input.args[[1]], "inst", "MapManBin.GOAs.Shared.Words.pdf"))
 plotDistAsHistAndBox(info.bins.words.all$percent.shared.words, "Percent of shared words among MapMan-Bins and GOAs")
