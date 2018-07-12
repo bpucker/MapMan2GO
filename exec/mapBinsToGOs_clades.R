@@ -111,14 +111,7 @@ for (ref.set.name in names(ref.prot.sets)) {
     plot(mm.2.go.df$n.genes, mm.2.go.df$n.GO, xlab = "Number of genes per MapMan-Bin", 
         ylab = "Number of GO Terms in MapMan-Bin-GOA", pch = 20)
     dev.off()
-    #' - Mutual information Histogram
-#    fl.name <- paste(ref.set.name, "DistributionOfMutualInformationBetweenBinGoaAndReferenceGoas.pdf", 
-#        sep = "_")
-#    pdf(file.path(input.args[[1]], "inst", fl.name))
-#    plotDistAsHistAndBox(mm.2.go.df$mutual.information, "Mutual Information between Bin GOA and reference GOAs [bits]")
-#    dev.off()
     #' - Histogram of number of MapMan-Bins sharing identical GOAs
-    #' @Yaxal: Example to be used in all cases of writing files (PDF, tables, etc):
     fl.name <- paste(subset.name, "NumberOfMapManBinsSharingIdentGOAsHist.pdf", 
         sep = "_")
     pdf(file.path(input.args[[1]], "inst", fl.name))
