@@ -218,11 +218,11 @@ compoundGoAnnotationEntropy <- function(map.man.bin, mm.bins.vs.genes = getOptio
 #' @export
 shannonEntropyForGoas <- function(genes.goa, intersect.with = getOption("MapMan2GO.entropy.intersect.compound.GOA.with", 
     NULL), entropy.funk = getOption("MapMan2GO.entropy.funk", MapMan2GO::shannonEntropy)) {
-    shannonEntropy(table(as.character(unlist(lapply(genes.goa, function(gene.goa) {
+    shannonEntropy(table(as.character(unlist(lapply(genes.goa, function(goa.i) {
         if (length(intersect.with > 0)) {
-            gene.goa <- intersect(genes.goa, intersect.with)
+            goa.i <- intersect(goa.i, intersect.with)
         }
-        paste(gene.goa, collapse = ",")
+        paste(goa.i, collapse = ",")
     })))))
 }
 
