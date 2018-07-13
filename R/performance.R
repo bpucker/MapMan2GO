@@ -27,8 +27,8 @@ performanceScores <- function(true.annos, predicted.annos, universe.annos = getO
     p.a <- unique(predicted.annos)
     if ((is.null(t.a) || all(is.na(t.a)) || length(t.a) == 0) && na.for.empty.references) {
         return(data.frame(n.truth = 0, n.pred = length(p.a), true.pos = NA, false.pos = NA, 
-            precision = NA, recall = NA, false.pos.rate = NA, specificity = NA, f1.score = NA, mcc = NA, 
-            stringsAsFactors = FALSE))
+            precision = NA, recall = NA, false.pos.rate = NA, specificity = NA, 
+            f1.score = NA, mcc = NA, stringsAsFactors = FALSE))
     }
     true.pos <- sum(t.a %in% p.a)
     false.pos <- length(p.a) - true.pos
@@ -46,12 +46,12 @@ performanceScores <- function(true.annos, predicted.annos, universe.annos = getO
         0 else true.pos/length(t.a)
     f1.score <- if (precision + recall == 0) 
         0 else 2 * precision * recall/(precision + recall)
-    specificity <- if (length(negatives) == 0)
+    specificity <- if (length(negatives) == 0) 
         0 else length(negatives)/(false.pos + length(negatives))
-  
+    
     data.frame(n.truth = length(t.a), n.pred = length(p.a), true.pos = true.pos, 
-        false.pos = false.pos, precision = precision, recall = recall, false.pos.rate = fp.rate, specificity = specificity,
-        f1.score = f1.score, mcc = mcc, stringsAsFactors = FALSE)
+        false.pos = false.pos, precision = precision, recall = recall, false.pos.rate = fp.rate, 
+        specificity = specificity, f1.score = f1.score, mcc = mcc, stringsAsFactors = FALSE)
 }
 
 #' Tests the function \code{performanceScores}.
