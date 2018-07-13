@@ -8,7 +8,7 @@ to the argument node \code{x}.}
 goDepth(x, n = 1, go.ont = getOption("MapMan2GO.GO.Ontology", GO.OBO))
 }
 \arguments{
-\item{x}{The node for which to compute its depth, e.g. 'GO:004437'.}
+\item{x}{The node for which to compute its depth, e.g. 'GO:0044237'.}
 
 \item{n}{The minimum number of edges any node has distance to the root node.
 Default is \code{1}.}
