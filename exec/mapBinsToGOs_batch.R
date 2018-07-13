@@ -1,7 +1,7 @@
 require(MapMan2GO)
 options(mc.cores = detectCores())
 
-message("USAGE: Rscript path/2/MapMan2GO/exec/mapBinsToGOs_batch.R path/2/MapMan2GO [# start_index] [# stop_index] [path_partial_result_file]")
+message("USAGE: Rscript path/2/MapMan2GO/exec/mapBinsToGOs_batch.R path/2/MercatorRawResults.tsf path/2/MapMan2GO [# start_index] [# stop_index] [path_partial_result_file]")
 
 input.args <- commandArgs(trailingOnly = TRUE)
 
@@ -24,20 +24,20 @@ result.file <- if (length(input.args) == 4) {
 mm.leaf.bins <- mm.leaf.bins.all[start.i:stop.i]
 rm( mm.leaf.bins.all )
 
-#' Map MapMan-Bins to compound Gene Ontology Term Annotations (GOA)
+
 mm.2.go <- setNames(mclapply(mm.leaf.bins, compoundGoAnnotationEntropy), mm.leaf.bins)
 mm.2.go.df <- Reduce(rbind, mclapply(names(mm.2.go), function(x) {
     y <- mm.2.go[[x]]
-    data.frame(MapManBin = x, MapManBin.GO = y[["MapManBin.GO"]], Shannon.Entropy = y[["Shannon.Entropy"]],
-         n.GO = y[["n.GO"]], n.genes = y[["n.genes"]],
-        median.n.GO = y[["median.n.GO"]], stringsAsFactors = FALSE)
+    data.frame(MapManBin = x, MapManBin.GO = y[["MapManBin.GO"]], Shannon.Entropy = y[["Shannon.Entropy"]], Shannon.Entropy.BP = y[["Shannon.Entropy.BP"]], Shannon.Entropy.CC = y[["Shannon.Entropy.CC"]], Shannon.Entropy.MF = y[["Shannon.Entropy.MF"]], Shannon.Entropy.not.used = y[["Shannon.Entropy.not.used"]], Shannon.Entropy.not.used.BP = y[["Shannon.Entropy.not.used.BP"]], Shannon.Entropy.not.used.CC = y[["Shannon.Entropy.not.used.CC"]], Shannon.Entropy.not.used.MF = y[["Shannon.Entropy.not.used.MF"]],  
+        n.GO = y[["n.GO"]], n.genes = y[["n.genes"]], median.n.GO = y[["median.n.GO"]], 
+        stringsAsFactors = FALSE)
 }))
-
 #' Add a full description for each MapMan-Bin's GOA including GO-Term names:
 go.terms.not.in.db <- c()
 mm.2.full.desc <- Reduce(rbind, mclapply(names(mm.2.go), function(m.b) {
     m.b.gos <- Reduce(intersect, mm.2.go[[m.b]]$genes.goa)
-    Reduce(rbind, lapply(m.b.gos, function(g.id) {
+    Reduce(rbind, mclapply(m.b.gos, function(g.id) {
+        # 
         if (g.id %in% GO.OBO$id) {
             g.name <- GO.OBO$name[[g.id]]
             g.ancestors <- GO.OBO$ancestors[[g.id]]
@@ -56,29 +56,32 @@ mm.2.full.desc <- Reduce(rbind, mclapply(names(mm.2.go), function(m.b) {
         }
     }))
 }))
-
 #' Warn about missing GO Terms:
 if (length(go.terms.not.in.db) > 0) {
-    message("WARNING: The following GO Terms were assigned to MapManBin(s), but had no entry in the installed 'GO.db' package:\n",
+    message("WARNING: The following GO Terms were assigned to MapManBin(s), but had no entry in the installed 'GO.db' package:\n", 
         paste(sort(unique(go.terms.not.in.db)), collapse = ", "))
 }
 
 
 #' Add the MapMan Bins Descriptions to the above table:
-mm.fst <- read.fasta(file.path(path.package("MapMan2GO"), "mapman4.fasta"), seqtype = "AA",
-    strip.desc = TRUE, as.string = TRUE)
-mm.desc.df <- unique(Reduce(rbind, mclapply(mm.fst, function(x) {
-    x.data <- strsplit(attr(x, "Annot"), " \\| ")[[1]]
-    data.frame(MapManBin = x.data[[1]], Description = x.data[[2]], stringsAsFactors = FALSE)
-})))
-mm.2.full.desc$Bin.Description <- as.character(unlist(mclapply(mm.2.full.desc$MapManBin,
-    function(x) {
-      ifelse( !is.null(which(mm.desc.df$MapManBin == x)), mm.desc.df[which(mm.desc.df$MapManBin == x), "Description"], NA )
+mr.full <- readMercatorResultTable(input.args[[1]], add.go.terms = FALSE)
+mm.desc.df <- unique(mr.full[, c("BINCODE", "NAME")])
+names(mm.desc.df) <- c("MapManBin", "Description")
 
+value = integer(0)
+mm.2.full.desc$Bin.Description <- as.character(unlist(mclapply(mm.2.full.desc$MapManBin, 
+    function(x) {
+        if (identical(which(mm.desc.df$MapManBin == x), value)) {
+            mm.2.full.desc$Bin.Description <- NA
+        } else {
+            mm.desc.df[which(mm.desc.df$MapManBin == x), "Description"]
+        }
+        
     })))
 
 
 #' Save results:
 save(mm.2.go, mm.2.go.df, mm.2.full.desc, mm.desc.df, file = result.file)
+
 
 message("DONE")
