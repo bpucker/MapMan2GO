@@ -14,7 +14,9 @@ compoundGoAnnotationEntropy(map.man.bin,
   ukb.goa.hits), gene.col = getOption("MapMan2GO.goa.tbl.gene.col", 3),
   go.col = getOption("MapMan2GO.goa.tbl.go.col", 2),
   extend.goas.with.ancestors = getOption("MapMan2GO.extend.goa.with.ancestors",
-  TRUE))
+  TRUE), bp.gos = getOption("MapMan2GO.bp.gos", GO.BP),
+  cc.gos = getOption("MapMan2GO.cc.gos", GO.CC),
+  mf.gos = getOption("MapMan2GO.mf.gos", GO.MF))
 }
 \arguments{
 \item{map.man.bin}{The identifier of the MapMan Bin to assign GO terms to.}
@@ -45,7 +47,7 @@ the GO terms. Default is \code{getOption('MapMan2GO.goa.tbl.go.col',2)}}
 proteins' GOA with the ancestors of the respective GO Terms. Default is
 \code{getOption('MapMan2GO.extend.goa.with.ancestors', TRUE)}.}
 
-\item{mm.bins.vs.genes}{An instance of \code{data.frame} with at least two
+\item{mm.bins.vs.genes}{An instance of \code{data.table} with at least two
 columns. It must hold mappings of \code{map.man.bin} to genes at least
 partially found in \code{goa.tbl}.}
 }

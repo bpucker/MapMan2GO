@@ -2,7 +2,7 @@
 % Please edit documentation in R/funks.R
 \name{readMercatorResultTable}
 \alias{readMercatorResultTable}
-\title{Wraps \code{base::read.table} to parse the result produced by 'Mercator'.}
+\title{Wraps \code{data.table::fread} to parse the result produced by 'Mercator'.}
 \usage{
 readMercatorResultTable(path.2.mercator.result.tbl,
   add.go.terms = getOption("MapMan2GO.add.GO.terms", TRUE),
@@ -31,9 +31,10 @@ identifiers. Default is \code{getOption(
 'MapMan2GO.read.mercator.sanitize.accession', FALSE)}.}
 }
 \value{
-An instance of \code{base::data.frame} holding the results of the
-mercator annotation pipeline.
+An instance of \code{data.table} holding the results of the mercator
+annotation pipeline. Note, if you want the result to be a
+\code{base::data.frame} call \code{as.data.frame} and the result.
 }
 \description{
-Wraps \code{base::read.table} to parse the result produced by 'Mercator'.
+Wraps \code{data.table::fread} to parse the result produced by 'Mercator'.
 }
