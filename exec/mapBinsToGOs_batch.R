@@ -1,7 +1,7 @@
 require(MapMan2GO)
 options(mc.cores = detectCores())
 
-message("USAGE: Rscript path/2/MapMan2GO/exec/mapBinsToGOs_batch.R path/2/MercatorRawResults.tsf path/2/MapMan2GO [# start_index] [# stop_index] [path_partial_result_file]")
+message("USAGE: Rscript path/2/MapMan2GO/exec/mapBinsToGOs_batch.R path/2/MercatorRawResults.tsf start_index stop_index path_partial_result_file")
 
 input.args <- commandArgs(trailingOnly = TRUE)
 
@@ -9,28 +9,25 @@ input.args <- commandArgs(trailingOnly = TRUE)
 mm.leaf.bins.all <- unique(mm.bins.vs.sprot$MapManBin)
 
 #' Subset according to input arguments:
-start.i <- if (length(input.args) == 4) {
-  input.args[[2]]
-} else 1
+start.i <- input.args[[2]]
 
-stop.i <- if (length(input.args) == 4) {
-  input.args[[3]]
-} else length(mm.leaf.bins.all)
+stop.i <- input.args[[3]]
 
-result.file <- if (length(input.args) == 4) {
-  input.args[[4]]
-} else file.path(input.args[[1]], "data", "MapManBins2GO.RData")
+result.file <- input.args[[4]]
 
 mm.leaf.bins <- mm.leaf.bins.all[start.i:stop.i]
-rm( mm.leaf.bins.all )
+rm(mm.leaf.bins.all)
 
 
 mm.2.go <- setNames(mclapply(mm.leaf.bins, compoundGoAnnotationEntropy), mm.leaf.bins)
 mm.2.go.df <- Reduce(rbind, mclapply(names(mm.2.go), function(x) {
     y <- mm.2.go[[x]]
-    data.frame(MapManBin = x, MapManBin.GO = y[["MapManBin.GO"]], Shannon.Entropy = y[["Shannon.Entropy"]], Shannon.Entropy.BP = y[["Shannon.Entropy.BP"]], Shannon.Entropy.CC = y[["Shannon.Entropy.CC"]], Shannon.Entropy.MF = y[["Shannon.Entropy.MF"]], Shannon.Entropy.not.used = y[["Shannon.Entropy.not.used"]], Shannon.Entropy.not.used.BP = y[["Shannon.Entropy.not.used.BP"]], Shannon.Entropy.not.used.CC = y[["Shannon.Entropy.not.used.CC"]], Shannon.Entropy.not.used.MF = y[["Shannon.Entropy.not.used.MF"]],  
-        n.GO = y[["n.GO"]], n.genes = y[["n.genes"]], median.n.GO = y[["median.n.GO"]], 
-        stringsAsFactors = FALSE)
+    data.frame(MapManBin = x, MapManBin.GO = y[["MapManBin.GO"]], Shannon.Entropy = y[["Shannon.Entropy"]], 
+        Shannon.Entropy.BP = y[["Shannon.Entropy.BP"]], Shannon.Entropy.CC = y[["Shannon.Entropy.CC"]], 
+        Shannon.Entropy.MF = y[["Shannon.Entropy.MF"]], Shannon.Entropy.not.used = y[["Shannon.Entropy.not.used"]], 
+        Shannon.Entropy.not.used.BP = y[["Shannon.Entropy.not.used.BP"]], Shannon.Entropy.not.used.CC = y[["Shannon.Entropy.not.used.CC"]], 
+        Shannon.Entropy.not.used.MF = y[["Shannon.Entropy.not.used.MF"]], n.GO = y[["n.GO"]], 
+        n.genes = y[["n.genes"]], median.n.GO = y[["median.n.GO"]], stringsAsFactors = FALSE)
 }))
 #' Add a full description for each MapMan-Bin's GOA including GO-Term names:
 go.terms.not.in.db <- c()
