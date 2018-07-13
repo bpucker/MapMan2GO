@@ -31,12 +31,53 @@ compoundGoAnnotation <- function(gene.id, goa.tbl = getOption("MapMan2GO.goa.tbl
     ukb.goa.hits), gene.col = getOption("MapMan2GO.goa.tbl.gene.col", 3), go.col = getOption("MapMan2GO.goa.tbl.go.col", 
     2), extend.goas.with.ancestors = getOption("MapMan2GO.extend.goa.with.ancestors", 
     TRUE)) {
-    res.goa <- unique(sort(goa.tbl[which(goa.tbl[, gene.col] == gene.id), go.col]))
+    res.goa <- sort(unique(goa.tbl[which(goa.tbl[[gene.col]] == gene.id), ][[go.col]]))
     if (extend.goas.with.ancestors && length(res.goa) > 0) {
         addAncestors(res.goa)
     } else {
         res.goa
     }
+}
+
+#' Counts the minimum number of edges from the Gene Ontology Graph's root node
+#' to the argument node \code{x}.
+#'
+#' @param x The node for which to compute its depth, e.g. 'GO:0044237'.
+#' @param n The minimum number of edges any node has distance to the root node.
+#' Default is \code{1}.
+#' @param go.ont The result of \code{ontologyIndex::get_ontology('go.obo')}.
+#' Default is \code{getOption('MapMan2GO.GO.Ontology', GO.OBO)}.
+#'
+#' @return An integer, the minimun number of edges from the GO Graph's root
+#' node to the argument term \code{x}.
+#' @export
+goDepth <- function(x, n = 1, go.ont = getOption("MapMan2GO.GO.Ontology", GO.OBO)) {
+    if (is.null(x) || length(x) == 0 || all(is.na(x))) {
+        return(NA)
+    }
+    y <- go.ont$parents[[x]]
+    if (length(y) == 0) {
+        n
+    } else {
+        min(sapply(y, function(z) {
+            goDepth(z, n + 1)
+        }))
+    }
+}
+
+#' Function to test \code{MapMan2GO::goDepth}.
+#'
+#' @return \code{TRUE} if and only if all tests pass.
+#' @export
+testGoDepth <- function() {
+    g.1 <- "GO:0005080"
+    g.2 <- "GO:0044237"
+    t.1 <- is.na(goDepth(NA))
+    t.2 <- is.na(goDepth(c()))
+    t.3 <- is.na(goDepth(NULL))
+    t.4 <- goDepth(g.1) == 7
+    t.5 <- goDepth(g.2) == 3
+    all(t.1, t.2, t.3, t.4, t.5)
 }
 
 #' Adds all GO Terms that are ancestral to the argument \code{go.terms}.
@@ -80,7 +121,7 @@ addAncestors <- function(go.terms, go.obo = getOption("MapMan2GO.go.obo", GO.OBO
 #' @param mm.gene.col The column of \code{mm.bins.vs.genes} in which to lookup
 #' the gene identifiers. Default is
 #' \code{getOption('MapMan2GO.seq.sim.tbl.gene.col', 'Swissprot.Short.ID')}.
-#' @param mm.bins.vs.genes An instance of \code{data.frame} with at least two
+#' @param mm.bins.vs.genes An instance of \code{data.table} with at least two
 #' columns. It must hold mappings of \code{map.man.bin} to genes at least
 #' partially found in \code{goa.tbl}.
 #' @param goa.tbl An instance of \code{data.frame} holding GOAs. Default is
@@ -109,27 +150,80 @@ compoundGoAnnotationEntropy <- function(map.man.bin, mm.bins.vs.genes = getOptio
     "MapManBin"), mm.gene.col = getOption("MapMan2GO.seq.sim.tbl.gene.col", "Swissprot.Short.ID"), 
     goa.tbl = getOption("MapMan2GO.goa.tbl", ukb.goa.hits), gene.col = getOption("MapMan2GO.goa.tbl.gene.col", 
         3), go.col = getOption("MapMan2GO.goa.tbl.go.col", 2), extend.goas.with.ancestors = getOption("MapMan2GO.extend.goa.with.ancestors", 
-        TRUE)) {
+        TRUE), bp.gos = getOption("MapMan2GO.bp.gos", GO.BP), cc.gos = getOption("MapMan2GO.cc.gos", 
+        GO.CC), mf.gos = getOption("MapMan2GO.mf.gos", GO.MF)) {
     tryCatch({
-        gene.ids <- mm.bins.vs.genes[which(mm.bins.vs.genes[, mm.bin.col] == map.man.bin), 
-            mm.gene.col]
+        gene.ids <- mm.bins.vs.genes[which(mm.bins.vs.genes[[mm.bin.col]] == map.man.bin), 
+            ][[mm.gene.col]]
         genes.goa <- setNames(lapply(gene.ids, function(g.id) {
             compoundGoAnnotation(g.id, goa.tbl, gene.col, go.col)
         }), gene.ids)
-        s.e <- shannonEntropy(table(as.character(unlist(lapply(genes.goa, paste, collapse = ",")))))
-        bin.goa <- Reduce(intersect, genes.goa[which(as.logical(lapply(genes.goa, 
-            function(x) length(x) > 0 && !is.na(x) && !is.null(x))))])
+        bin.genes.goa <- genes.goa[which(as.logical(lapply(genes.goa, function(x) length(x) > 
+            0 && !is.na(x) && !is.null(x))))]
+        bin.goa <- Reduce(intersect, bin.genes.goa)
         if (extend.goas.with.ancestors) {
             bin.goa <- addAncestors(bin.goa)
         }
         bin.goa <- sort(bin.goa)
-        list(Shannon.Entropy = s.e, genes.goa = genes.goa, 
+        gos.not.usd <- setdiff(unlist(bin.genes.goa), bin.goa)
+        s.e <- shannonEntropyForGoas(genes.goa)
+        s.e.bp <- shannonEntropyForGoas(genes.goa, bp.gos)
+        s.e.cc <- shannonEntropyForGoas(genes.goa, cc.gos)
+        s.e.mf <- shannonEntropyForGoas(genes.goa, mf.gos)
+        s.e.not.usd <- shannonEntropyForGoas(genes.goa, gos.not.usd)
+        s.e.not.usd.bp <- shannonEntropyForGoas(genes.goa, intersect(gos.not.usd, 
+            bp.gos))
+        s.e.not.usd.cc <- shannonEntropyForGoas(genes.goa, intersect(gos.not.usd, 
+            cc.gos))
+        s.e.not.usd.mf <- shannonEntropyForGoas(genes.goa, intersect(gos.not.usd, 
+            mf.gos))
+        go.df <- data.frame(GO.ID = c(bin.goa, gos.not.usd), USED = c(rep(TRUE, 
+            length(bin.goa)), rep(FALSE, length(gos.not.usd))), stringsAsFactors = FALSE)
+        go.df$GO.DEPTH <- sapply(go.df$GO.ID, goDepth)
+        list(Shannon.Entropy = s.e, Shannon.Entropy.BP = s.e.bp, Shannon.Entropy.CC = s.e.cc, 
+            Shannon.Entropy.MF = s.e.mf, Shannon.Entropy.not.used = s.e.not.usd, 
+            Shannon.Entropy.not.used.BP = s.e.not.usd.bp, Shannon.Entropy.not.used.CC = s.e.not.usd.cc, 
+            Shannon.Entropy.not.used.MF = s.e.not.usd.mf, genes.goa = genes.goa, 
             MapManBin.GO = paste(bin.goa, collapse = ","), n.GO = length(bin.goa), 
             median.n.GO = median(unlist(lapply(genes.goa, length)), na.rm = TRUE), 
-            n.genes = length(gene.ids))
+            n.genes = length(gene.ids), GO.TERM.INFO = go.df)
     }, error = function(e) {
         message("MapMan-Bin '", e, "' caused an error:\n", e)
     })
+}
+
+#' Computes the Shannon Entropy for a set of compound Gene Ontology
+#' Annotations, that is sets of GO Terms assigned to a number of genes. Each
+#' distinct compound GOA is treated as a unique statistical event for which its
+#' respective frequency is measured and used as basis for the entropy
+#' calculation. Optionally each compound GOA can be intersected with an
+#' arbitrary set of GO Terms, e.g. all molecular function (MF) terms, to
+#' compute the entropy just within this sub-ontology of the Gene Ontology.
+#'
+#' @param genes.goa A list of character vectors, where each character vector
+#' resembles a compound GO annotation. Names can be the corresponding gene
+#' accessions.
+#' @param intersect.with A character vector of an arbitrary set of Gene
+#' Ontology Terms to intersect each gene's GOA with before computing the
+#' entropy. Can be \code{GO.BP}, \code{GO.CC}, or \code{GO.MF} as examples. In
+#' case of this argument having length zero no intersection will be done.
+#' Default is \code{getOption('MapMan2GO.entropy.intersect.compound.GOA.with',
+#' NULL)}.
+#' @param entropy.funk The function to be used to compute the Shannon Entropy.
+#' Can be e.g. \code{entropy::entropy} for the standard Shannon Entropy.
+#' Default is the normalized Shannon Entropy
+#' \code{getOption('MapMan2GO.entropy.funk', MapMan2GO::shannonEntropy)}.
+#'
+#' @return A numeric value the computed Shannon Entropy. 
+#' @export
+shannonEntropyForGoas <- function(genes.goa, intersect.with = getOption("MapMan2GO.entropy.intersect.compound.GOA.with", 
+    NULL), entropy.funk = getOption("MapMan2GO.entropy.funk", MapMan2GO::shannonEntropy)) {
+    shannonEntropy(table(as.character(unlist(lapply(genes.goa, function(gene.goa) {
+        if (length(intersect.with > 0)) {
+            gene.goa <- intersect(genes.goa, intersect.with)
+        }
+        paste(gene.goa, collapse = ",")
+    })))))
 }
 
 #' Computes the empirical counts of events in a sample. Events are GO Term
@@ -143,12 +237,8 @@ compoundGoAnnotationEntropy <- function(map.man.bin, mm.bins.vs.genes = getOptio
 #' \code{go.sample.space} and values are the empirical counts as found in
 #' \code{go.annos}.
 goCounts <- function(go.sample.space, go.annos) {
-    tryCatch({
-        setNames(as.numeric(lapply(go.sample.space, function(go.t) length(which(go.annos == 
-            go.t)))), go.sample.space)
-    }, error = function(e) {
-        browser()
-    })
+    setNames(as.numeric(lapply(go.sample.space, function(go.t) length(which(go.annos == 
+        go.t)))), go.sample.space)
 }
 
 #' Generates a two row plot with the first one being a Histogram and the second
@@ -238,7 +328,7 @@ analyzeSharedWords <- function(mm.2.go.df.MapManBin.GO, mm.2.go.df.MapManBin) {
     return(info.bins.words)
 }
 
-#' Wraps \code{base::read.table} to parse the result produced by 'Mercator'.
+#' Wraps \code{data.table::fread} to parse the result produced by 'Mercator'.
 #'
 #' @param path.2.mercator.result.tbl The valid file path to the text file
 #' holding the table produced as result by Mercator.
@@ -256,22 +346,23 @@ analyzeSharedWords <- function(mm.2.go.df.MapManBin.GO, mm.2.go.df.MapManBin) {
 #' identifiers. Default is \code{getOption(
 #' 'MapMan2GO.read.mercator.sanitize.accession', FALSE)}.
 #'
-#' @return An instance of \code{base::data.frame} holding the results of the
-#' mercator annotation pipeline.
+#' @return An instance of \code{data.table} holding the results of the mercator
+#' annotation pipeline. Note, if you want the result to be a
+#' \code{base::data.frame} call \code{as.data.frame} and the result.
 #' @export
 readMercatorResultTable <- function(path.2.mercator.result.tbl, add.go.terms = getOption("MapMan2GO.add.GO.terms", 
     TRUE), map.man.bins.2.go = getOption("MapMan2GO.map.man.bins.2.go", mm.2.go.df), 
     sanitize.accession = getOption("MapMan2GO.read.mercator.sanitize.accession", 
         FALSE)) {
-    m.df <- read.table(path.2.mercator.result.tbl, header = TRUE, sep = "\t", colClasses = c(rep("character", 
-        4), "logical"), quote = "", na.strings = "", comment.char = "", stringsAsFactors = FALSE)
-    for (i.col in colnames(m.df)) {
-        if (class(m.df[, i.col]) == "character") {
-            m.df[, i.col] <- sub("^\\s*'", "", sub("'\\s*$", "", m.df[, i.col]))
+    m.dt <- fread(path.2.mercator.result.tbl, sep = "\t", header = TRUE, stringsAsFactors = FALSE, 
+        na.strings = "", quote = "", colClasses = c(rep("character", 4), "logical"))
+    for (i.col in colnames(m.dt)) {
+        if (class(m.dt[[i.col]]) == "character") {
+            m.dt[[i.col]] <- sub("^\\s*'", "", sub("'\\s*$", "", m.dt[[i.col]]))
         }
     }
     if (add.go.terms) {
-        m.df$MapManBin.GO <- unlist(lapply(m.df$BINCODE, function(mm.bin) {
+        m.dt[["MapManBin.GO"]] <- unlist(lapply(m.dt$BINCODE, function(mm.bin) {
             i <- which(map.man.bins.2.go$MapManBin == mm.bin)
             if (length(i) > 0) {
                 map.man.bins.2.go[[i, "MapManBin.GO"]]
@@ -279,11 +370,10 @@ readMercatorResultTable <- function(path.2.mercator.result.tbl, add.go.terms = g
         }))
     }
     if (sanitize.accession) {
-        m.df$IDENTIFIER.LONG <- m.df$IDENTIFIER
-        m.df$IDENTIFIER <- sanitizeAccession(m.df$IDENTIFIER)
+        m.dt[["IDENTIFIER.LONG"]] <- toupper(m.dt$IDENTIFIER)
+        m.dt[["IDENTIFIER"]] <- toupper(sanitizeAccession(m.dt$IDENTIFIER))
     }
-    
-    m.df
+    m.dt
 }
 
 #' Uses the MapMan-Bin to Gene Ontology mappings generated within the
@@ -478,5 +568,3 @@ testShannonEntropy <- function() {
     test.5 <- identical(shannonEntropy(table(1:2)), 1)
     all(c(test.1, test.2, test.3, test.4, test.5))
 }
-
-

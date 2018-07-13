@@ -7,18 +7,19 @@ input.args <- commandArgs(trailingOnly = TRUE)
 
 #' Map MapMan-Bins to compound Gene Ontology Term Annotations (GOA):
 mm.leaf.bins <- unique(mm.bins.vs.sprot$MapManBin)
-mm.2.go <- setNames(mclapply(mm.leaf.bins, compoundGoAnnotationEntropy), mm.leaf.bins)  
+mm.2.go <- setNames(mclapply(mm.leaf.bins, compoundGoAnnotationEntropy), mm.leaf.bins)
 mm.2.go.df <- Reduce(rbind, mclapply(names(mm.2.go), function(x) {
     y <- mm.2.go[[x]]
-    data.frame(MapManBin = x, MapManBin.GO = y[["MapManBin.GO"]], Shannon.Entropy = y[["Shannon.Entropy"]], 
-        n.GO = y[["n.GO"]], n.genes = y[["n.genes"]], 
-        median.n.GO = y[["median.n.GO"]], stringsAsFactors = FALSE)
+    data.frame(MapManBin = x, MapManBin.GO = y[["MapManBin.GO"]], Shannon.Entropy = y[["Shannon.Entropy"]], Shannon.Entropy.BP = y[["Shannon.Entropy.BP"]], Shannon.Entropy.CC = y[["Shannon.Entropy.CC"]], Shannon.Entropy.MF = y[["Shannon.Entropy.MF"]], Shannon.Entropy.not.used = y[["Shannon.Entropy.not.used"]], Shannon.Entropy.not.used.BP = y[["Shannon.Entropy.not.used.BP"]], Shannon.Entropy.not.used.CC = y[["Shannon.Entropy.not.used.CC"]], Shannon.Entropy.not.used.MF = y[["Shannon.Entropy.not.used.MF"]],  
+        n.GO = y[["n.GO"]], n.genes = y[["n.genes"]], median.n.GO = y[["median.n.GO"]], 
+        stringsAsFactors = FALSE)
 }))
 #' Add a full description for each MapMan-Bin's GOA including GO-Term names:
 go.terms.not.in.db <- c()
 mm.2.full.desc <- Reduce(rbind, mclapply(names(mm.2.go), function(m.b) {
     m.b.gos <- Reduce(intersect, mm.2.go[[m.b]]$genes.goa)
-    Reduce(rbind, mclapply(m.b.gos, function(g.id) {    #
+    Reduce(rbind, mclapply(m.b.gos, function(g.id) {
+        # 
         if (g.id %in% GO.OBO$id) {
             g.name <- GO.OBO$name[[g.id]]
             g.ancestors <- GO.OBO$ancestors[[g.id]]
@@ -45,24 +46,24 @@ if (length(go.terms.not.in.db) > 0) {
 
 
 #' Add the MapMan Bins Descriptions to the above table:
-    mr.full <- readMercatorResultTable(input.args[[1]], add.go.terms = FALSE)
-    mm.desc.df <- unique(mr.full[, c("BINCODE", "NAME")])
-    names(mm.desc.df) <- c("MapManBin", "Description")
+mr.full <- readMercatorResultTable(input.args[[1]], add.go.terms = FALSE)
+mm.desc.df <- unique(mr.full[, c("BINCODE", "NAME")])
+names(mm.desc.df) <- c("MapManBin", "Description")
 
-    # mm.2.full.desc$Bin.Description <-
-    # as.character(unlist(mclapply(mm.2.full.desc$MapManBin, function(x) {
-    # mm.desc.df[which(mm.desc.df$MapManBin == x), 'Description'] })))
-    
-    value = integer(0)
-    mm.2.full.desc$Bin.Description <- as.character(unlist(mclapply(mm.2.full.desc$MapManBin, 
-        function(x) {
-            if (identical(which(mm.desc.df$MapManBin == x), value)) {
-                mm.2.full.desc$Bin.Description <- NA
-            } else {
-                mm.desc.df[which(mm.desc.df$MapManBin == x), "Description"]
-            }
-            
-        })))
+# mm.2.full.desc$Bin.Description <-
+# as.character(unlist(mclapply(mm.2.full.desc$MapManBin, function(x) {
+# mm.desc.df[which(mm.desc.df$MapManBin == x), 'Description'] })))
+
+value = integer(0)
+mm.2.full.desc$Bin.Description <- as.character(unlist(mclapply(mm.2.full.desc$MapManBin, 
+    function(x) {
+        if (identical(which(mm.desc.df$MapManBin == x), value)) {
+            mm.2.full.desc$Bin.Description <- NA
+        } else {
+            mm.desc.df[which(mm.desc.df$MapManBin == x), "Description"]
+        }
+        
+    })))
 
 
 #' Some statistics:
@@ -91,8 +92,8 @@ dev.off()
 
 
 #' Save results:
-write.table(mm.2.full.desc, file.path(input.args[[length(input.args)]], "inst", "MapManBins2GO.txt"), 
-    sep = "\t", row.names = FALSE)
+write.table(mm.2.full.desc, file.path(input.args[[length(input.args)]], "inst", 
+    "MapManBins2GO.txt"), sep = "\t", row.names = FALSE)
 save(mm.2.go, mm.2.go.df, mm.2.full.desc, mm.desc.df, file = file.path(input.args[[length(input.args)]], 
     "data", "MapManBins2GO.RData"))
 
