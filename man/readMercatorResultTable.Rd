@@ -25,10 +25,10 @@ columns: One named 'MapManBin' holding the BINCODEs and another named
 Default is \code{getOption('MapMan2GO.map.man.bins.2.go', mm.2.go.df)}.}
 
 \item{sanitize.accession}{boolean if TRUE the mercator table column
-'IDENTIFIER' will be passed through \code{MapMan2GO::sanitizeAccession} and
-an additional column 'IDENTIFIER.LONG' will hold the long Uniprot protein
-identifiers. Default is \code{getOption(
-'MapMan2GO.read.mercator.sanitize.accession', FALSE)}.}
+'IDENTIFIER' will be passed through
+\code{toupper(MapMan2GO::sanitizeAccession)} and an additional column
+'IDENTIFIER.LONG' will hold the long Uniprot protein identifiers. Default is
+\code{getOption( 'MapMan2GO.read.mercator.sanitize.accession', FALSE)}.}
 }
 \value{
 An instance of \code{data.table} holding the results of the mercator

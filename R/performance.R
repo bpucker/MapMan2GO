@@ -122,11 +122,11 @@ predictorPerformance <- function(pred.annos, pa.gene.col, pa.anno.col, reference
     "V2"), process.predicted.annos.funk = getOption("MapMan2GO.process.predicted.annos.funk", 
     identity), process.annos.funk = getOption("MapMan2GO.process.annos.funk", MapMan2GO::addAncestors)) {
     Reduce(rbind, mclapply(reference.genes, function(gene) {
-        ref.annos <- process.annos.funk(reference.gene.annos[which(reference.gene.annos[, 
+        ref.a <- process.annos.funk(reference.gene.annos[which(reference.gene.annos[, 
             rga.gene.col] == gene), rga.anno.col])
-        pred.annos <- process.annos.funk(process.predicted.annos.funk(pred.annos[which(pred.annos[, 
+        pred.a <- process.annos.funk(process.predicted.annos.funk(pred.annos[which(pred.annos[, 
             pa.gene.col] == gene), pa.anno.col]))
-        pred.performance.df <- performanceScores(ref.annos, pred.annos)
+        pred.performance.df <- performanceScores(ref.a, pred.a)
         pred.performance.df$gene <- gene
         pred.performance.df
     }))

@@ -341,10 +341,10 @@ analyzeSharedWords <- function(mm.2.go.df.MapManBin.GO, mm.2.go.df.MapManBin) {
 #' 'MapManBin.GO' holding the compound GO Term annotations separated by comma.
 #' Default is \code{getOption('MapMan2GO.map.man.bins.2.go', mm.2.go.df)}.
 #' @param sanitize.accession boolean if TRUE the mercator table column
-#' 'IDENTIFIER' will be passed through \code{MapMan2GO::sanitizeAccession} and
-#' an additional column 'IDENTIFIER.LONG' will hold the long Uniprot protein
-#' identifiers. Default is \code{getOption(
-#' 'MapMan2GO.read.mercator.sanitize.accession', FALSE)}.
+#' 'IDENTIFIER' will be passed through
+#' \code{toupper(MapMan2GO::sanitizeAccession)} and an additional column
+#' 'IDENTIFIER.LONG' will hold the long Uniprot protein identifiers. Default is
+#' \code{getOption( 'MapMan2GO.read.mercator.sanitize.accession', FALSE)}.
 #'
 #' @return An instance of \code{data.table} holding the results of the mercator
 #' annotation pipeline. Note, if you want the result to be a
@@ -370,7 +370,7 @@ readMercatorResultTable <- function(path.2.mercator.result.tbl, add.go.terms = g
         }))
     }
     if (sanitize.accession) {
-        m.dt[["IDENTIFIER.LONG"]] <- toupper(m.dt$IDENTIFIER)
+        m.dt[["IDENTIFIER.LONG"]] <- m.dt$IDENTIFIER
         m.dt[["IDENTIFIER"]] <- toupper(sanitizeAccession(m.dt$IDENTIFIER))
     }
     m.dt

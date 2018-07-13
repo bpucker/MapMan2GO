@@ -33,10 +33,10 @@ bb.annos.no.ref.anc <- predictorPerformance(best.blast.pred, pa.gene.col = "quer
 
 options(MapMan2GO.performance.universe.annotations = ukb.ref.universe.gos.w.anc)
 
-mercator.annos <- readMercatorResultTable(input.args[[1]], sanitize.accession = TRUE)
+mercator.annos <- as.data.frame(readMercatorResultTable(input.args[[1]], sanitize.accession = TRUE))
 mercator.annos.f1 <- predictorPerformance(mercator.annos, pa.gene.col = "IDENTIFIER", 
     pa.anno.col = "MapManBin.GO", process.predicted.annos.funk = splitMapManBinGOAs, 
-    reference.genes = tolower(ref.gene.ids), rga.gene.col = "V5")
+    reference.genes = ref.gene.ids)
 
 ipr.annos.w.ref.anc <- predictorPerformance(ipr.annos, pa.gene.col = "V4", pa.anno.col = "V2")
 
