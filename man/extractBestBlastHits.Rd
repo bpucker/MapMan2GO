@@ -15,7 +15,8 @@ extractBestBlastHits(path.2.blast.tbl, exclude.accessions.lines.path)
 
 \item{exclude.accessions.lines.path}{Valid file path to the file in which
 protein identifiers are stored that are to be excluded from the hits.
-Expected format is the short protein ID from uniprot, eg. 'Q54IF9'.}
+Expected format is the short protein ID from uniprot, eg. 'Q54IF9'. Set to
+\code{NULL}, if you do not want to exclude any protein identifiers.}
 }
 \value{
 An instance of \code{data.frame} with 14 columns, two additional to

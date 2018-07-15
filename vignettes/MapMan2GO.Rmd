@@ -157,3 +157,70 @@ Finally, execute the script to evaluate the performance of all methodologies
 `Rscript ./exec/evalGoPredictionPerformances.R  path/2/mercator_result.txt  path/2/best_blast_preprocessed_results_table.txt  path/2/protein_identifiers_2_exclude  path/2/preprocessed_uniprot_goa_table.txt  path/2/MapMan2GO `
 
 Returns plots of the F1 score for each methodology. 
+
+## Performance evaluation on non SwissProt genes with non electronically made Gene Ontology term annotations
+
+### Obtain gene IDs
+
+We want to obtain gene identifiers that are not contained in SwissProt and do
+not have electronically made Gene Ontology term annotations. For this, we use
+the Gene Ontology's download section, where sets of GOAs are offered. 
+
+We downloaded the one available for [Oryza
+sativa](http://geneontology.org/gene-associations/gene_association.gramene_oryza.gz)
+on July 14th 2018. The file is called `gene_association.gramene_oryza` after
+unzipping.
+
+Extract those gene UniProtKB gene identifiers meeting the above criteria: (i)
+non SwissProt and (ii) non electronically made GOAs (evidence codes not in
+(`IEA`, `RCA`, `ISS`).
+
+From the root folder of MapMan2GO:
+
+`Rscript ./exec/extractFromGOANonSprotNon_IEA_ISS_RCA_gene_ids.R gene_association.gramene_oryza uniprot_sprot.fasta .`
+
+The above script will generate a list of UniProtKB short gene identifiers in `inst/nonSwissProtGenesWithNonElectMadeGOAs_IDs.txt`.
+
+In an arbitrary directory of your choice download the UniProtKB fasta amino
+acid sequences for these proteins using the UniProt RESTful API:
+
+`cat nonSwissProtGenesWithNonElectMadeGOAs_IDs.txt | awk '{print "wget https://www.uniprot.org/uniprot/" $1 ".fasta"}' | sh`
+
+Then concatonate those files into a single fasta file for downstream analysis:
+`cat *.fasta | sed -e '/^\s*$/d' > nonSwissProtGenesWithNonElectMadeGOAs_AA.fasta` 
+The result is stored in this package's inst directory.
+
+Subsequently filter out those that have been moved into SwissProt and whose
+protein identifier, we supplied the UniProt REST Api is now a synonym. For
+this, open an interactive R session and execute the following code from the
+root directory of the MapMan2GO R-package:
+
+```
+require(seqinr)
+res <- read.fasta( './inst/nonSwissProtGenesWithNonElectMadeGOAs_AA.fasta', seqtype='AA', as.string=T, strip.desc=T )
+retain.i <- which( grepl( '^tr', names(res), ignore.case=TRUE ) & ! duplicated( names(res) ) )
+res.trembl <- res[retain.i]
+write.fasta(res.trembl, names=names(res.trembl), file.out='./inst/nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_AA.fasta' )
+writeLines( names(res.trembl), './inst/nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_IDs.txt' )
+```
+
+### Execute performance analysis on Non Swissprot Non elect annot gold standard
+
+The above gold standard of non SwissProt proteins with non electronically made
+GO term annotations is used.
+
+The following three competitors are compared:
+* Best Blast (using Diamond) on gold standard searching hits in SwissProt
+* Mercator v4 on Gold Standard and using the GO terms mapped to the resulting Bins
+* InterProScan and its to GO mappings
+
+The results have been prepared as follows:
+* Best Blast: `diamond-aligner blastp -d uniprot_sprot -q nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_AA.fasta -o nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_vs_SwissProt_diamond_out.tsv`
+* InterProScan: `/opt/interproscan/interproscan-5.23-62.0/interproscan.sh -i nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_AA.fasta -b Oryza_unique_IPS -goterm` 
+* Extract SwissProtID, InterProScanID and GO term from InterProScan output: `cat Oryza_unique_IPS.tsv | grep -P '\bGO:\d{6,6}' | awk -F "\t" '{split($14, a, "|"); for (i in a) { print $1 "\t" $12 "\t" a[i] }}' | sort -u  > Oryza_IPR_GO.tsv`
+* Mercator v4: Uploaded nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_AA.fasta to the Web Interface
+
+Compute performance as follows:
+
+```
+```

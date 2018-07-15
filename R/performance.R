@@ -9,7 +9,7 @@
 #' possible annotations that could theoretically be assigned, i.e. the
 #' 'annotation universe'. Default is
 #' \code{getOption('MapMan2GO.performance.universe.annotations',
-#' ukb.ref.universe.gos)}.
+#' GO.OBO$id)}.
 #' @param na.for.empty.references boolean indicating whether to return all NA
 #' values in case no references are given. In the case of protein function
 #' prediction missing references can be interpreted as missing knowledge,
@@ -21,7 +21,7 @@
 #' false.pos.rate, f1.score, mcc
 #' @export
 performanceScores <- function(true.annos, predicted.annos, universe.annos = getOption("MapMan2GO.performance.universe.annotations", 
-    ukb.ref.universe.gos), na.for.empty.references = getOption("MapMan2GO.f1.na.for.empty.references", 
+    GO.OBO$id), na.for.empty.references = getOption("MapMan2GO.f1.na.for.empty.references", 
     TRUE)) {
     t.a <- unique(true.annos)
     p.a <- unique(predicted.annos)
@@ -143,7 +143,8 @@ predictorPerformance <- function(pred.annos, pa.gene.col, pa.anno.col, reference
 #' @param path.2.blast.tbl Valid file path to the Blastp output table.
 #' @param exclude.accessions.lines.path Valid file path to the file in which
 #' protein identifiers are stored that are to be excluded from the hits.
-#' Expected format is the short protein ID from uniprot, eg. 'Q54IF9'.
+#' Expected format is the short protein ID from uniprot, eg. 'Q54IF9'. Set to
+#' \code{NULL}, if you do not want to exclude any protein identifiers.
 #'
 #' @return An instance of \code{data.frame} with 14 columns, two additional to
 #' the original blast tabular output: \code{'query.ukb.short.id'} and
@@ -153,7 +154,8 @@ predictorPerformance <- function(pred.annos, pa.gene.col, pa.anno.col, reference
 #' @export
 extractBestBlastHits <- function(path.2.blast.tbl, exclude.accessions.lines.path) {
     blast.tbl <- read.table(path.2.blast.tbl, sep = "\t", stringsAsFactors = F)
-    excl.ids <- readLines(exclude.accessions.lines.path)
+    excl.ids <- if (is.null(exclude.accessions.lines.path)) 
+        c() else readLines(exclude.accessions.lines.path)
     blast.tbl$query.ukb.short.id <- sub("^[^|]+\\|", "", sub("\\|[^|]+$", "", blast.tbl$V1))
     blast.tbl$hit.ukb.short.id <- sub("^[^|]+\\|", "", sub("\\|[^|]+$", "", blast.tbl$V2))
     blast.tbl.filtered <- blast.tbl[which(blast.tbl$V1 != blast.tbl$V2 & !blast.tbl$hit.ukb.short.id %in% 

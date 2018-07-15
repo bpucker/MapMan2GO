@@ -8,7 +8,7 @@ precision and recall. mcc using \code{mccr::mccr}.}
 \usage{
 performanceScores(true.annos, predicted.annos,
   universe.annos = getOption("MapMan2GO.performance.universe.annotations",
-  ukb.ref.universe.gos),
+  GO.OBO$id),
   na.for.empty.references = getOption("MapMan2GO.f1.na.for.empty.references",
   TRUE))
 }
@@ -22,7 +22,7 @@ PREDICTIONS.}
 possible annotations that could theoretically be assigned, i.e. the
 'annotation universe'. Default is
 \code{getOption('MapMan2GO.performance.universe.annotations',
-ukb.ref.universe.gos)}.}
+GO.OBO$id)}.}
 
 \item{na.for.empty.references}{boolean indicating whether to return all NA
 values in case no references are given. In the case of protein function

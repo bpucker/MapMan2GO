@@ -4,5 +4,6 @@
     data("MapManBins2GO", package = "MapMan2GO")
     data("UKB_Reference_GOA_InterPro", package = "MapMan2GO")
     data("predictionPerformances", package = "MapMan2GO")
+    data("predictionPerformancesNonSwissProt", package = "MapMan2GO")
     data("EvidenceCodesOntology", package = "MapMan2GO")
 }
