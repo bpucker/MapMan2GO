@@ -18,6 +18,7 @@ Depends:
     data.table (>= 1.9.6),
     ontologyIndex (>= 2.4),
     mccr (>= 0.4.4),
+    entropy (>= 1.2.1),
     RColorBrewer (>= 1.1.2)
 RoxygenNote: 6.0.1
 Suggests: knitr,

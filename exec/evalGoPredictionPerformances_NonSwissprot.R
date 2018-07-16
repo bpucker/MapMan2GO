@@ -23,8 +23,19 @@ colnames(gold.standard.goas) <- c("gene", "GO", "ECO")
 exclude.eco <- c("IEA", "RCA", "ISS")
 gold.standard.goas.trust <- gold.standard.goas[which(!gold.standard.goas$ECO %in% 
     exclude.eco), ]
+gold.standard.goas.trust.w.anc <- unique(Reduce(rbind, mclapply(gold.standard.goas.trust$gene, 
+    function(gs.gene) {
+        gs.goa <- gold.standard.goas.trust[which(gold.standard.goas.trust$gene == 
+            gs.gene), ]
+        Reduce(rbind, lapply(1:nrow(gs.goa), function(gs.goa.i) {
+            gs.goa.row <- gs.goa[gs.goa.i, ]
+            data.frame(gene = gs.gene, GO = addAncestors(gs.goa.row$GO), ECO = gs.goa.row$ECO, 
+                stringsAsFactors = FALSE)
+        }))
+    })))
 #' Set the gold standard reference GO annotations and the columns in which to
 #' lookup gold standard proteins' identifiers and GO annotations:
+message("Using gold standard without ancestral terms and predictions as they come from Best Blast and InterProScan (AsIs method).")
 options(MapMan2GO.reference.gene.annos = gold.standard.goas.trust)
 options(MapMan2GO.rga.gene.col = "gene")
 options(MapMan2GO.rga.anno.col = "GO")
@@ -40,29 +51,103 @@ best.blast.tbl.non.sprot <- extractBestBlastHits(input.args[[2]], NULL)
 blast.hit.goa <- as.data.frame(ukb.goa[ukb.goa[["V3"]] %in% best.blast.tbl.non.sprot$hit.ukb.short.id, 
     ])
 best.blast.pred <- bestBlastPredictions(best.blast.tbl.non.sprot, blast.hit.goa)
+#' Performance on the whole of the Gene Ontology:
+options(MapMan2GO.performance.universe.annotations = GO.OBO$id)
 bb.annos.no.ref.anc.non.sprot <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
     pa.anno.col = "GO", process.annos.funk = identity)
+#' Performance on the sub-ontology Biological Process (BP):
+options(MapMan2GO.performance.universe.annotations = GO.BP)
+bb.annos.no.ref.anc.non.sprot.BP <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
+    pa.anno.col = "GO", process.annos.funk = identity)
+#' Performance on the sub-ontology Cellular Component (CC):
+options(MapMan2GO.performance.universe.annotations = GO.CC)
+bb.annos.no.ref.anc.non.sprot.CC <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
+    pa.anno.col = "GO", process.annos.funk = identity)
+#' Performance on the sub-ontology Molecular Function (MF):
+options(MapMan2GO.performance.universe.annotations = GO.MF)
+bb.annos.no.ref.anc.non.sprot.MF <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
+    pa.anno.col = "GO", process.annos.funk = identity)
+
 
 ipr.annos.non.sprot <- read.table(input.args[[3]], sep = "\t", header = FALSE, 
     comment.char = "", quote = "", na.strings = "", stringsAsFactors = FALSE)
+#' Performance on the whole of the Gene Ontology:
+options(MapMan2GO.performance.universe.annotations = GO.OBO$id)
 ipr.annos.no.ref.anc.non.sprot <- predictorPerformance(ipr.annos.non.sprot, pa.gene.col = "V1", 
     pa.anno.col = "V3", process.annos.funk = identity)
+#' Performance on the sub-ontology Biological Process (BP):
+options(MapMan2GO.performance.universe.annotations = GO.BP)
+ipr.annos.no.ref.anc.non.sprot.BP <- predictorPerformance(ipr.annos.non.sprot, 
+    pa.gene.col = "V1", pa.anno.col = "V3", process.annos.funk = identity)
+#' Performance on the sub-ontology Cellular Component (CC):
+options(MapMan2GO.performance.universe.annotations = GO.CC)
+ipr.annos.no.ref.anc.non.sprot.CC <- predictorPerformance(ipr.annos.non.sprot, 
+    pa.gene.col = "V1", pa.anno.col = "V3", process.annos.funk = identity)
+#' Performance on the sub-ontology Molecular Function (MF):
+options(MapMan2GO.performance.universe.annotations = GO.MF)
+ipr.annos.no.ref.anc.non.sprot.MF <- predictorPerformance(ipr.annos.non.sprot, 
+    pa.gene.col = "V1", pa.anno.col = "V3", process.annos.funk = identity)
 
 
 
 #' Now consider the universe of all possible GO term annotations to include
 #' ancestral terms. Also extend both reference GO term annotations as well as
-#' predicted GO term annotations with ancestral termsc
+#' predicted GO term annotations with ancestral terms:
+message("Using gold standard and predictions including ancestral GO terms (PlusAnc method).")
+#' (Default process.annos.funk is MapMan2GO::addAncestors)
 
 mercator.annos.non.sprot <- as.data.frame(readMercatorResultTable(input.args[[1]], 
     sanitize.accession = TRUE))
+#' Performance on the whole of the Gene Ontology:
+options(MapMan2GO.performance.universe.annotations = GO.OBO$id)
 mercator.annos.perf.non.sprot <- predictorPerformance(mercator.annos.non.sprot, 
     pa.gene.col = "IDENTIFIER", pa.anno.col = "MapManBin.GO", process.predicted.annos.funk = splitMapManBinGOAs)
+#' Performance on the sub-ontology Biological Process (BP):
+options(MapMan2GO.performance.universe.annotations = GO.BP)
+mercator.annos.perf.non.sprot.BP <- predictorPerformance(mercator.annos.non.sprot, 
+    pa.gene.col = "IDENTIFIER", pa.anno.col = "MapManBin.GO", process.predicted.annos.funk = splitMapManBinGOAs)
+#' Performance on the sub-ontology Cellular Component (CC):
+options(MapMan2GO.performance.universe.annotations = GO.CC)
+mercator.annos.perf.non.sprot.CC <- predictorPerformance(mercator.annos.non.sprot, 
+    pa.gene.col = "IDENTIFIER", pa.anno.col = "MapManBin.GO", process.predicted.annos.funk = splitMapManBinGOAs)
+#' Performance on the sub-ontology Molecular Function (MF):
+options(MapMan2GO.performance.universe.annotations = GO.MF)
+mercator.annos.perf.non.sprot.MF <- predictorPerformance(mercator.annos.non.sprot, 
+    pa.gene.col = "IDENTIFIER", pa.anno.col = "MapManBin.GO", process.predicted.annos.funk = splitMapManBinGOAs)
 
+
+#' Performance on the whole of the Gene Ontology:
+options(MapMan2GO.performance.universe.annotations = GO.OBO$id)
 ipr.annos.w.ref.anc.non.sprot <- predictorPerformance(ipr.annos.non.sprot, pa.gene.col = "V1", 
     pa.anno.col = "V3")
+#' Performance on the sub-ontology Biological Process (BP):
+options(MapMan2GO.performance.universe.annotations = GO.BP)
+ipr.annos.w.ref.anc.non.sprot.BP <- predictorPerformance(ipr.annos.non.sprot, pa.gene.col = "V1", 
+    pa.anno.col = "V3")
+#' Performance on the sub-ontology Cellular Component (CC):
+options(MapMan2GO.performance.universe.annotations = GO.CC)
+ipr.annos.w.ref.anc.non.sprot.CC <- predictorPerformance(ipr.annos.non.sprot, pa.gene.col = "V1", 
+    pa.anno.col = "V3")
+#' Performance on the sub-ontology Molecular Function (MF):
+options(MapMan2GO.performance.universe.annotations = GO.MF)
+ipr.annos.w.ref.anc.non.sprot.MF <- predictorPerformance(ipr.annos.non.sprot, pa.gene.col = "V1", 
+    pa.anno.col = "V3")
 
+#' Performance on the whole of the Gene Ontology:
+options(MapMan2GO.performance.universe.annotations = GO.OBO$id)
 bb.annos.w.ref.anc.non.sprot <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
+    pa.anno.col = "GO")
+#' Performance on the sub-ontology Biological Process (BP):
+options(MapMan2GO.performance.universe.annotations = GO.BP)
+bb.annos.w.ref.anc.non.sprot.BP <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
+    pa.anno.col = "GO")
+#' Performance on the sub-ontology Cellular Component (CC):
+options(MapMan2GO.performance.universe.annotations = GO.CC)
+bb.annos.w.ref.anc.non.sprot.CC <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
+    pa.anno.col = "GO")
+#' Performance on the sub-ontology Molecular Function (MF):
+options(MapMan2GO.performance.universe.annotations = GO.MF)
+bb.annos.w.ref.anc.non.sprot.MF <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
     pa.anno.col = "GO")
 
 
@@ -72,177 +157,17 @@ gold.standard.with.100.seq.sim.hits <- sort(unique(best.blast.tbl.non.sprot[whic
     100), "query.ukb.short.id"]))
 
 
-#' Write out textual results:
-capSumOut <- function(x) {
-    capture.output(summary(x[, setdiff(colnames(x), "gene")]))
-}
-performance.summaries <- c("Mercator performance on Oryza Non SwissProt Non Elect Inferred GOA:", 
-    capSumOut(mercator.annos.perf.non.sprot), "", "", "InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA:", 
-    capSumOut(ipr.annos.w.ref.anc.non.sprot), "", "", "Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA:", 
-    capSumOut(bb.annos.w.ref.anc.non.sprot), "", "", "Excluding those gold standard proteins for which Blast found Hits with 100 percent sequence similarity:", 
-    "", "Mercator performance on Oryza Non SwissProt Non Elect Inferred GOA:", 
-    capSumOut(mercator.annos.perf.non.sprot[which(!mercator.annos.perf.non.sprot$gene %in% 
-        gold.standard.with.100.seq.sim.hits), ]), "", "", "InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA:", 
-    capSumOut(ipr.annos.w.ref.anc.non.sprot[which(!ipr.annos.w.ref.anc.non.sprot$gene %in% 
-        gold.standard.with.100.seq.sim.hits), ]), "", "", "Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA:", 
-    capSumOut(bb.annos.w.ref.anc.non.sprot[which(!bb.annos.w.ref.anc.non.sprot$gene %in% 
-        gold.standard.with.100.seq.sim.hits), ]))
-writeLines(performance.summaries, file.path(input.args[[length(input.args)]], "inst", 
-    "predictionPerformancesNonSwissProt_summaries.txt"))
-
-
-#' Plot histograms of F1-Scores and Matthews correlation coefficient:
-scores <- c("precision", "recall", "false.pos.rate", "f1.score", "mcc", "specificity")
-
-#' - for mercator
-for (gs.set in c("all", "non100PercSeqSimHit")) {
-    for (score.i in scores) {
-        plot.vals <- if (gs.set == "all") {
-            mercator.annos.perf.non.sprot[, score.i]
-        } else {
-            mercator.annos.perf.non.sprot[which(mercator.annos.perf.non.sprot$gene %in% 
-                gold.standard.with.100.seq.sim.hits), score.i]
-        }
-        pdf(file.path(input.args[[length(input.args)]], "inst", paste("mercator_", 
-            score.i, "_", gs.set, "_non_SwissProt_Hist.pdf", sep = "")))
-        plotDistAsHistAndBox(plot.vals, main = paste("Mercator", score.i, "distribution (", 
-            gs.set, ")"), summary.as.title = TRUE)
-        dev.off()
-    }
-}
-
-
-#' - for InterProScan
-for (gs.set in c("all", "non100PercSeqSimHit")) {
-    for (score.i in scores) {
-        plot.vals <- if (gs.set == "all") {
-            ipr.annos.w.ref.anc.non.sprot[, score.i]
-        } else {
-            ipr.annos.w.ref.anc.non.sprot[which(ipr.annos.w.ref.anc.non.sprot$gene %in% 
-                gold.standard.with.100.seq.sim.hits), score.i]
-        }
-        pdf(file.path(input.args[[length(input.args)]], "inst", paste("interProScanWithAncRefGoTerms_", 
-            score.i, "_", gs.set, "_non_SwissProt_Hist.pdf", sep = "")))
-        plotDistAsHistAndBox(plot.vals, main = paste("InterProScan", score.i, "distribution (", 
-            gs.set, ")"), summary.as.title = TRUE)
-        dev.off()
-    }
-}
-for (gs.set in c("all", "non100PercSeqSimHit")) {
-    for (score.i in scores) {
-        plot.vals <- if (gs.set == "all") {
-            ipr.annos.no.ref.anc.non.sprot[, score.i]
-        } else {
-            ipr.annos.no.ref.anc.non.sprot[which(ipr.annos.no.ref.anc.non.sprot$gene %in% 
-                gold.standard.with.100.seq.sim.hits), score.i]
-        }
-        pdf(file.path(input.args[[length(input.args)]], "inst", paste("interProScanNoAncRefGoTerms_", 
-            score.i, "_", gs.set, "_non_SwissProt_Hist.pdf", sep = "")))
-        plotDistAsHistAndBox(plot.vals, main = paste("InterProScan", score.i, "distribution (", 
-            gs.set, ")"), summary.as.title = TRUE)
-        dev.off()
-    }
-}
-
-
-#' - for BestBlast
-for (gs.set in c("all", "non100PercSeqSimHit")) {
-    for (score.i in scores) {
-        plot.vals <- if (gs.set == "all") {
-            bb.annos.w.ref.anc.non.sprot[, score.i]
-        } else {
-            bb.annos.w.ref.anc.non.sprot[which(bb.annos.w.ref.anc.non.sprot$gene %in% 
-                gold.standard.with.100.seq.sim.hits), score.i]
-        }
-        pdf(file.path(input.args[[length(input.args)]], "inst", paste("bestBlastWithAncRefGoTerms_", 
-            score.i, "_", gs.set, "_non_SwissProt_Hist.pdf", sep = "")))
-        plotDistAsHistAndBox(plot.vals, main = paste("Best Blast", score.i, "distribution (", 
-            gs.set, ")"), summary.as.title = TRUE)
-        dev.off()
-    }
-}
-for (gs.set in c("all", "non100PercSeqSimHit")) {
-    for (score.i in scores) {
-        plot.vals <- if (gs.set == "all") {
-            bb.annos.no.ref.anc.non.sprot[, score.i]
-        } else {
-            bb.annos.no.ref.anc.non.sprot[which(bb.annos.no.ref.anc.non.sprot$gene %in% 
-                gold.standard.with.100.seq.sim.hits), score.i]
-        }
-        pdf(file.path(input.args[[length(input.args)]], "inst", paste("bestBlastNoAncRefGoTerms_", 
-            score.i, "_", gs.set, "_non_SwissProt_Hist.pdf", sep = "")))
-        plotDistAsHistAndBox(plot.vals, main = paste("Best Blast", score.i, "distribution (", 
-            gs.set, ")"), summary.as.title = TRUE)
-        dev.off()
-    }
-}
-
-
-#' Scatterplots of of n.truth againt false positives, true positives and n.pred:
-scatter.y <- c("n.pred", "false.pos", "true.pos")
-
-#' - for mercator
-for (gs.set in c("all", "non100PercSeqSimHit")) {
-    plot.df <- if (gs.set == "all") {
-        mercator.annos.perf.non.sprot
-    } else {
-        mercator.annos.perf.non.sprot[which(!mercator.annos.perf.non.sprot$gene %in% 
-            gold.standard.with.100.seq.sim.hits), ]
-    }
-    for (scatter.i in scatter.y) {
-        pdf(file.path(input.args[[length(input.args)]], "inst", paste("mercator_", 
-            scatter.i, "_", gs.set, "_non_SwissProt_Scatter.pdf", sep = "")))
-        plot(plot.df$n.truth, plot.df[, scatter.i], xlab = "n.truth", ylab = scatter.i, 
-            pch = 20, main = paste("Mercator", scatter.i, "distribution (", gs.set, 
-                ")"))
-        dev.off()
-    }
-}
-
-
-#' - for Best Blast with ancestral GO Terms
-for (gs.set in c("all", "non100PercSeqSimHit")) {
-    plot.df <- if (gs.set == "all") {
-        bb.annos.w.ref.anc.non.sprot
-    } else {
-        bb.annos.w.ref.anc.non.sprot[which(!bb.annos.w.ref.anc.non.sprot$gene %in% 
-            gold.standard.with.100.seq.sim.hits), ]
-    }
-    for (scatter.i in scatter.y) {
-        pdf(file.path(input.args[[length(input.args)]], "inst", paste("bestBlast_", 
-            scatter.i, "_", gs.set, "_non_SwissProt_Scatter.pdf", sep = "")))
-        plot(plot.df$n.truth, plot.df[, scatter.i], xlab = "n.truth", ylab = scatter.i, 
-            pch = 20, main = paste("Best Blast", scatter.i, "distribution (", gs.set, 
-                ")"))
-        dev.off()
-    }
-}
-
-
-#' - for InterProScan with ancestral GO Terms
-for (gs.set in c("all", "non100PercSeqSimHit")) {
-    plot.df <- if (gs.set == "all") {
-        ipr.annos.w.ref.anc.non.sprot
-    } else {
-        ipr.annos.w.ref.anc.non.sprot[which(!ipr.annos.w.ref.anc.non.sprot$gene %in% 
-            gold.standard.with.100.seq.sim.hits), ]
-    }
-    for (scatter.i in scatter.y) {
-        pdf(file.path(input.args[[length(input.args)]], "inst", paste("interProScan_", 
-            scatter.i, "_", gs.set, "_non_SwissProt_Scatter.pdf", sep = "")))
-        plot(plot.df$n.truth, plot.df[, scatter.i], xlab = "n.truth", ylab = scatter.i, 
-            pch = 20, main = paste("InterProScan", scatter.i, "distribution (", 
-                gs.set, ")"))
-        dev.off()
-    }
-}
-
 
 #' Save results:
-save(mercator.annos.non.sprot, mercator.annos.perf.non.sprot, ipr.annos.non.sprot, 
-    ipr.annos.w.ref.anc.non.sprot, ipr.annos.no.ref.anc.non.sprot, best.blast.tbl.non.sprot, 
-    bb.annos.no.ref.anc.non.sprot, bb.annos.w.ref.anc.non.sprot, file = file.path(input.args[[length(input.args)]], 
-        "data", "predictionPerformancesNonSwissProt.RData"))
+save(mercator.annos.non.sprot, mercator.annos.perf.non.sprot, mercator.annos.perf.non.sprot.BP, 
+    mercator.annos.perf.non.sprot.CC, mercator.annos.perf.non.sprot.MF, ipr.annos.non.sprot, 
+    ipr.annos.w.ref.anc.non.sprot, ipr.annos.w.ref.anc.non.sprot.BP, ipr.annos.w.ref.anc.non.sprot.CC, 
+    ipr.annos.w.ref.anc.non.sprot.MF, ipr.annos.no.ref.anc.non.sprot, ipr.annos.no.ref.anc.non.sprot.BP, 
+    ipr.annos.no.ref.anc.non.sprot.CC, ipr.annos.no.ref.anc.non.sprot.MF, best.blast.tbl.non.sprot, 
+    bb.annos.no.ref.anc.non.sprot, bb.annos.no.ref.anc.non.sprot.BP, bb.annos.no.ref.anc.non.sprot.CC, 
+    bb.annos.no.ref.anc.non.sprot.MF, bb.annos.w.ref.anc.non.sprot, bb.annos.w.ref.anc.non.sprot.BP, 
+    bb.annos.w.ref.anc.non.sprot.CC, bb.annos.w.ref.anc.non.sprot.MF, gold.standard.with.100.seq.sim.hits, 
+    file = file.path(input.args[[length(input.args)]], "data", "predictionPerformancesNonSwissProt.RData"))
 
 
 message("DONE")

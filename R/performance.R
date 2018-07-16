@@ -1,6 +1,8 @@
 #' Compute the Matthew's correlation coefficient (mcc) and F1-Score for the
 #' prediction \code{predicted.annos}. F1-Score as the harmonic mean of
-#' precision and recall. mcc using \code{mccr::mccr}.
+#' precision and recall. mcc using \code{mccr::mccr}. Note that to ensure
+#' correct computation of performance all predicted and true annotations are
+#' discarded that are not found in the argument \code{universe.annos}.
 #'
 #' @param true.annos A vector of atomic annotations representing the TRUTH.
 #' @param predicted.annos A vector of atomic annotations representing the
@@ -8,8 +10,9 @@
 #' @param universe.annos A vector of atomic annotations representing all
 #' possible annotations that could theoretically be assigned, i.e. the
 #' 'annotation universe'. Default is
-#' \code{getOption('MapMan2GO.performance.universe.annotations',
-#' GO.OBO$id)}.
+#' \code{getOption('MapMan2GO.performance.universe.annotations', GO.OBO$id)}.
+#' Set to \code{GO.BP}, or \code{GO.CC}, or \code{GO.MF} to compute performance
+#' on the respective sub-ontology only.
 #' @param na.for.empty.references boolean indicating whether to return all NA
 #' values in case no references are given. In the case of protein function
 #' prediction missing references can be interpreted as missing knowledge,
@@ -23,8 +26,8 @@
 performanceScores <- function(true.annos, predicted.annos, universe.annos = getOption("MapMan2GO.performance.universe.annotations", 
     GO.OBO$id), na.for.empty.references = getOption("MapMan2GO.f1.na.for.empty.references", 
     TRUE)) {
-    t.a <- unique(true.annos)
-    p.a <- unique(predicted.annos)
+    t.a <- intersect(true.annos, universe.annos)
+    p.a <- intersect(predicted.annos, universe.annos)
     if ((is.null(t.a) || all(is.na(t.a)) || length(t.a) == 0) && na.for.empty.references) {
         return(data.frame(n.truth = 0, n.pred = length(p.a), true.pos = NA, false.pos = NA, 
             precision = NA, recall = NA, false.pos.rate = NA, specificity = NA, 
@@ -60,12 +63,11 @@ performanceScores <- function(true.annos, predicted.annos, universe.annos = getO
 #' @export
 testPerformanceScores <- function() {
     t.1 <- is.na(performanceScores(c(), c(), c(), TRUE)$f1.score)
-    t.11 <- performanceScores(c(), c(), c(), FALSE)$f1.score == 0
     t.2 <- performanceScores(c(), LETTERS[1:3], LETTERS[1:3], FALSE)$f1.score == 
         0
-    t.3 <- performanceScores(LETTERS[1:3], LETTERS[1:3], c(), FALSE)$f1.score == 
+    t.3 <- performanceScores(LETTERS[1:3], LETTERS[1:3], LETTERS[1:3], FALSE)$f1.score == 
         1
-    t.4 <- performanceScores(LETTERS[1:4], LETTERS[3:6], c(), FALSE)$f1.score == 
+    t.4 <- performanceScores(LETTERS[1:4], LETTERS[3:6], LETTERS[1:6], FALSE)$f1.score == 
         0.5
     t.5 <- is.na(performanceScores(character(0), LETTERS[1:3], c(), TRUE)$f1.score)
     t.6 <- performanceScores(c(), c(), c(), FALSE)$mcc == 0
@@ -75,7 +77,10 @@ testPerformanceScores <- function() {
     t.9 <- performanceScores(LETTERS[1:3], LETTERS[4:6], LETTERS[1:6], FALSE)$mcc == 
         -1
     t.10 <- is.na(performanceScores(character(0), LETTERS[1:3], c(), TRUE)$mcc)
-    all(c(t.1, t.2, t.3, t.4, t.5, t.6, t.7, t.8, t.9, t.10, t.11))
+    t.11 <- performanceScores(c(), c(), c(), FALSE)$f1.score == 0
+    t.12 <- performanceScores(LETTERS[1:8], LETTERS[1:4], LETTERS[1:3], FALSE)$mcc == 
+        0
+    all(c(t.1, t.2, t.3, t.4, t.5, t.6, t.7, t.8, t.9, t.10, t.11, t.12))
 }
 
 

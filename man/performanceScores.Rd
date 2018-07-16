@@ -4,7 +4,9 @@
 \alias{performanceScores}
 \title{Compute the Matthew's correlation coefficient (mcc) and F1-Score for the
 prediction \code{predicted.annos}. F1-Score as the harmonic mean of
-precision and recall. mcc using \code{mccr::mccr}.}
+precision and recall. mcc using \code{mccr::mccr}. Note that to ensure
+correct computation of performance all predicted and true annotations are
+discarded that are not found in the argument \code{universe.annos}.}
 \usage{
 performanceScores(true.annos, predicted.annos,
   universe.annos = getOption("MapMan2GO.performance.universe.annotations",
@@ -21,8 +23,9 @@ PREDICTIONS.}
 \item{universe.annos}{A vector of atomic annotations representing all
 possible annotations that could theoretically be assigned, i.e. the
 'annotation universe'. Default is
-\code{getOption('MapMan2GO.performance.universe.annotations',
-GO.OBO$id)}.}
+\code{getOption('MapMan2GO.performance.universe.annotations', GO.OBO$id)}.
+Set to \code{GO.BP}, or \code{GO.CC}, or \code{GO.MF} to compute performance
+on the respective sub-ontology only.}
 
 \item{na.for.empty.references}{boolean indicating whether to return all NA
 values in case no references are given. In the case of protein function
@@ -38,5 +41,7 @@ false.pos.rate, f1.score, mcc
 \description{
 Compute the Matthew's correlation coefficient (mcc) and F1-Score for the
 prediction \code{predicted.annos}. F1-Score as the harmonic mean of
-precision and recall. mcc using \code{mccr::mccr}.
+precision and recall. mcc using \code{mccr::mccr}. Note that to ensure
+correct computation of performance all predicted and true annotations are
+discarded that are not found in the argument \code{universe.annos}.
 }

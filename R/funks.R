@@ -355,7 +355,7 @@ readMercatorResultTable <- function(path.2.mercator.result.tbl, add.go.terms = g
     sanitize.accession = getOption("MapMan2GO.read.mercator.sanitize.accession", 
         FALSE)) {
     m.dt <- fread(path.2.mercator.result.tbl, sep = "\t", header = TRUE, stringsAsFactors = FALSE, 
-        na.strings = "", quote = "", colClasses = c(rep("character", 4), "logical"))
+        na.strings = "", quote = "")
     for (i.col in colnames(m.dt)) {
         if (class(m.dt[[i.col]]) == "character") {
             m.dt[[i.col]] <- sub("^\\s*'", "", sub("'\\s*$", "", m.dt[[i.col]]))
