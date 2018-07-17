@@ -217,10 +217,47 @@ The following three competitors are compared:
 The results have been prepared as follows:
 * Best Blast: `diamond-aligner blastp -d uniprot_sprot -q nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_AA.fasta -o nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_vs_SwissProt_diamond_out.tsv`
 * InterProScan: `/opt/interproscan/interproscan-5.23-62.0/interproscan.sh -i nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_AA.fasta -b Oryza_unique_IPS -goterm` 
-* Extract SwissProtID, InterProScanID and GO term from InterProScan output: `cat Oryza_unique_IPS.tsv | grep -P '\bGO:\d{6,6}' | awk -F "\t" '{split($14, a, "|"); for (i in a) { print $1 "\t" $12 "\t" a[i] }}' | sort -u  > Oryza_IPR_GO.tsv`
+* Extract SwissProtID, InterProScanID and GO term from InterProScan output: `cat Oryza_unique_IPS.tsv | grep -P '\bGO:\d{6,6}' | awk -F "\t" '{split($14, a, "|"); for (i in a) { print $1 "\t" $12 "\t" a[i] }}' | sort -u  > nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_interProScan_result.tsv`
 * Mercator v4: Uploaded nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_AA.fasta to the Web Interface
 
 Compute performance as follows:
 
+For each of the methods, the F1-Score and Matthews correlation coefficient were computed. Four evaluations were done: 
+(i) Including the whole prediction of the tested method. 
+(ii) Including only the GO terms of the prediction belonging to the Biological Process sub-ontology. 
+(iii) Including only the GO terms of the prediction belonging to the Cellular Component sub-ontology. 
+(iv) Including only the GO terms of the prediction belonging to the Molecular Function sub-ontology.
+
+The following script compute the F1-Scores and Matthews correlation coeficient of the three methods mentioned above on several levels:
+* Considering the universe of all possible GO term annotations without adding ancestral GO terms.
+* Considering the universe of all possible GO term annotations including ancestral GO terms.
+
 ```
+Done with the R script in this package: 
+Rscript ./exec/evalGoPredictionPerformances.R inst/nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_mercator_result.tsf inst/nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_vs_SwissProt_diamond_out.tsv inst/nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_interProScan_result.tsv ../goa_uniprot_all_tbl.txt ../performance_evaluation/gene_association.gramene_oryza path/2/MapMan2GO
 ```
+The R script saves the resulting data.frames with the different performances in this package's data folder.
+
+Additional scripts are included to plot performances and save tables of the preformance results.
+
+* generatePlotsPerformanceReport.R
+* generateTablesMeanPerformanceReport.R
+* generateTextualPerformanceReport.R
+
+The scripts are executed as follow:
+```
+Rscript. ./exec/generatePlotsPerformanceReport.R path/2/MapMan2GO
+```
+Generates histograms for Precision, recall, false positive rate, F1-Score and Matthews correlation coefficient, as well as scatter plots of false positives, true negatives and number of predictions for Mercator, best Blast and InterProScan performances. 
+For each method and each parameter, generates two plots, (i) Including all proteins tested, and (ii) Excluding those proteins with a 100% of secuence similarity with Blast. 
+All plots are stored in the inst folder or this package.
+
+```
+Rscript. ./exec/generateTablesMeanPerformanceReport.R path/2/MapMan2GO
+```
+Generate four summary tables of the prediction analysis for the results including: (i) All Go terms, (ii) Biological Process, (iii) Cellular Component and (iv) Molecular Function. The resulting tables are stored in the inst folder of this package.
+```
+Rscript. ./exec/generateTextualPerformanceReport.R path/2/MapMan2GO
+```
+Generate a text file containing the performance evaluation of the three methods, including and excluidng the ancestral GO terms, as well as incluidng and excluding those proteins with 100 percent sequence similarity with best Blast. This is done for all the proteins as well as for the three sub-ontologies.
+
