@@ -7,4 +7,5 @@
     data("predictionPerformancesNonSwissProt", package = "MapMan2GO")
     data("EvidenceCodesOntology", package = "MapMan2GO")
     data("mapMan2GoMutualInformation", package = "MapMan2GO")
+    data("interpro", package = "MapMan2GO")
 }
