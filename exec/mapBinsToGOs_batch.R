@@ -34,7 +34,6 @@ go.terms.not.in.db <- c()
 mm.2.full.desc <- Reduce(rbind, mclapply(names(mm.2.go), function(m.b) {
     m.b.gos <- Reduce(intersect, mm.2.go[[m.b]]$genes.goa)
     Reduce(rbind, mclapply(m.b.gos, function(g.id) {
-        # 
         if (g.id %in% GO.OBO$id) {
             g.name <- GO.OBO$name[[g.id]]
             g.ancestors <- GO.OBO$ancestors[[g.id]]
@@ -61,7 +60,7 @@ if (length(go.terms.not.in.db) > 0) {
 
 
 #' Add the MapMan Bins Descriptions to the above table:
-mr.full <- readMercatorResultTable(input.args[[1]], add.go.terms = FALSE)
+mr.full <- as.data.table( readMercatorResultTable(input.args[[1]], add.go.terms = FALSE) )
 mm.desc.df <- unique(mr.full[, c("BINCODE", "NAME")])
 names(mm.desc.df) <- c("MapManBin", "Description")
 

@@ -14,7 +14,7 @@ sanitizeAccession <- function(ukb.accs) {
 #' gene.
 #'
 #' @param gene.id The unique identifier of the gene to lookup GOA for
-#' @param goa.tbl An instance of \code{data.frame} holding GOAs. Default is
+#' @param goa.tbl An instance of \code{data.table} holding GOAs. Default is
 #' \code{getOption('MapMan2GO.goa.tbl', ukb.goa.hits)}
 #' @param gene.col The column of \code{goa.tbl} number or name in which to
 #' lookup the genes. Default is \code{getOption('MapMan2GO.goa.tbl.gene.col',
@@ -112,7 +112,7 @@ addAncestors <- function(go.terms, go.obo = getOption("MapMan2GO.go.obo", GO.OBO
 #' compound GO annotations.
 #'
 #' @param map.man.bin The identifier of the MapMan Bin to assign GO terms to.
-#' @param mm.bins.vs.genes An instance of \code{data.frame} holding
+#' @param mm.bins.vs.genes An instance of \code{data.table} holding
 #' MapManBin-Gene-Relations. Default is
 #' \code{getOption('MapMan2GO.seq.sim.tbl', mm.bins.vs.sprot)}.
 #' @param mm.bin.col The column of \code{mm.bins.vs.genes} in which to lookup
@@ -124,7 +124,7 @@ addAncestors <- function(go.terms, go.obo = getOption("MapMan2GO.go.obo", GO.OBO
 #' @param mm.bins.vs.genes An instance of \code{data.table} with at least two
 #' columns. It must hold mappings of \code{map.man.bin} to genes at least
 #' partially found in \code{goa.tbl}.
-#' @param goa.tbl An instance of \code{data.frame} holding GOAs. Default is
+#' @param goa.tbl An instance of \code{data.table} holding GOAs. Default is
 #' \code{getOption('MapMan2GO.goa.tbl', ukb.goa.hits)}
 #' @param gene.col The column of \code{goa.tbl} number or name in which to
 #' lookup the genes. Default is \code{getOption('MapMan2GO.goa.tbl.gene.col',
@@ -134,12 +134,35 @@ addAncestors <- function(go.terms, go.obo = getOption("MapMan2GO.go.obo", GO.OBO
 #' @param extend.goas.with.ancestors boolean indicating whether to extend each
 #' proteins' GOA with the ancestors of the respective GO Terms. Default is
 #' \code{getOption('MapMan2GO.extend.goa.with.ancestors', TRUE)}.
-#'
+#' @param bp.gos A character vector of the GO terms belonging to the Biological
+#' Process sub-ontology. Default is \code{getOption('MapMan2GO.bp.gos', GO.BP)}
+#' @param cc.gos A character vector of the GO terms belonging to the Cellular
+#' Component sub-ontology. Default is \code{getOption('MapMan2GO.cc.gos', GO.CC)}
+#' @param mf.gos A character vector of the GO terms belonging to the Molecular
+#' Function sub-ontology. Default is \code{getOption('MapMan2GO.mf.gos', GO.MF)}
+#' 
 #' @export
 #' @return An instance of \code{list} with the following named entries:
 #' 'Shannon.Entropy' is the measured entropy of compound GO annotations
-#' retrieved for the genes related to \code{map.man.bin}. The second entry
-#' 'genes.goa' is a list with each genes' compound GO Annotations,
+#' retrieved for the genes related to \code{map.man.bin}. 'Shannon.Entropy.BP' 
+#' is the measured entropy of compound GO annotations retrieved for the genes related 
+#' to \code{map.man.bin}, for those GO terms belonging to the Biological Process 
+#' sub-ontology.'Shannon.Entropy.CC' is the measured entropy of compound GO 
+#' annotations retrieved for the genes related to \code{map.man.bin}, for those 
+#' GO terms belonging to the Cellular Component sub-ontology.'Shannon.Entropy.MF' 
+#' is the measured entropy of compound GO annotations retrieved for the genes related 
+#' to \code{map.man.bin}, for those GO terms belonging to the Molecular Function 
+#' sub-ontology. 'Shannon.Entropy.not.used' is the measured entropy of those GO terms 
+#' not included in the compound GO annotation for the genes related to 
+#' \code{map.man.bin}. 'Shannon.Entropy.not.used.BP' is the measured entropy of 
+#' those GO terms belonging to the Biological Process sub-ontology not included in 
+#' the compound GO annotation for the genes related to \code{map.man.bin}. 
+#' 'Shannon.Entropy.not.used.CC' is the measured entropy of those GO terms belonging
+#' to the Cellular Component sub-ontology not included in the compound GO annotation 
+#' for the genes related to \code{map.man.bin}. 'Shannon.Entropy.not.used.MF' is the 
+#' measured entropy of those GO terms belonging to the Molecular Function 
+#' sub-ontology not included in the compound GO annotation for the genes related to 
+#' \code{map.man.bin}. 'genes.goa' is a list with each genes' compound GO Annotations,
 #' 'MapManBin.GO' is the intersection of the genes' compound GO Annotations to
 #' be used as the MapMan-Bin's compound GO Annotation, n.GO is the number of GO
 #' Terms in the MapMan-Bin's compound GO Annotation, median.n.GO is the median
@@ -164,9 +187,11 @@ compoundGoAnnotationEntropy <- function(map.man.bin, mm.bins.vs.genes = getOptio
         if (extend.goas.with.ancestors) {
             bin.goa <- addAncestors(bin.goa)
         }
-        if ( any( gene.ids != "" )) {
-          length.genes <- length(gene.ids)}
-        else { length.genes <- 0 }
+        if (any(gene.ids != "")) {
+            length.genes <- length(gene.ids)
+        } else {
+            length.genes <- 0
+        }
         bin.goa <- sort(bin.goa)
         gos.not.usd <- setdiff(unlist(bin.genes.goa), bin.goa)
         s.e <- shannonEntropyForGoas(genes.goa)
@@ -571,3 +596,4 @@ testShannonEntropy <- function() {
     test.5 <- identical(shannonEntropy(table(1:2)), 1)
     all(c(test.1, test.2, test.3, test.4, test.5))
 }
+

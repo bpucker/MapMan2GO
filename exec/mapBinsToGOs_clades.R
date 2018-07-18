@@ -55,7 +55,7 @@ if (length(go.terms.not.in.db) > 0) {
 
 
 #' Add the MapMan Bins Descriptions to the above table:
-mr.full <- readMercatorResultTable(input.args[[2]], add.go.terms = FALSE)
+mr.full <- as.data.frame( readMercatorResultTable(input.args[[2]], add.go.terms = FALSE) )
 mm.desc.df.work <- unique(mr.full[, c("BINCODE", "NAME")])
 names(mm.desc.df.work) <- c("MapManBin", "Description")
 
