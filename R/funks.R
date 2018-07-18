@@ -164,6 +164,9 @@ compoundGoAnnotationEntropy <- function(map.man.bin, mm.bins.vs.genes = getOptio
         if (extend.goas.with.ancestors) {
             bin.goa <- addAncestors(bin.goa)
         }
+        if ( any( gene.ids != "" )) {
+          length.genes <- length(gene.ids)}
+        else { length.genes <- 0 }
         bin.goa <- sort(bin.goa)
         gos.not.usd <- setdiff(unlist(bin.genes.goa), bin.goa)
         s.e <- shannonEntropyForGoas(genes.goa)
@@ -186,7 +189,7 @@ compoundGoAnnotationEntropy <- function(map.man.bin, mm.bins.vs.genes = getOptio
             Shannon.Entropy.not.used.MF = s.e.not.usd.mf, genes.goa = genes.goa, 
             MapManBin.GO = paste(bin.goa, collapse = ","), n.GO = length(bin.goa), 
             median.n.GO = median(unlist(lapply(genes.goa, length)), na.rm = TRUE), 
-            n.genes = length(gene.ids), GO.TERM.INFO = go.df)
+            n.genes = length.genes, GO.TERM.INFO = go.df)
     }, error = function(e) {
         message("MapMan-Bin '", e, "' caused an error:\n", e)
     })
