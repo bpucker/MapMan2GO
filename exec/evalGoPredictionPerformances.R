@@ -16,16 +16,6 @@ ipr.annos <- ukb.ref.goas[!is.na(ukb.ref.goas$V3), ]
 ipr.annos.no.ref.anc <- predictorPerformance(ipr.annos, pa.gene.col = "V4", pa.anno.col = "V2", 
     process.annos.funk = identity)
 
-best.blast.tbl <- extractBestBlastHits(input.args[[2]], input.args[[3]])
-goa.tbl <- fread(input.args[[4]], sep = "\t", data.table = FALSE, stringsAsFactors = FALSE, 
-    quote = "", na.strings = "", header = FALSE)
-blast.hit.goa <- goa.tbl[which(goa.tbl$V3 %in% best.blast.tbl$hit.ukb.short.id), 
-    ]
-rm(goa.tbl)
-best.blast.pred <- bestBlastPredictions(best.blast.tbl, blast.hit.goa)
-bb.annos.no.ref.anc <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
-    pa.anno.col = "GO", process.annos.funk = identity)
-
 
 #' Now consider the universe of all possible GO term annotations to include
 #' ancestral terms. Also extend both reference GO term annotations as well as
@@ -39,9 +29,6 @@ mercator.annos.f1 <- predictorPerformance(mercator.annos, pa.gene.col = "IDENTIF
     reference.genes = ref.gene.ids)
 
 ipr.annos.w.ref.anc <- predictorPerformance(ipr.annos, pa.gene.col = "V4", pa.anno.col = "V2")
-
-bb.annos.w.ref.anc <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
-    pa.anno.col = "GO")
 
 #' Set the respective option back to default value:
 options(MapMan2GO.performance.universe.annotations = NULL)
@@ -76,35 +63,6 @@ for (score.i in scores) {
     dev.off()
 }
 
-#' - for BestBlast
-for (score.i in scores) {
-    pdf(file.path(input.args[[length(input.args)]], "inst", paste("bestBlastWithAncRefGoTerms_", 
-        score.i, "_Hist.pdf", sep = "")))
-    plotDistAsHistAndBox(bb.annos.w.ref.anc[, score.i], main = paste("BestBlast", 
-        score.i, "distribution"), summary.as.title = TRUE)
-    dev.off()
-}
-for (score.i in scores) {
-    pdf(file.path(input.args[[length(input.args)]], "inst", paste("bestBlastNoAncRefGoTerms_", 
-        score.i, "_Hist.pdf", sep = "")))
-    plotDistAsHistAndBox(bb.annos.no.ref.anc[, score.i], main = paste("BestBlast", 
-        score.i, "distribution"), summary.as.title = TRUE)
-    dev.off()
-}
-
-
-#' Plot Blast sequence similarity distribution among the queries for which Best
-#' Blast achieved a non zero False Positive Rate (FPR):
-bb.i <- which(bb.annos.w.ref.anc$false.pos.rate > 0)
-bb.queries <- bb.annos.w.ref.anc[bb.i, "gene"]
-pdf(file.path(input.args[[length(input.args)]], "inst", "bestBlastWithAncestorsSeqSimOnQueriesWithFPRgtZero_Hist.pdf"))
-plotDistAsHistAndBox(best.blast.tbl[which(best.blast.tbl$query.ukb.short.id %in% 
-    bb.queries), "V3"], main = "Blast Sequence Similarity for queries with FPR > 0", 
-    summary.as.title = TRUE)
-dev.off()
-
-
-
 #' Scatterplots of of n.truth againt false positives, true positives and n.pred:
 scatter.y <- c("n.pred", "false.pos", "true.pos")
 
@@ -117,14 +75,6 @@ for (scatter.i in scatter.y) {
     dev.off()
 }
 
-#' - for Best Blast with ancestral GO Terms
-for (scatter.i in scatter.y) {
-    pdf(file.path(input.args[[length(input.args)]], "inst", paste("bestBlastWithAncRefGoTerms_", 
-        scatter.i, "_Scatter.pdf", sep = "")))
-    plot(bb.annos.w.ref.anc$n.truth, bb.annos.w.ref.anc[, scatter.i], xlab = "n.truth", ylab = scatter.i, pch = 20, 
-         main = paste("Mercator", scatter.i, "distribution"))
-    dev.off()
-}
 
 #' - for InterProScan with ancestral GO Terms
 for (scatter.i in scatter.y) {
@@ -139,7 +89,7 @@ for (scatter.i in scatter.y) {
 
 #' Save results:
 save(mercator.annos, mercator.annos.f1, ipr.annos, ipr.annos.w.ref.anc, ipr.annos.no.ref.anc, 
-    best.blast.tbl, bb.annos.no.ref.anc, bb.annos.w.ref.anc, file = file.path(input.args[[length(input.args)]], 
+    file = file.path(input.args[[length(input.args)]], 
         "data", "predictionPerformances.RData"))
 
 

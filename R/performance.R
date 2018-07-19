@@ -138,7 +138,7 @@ predictorPerformance <- function(pred.annos, pa.gene.col, pa.anno.col, reference
 }
 
 
-
+#' DEPRECATED
 #' Function to parse a Blastp output table, retain only the best non self Hits,
 #' where query and hit are identical, also discarding any hits that match
 #' protein identifiers given one per line in argument
@@ -158,6 +158,7 @@ predictorPerformance <- function(pred.annos, pa.gene.col, pa.anno.col, reference
 #' columns are obtained from the Blast tabular output.
 #' @export
 extractBestBlastHits <- function(path.2.blast.tbl, exclude.accessions.lines.path) {
+    message("Function 'extractBestBlastHits' is deprecated")
     blast.tbl <- read.table(path.2.blast.tbl, sep = "\t", stringsAsFactors = F)
     excl.ids <- if (is.null(exclude.accessions.lines.path)) 
         c() else readLines(exclude.accessions.lines.path)
@@ -170,6 +171,7 @@ extractBestBlastHits <- function(path.2.blast.tbl, exclude.accessions.lines.path
     blast.tbl.sort[!duplicated(blast.tbl.sort$V1), ]
 }
 
+#' DEPRECATED
 #' Function to generate the annotations (GO Term predictions) for Best Blast.
 #'
 #' @param best.blast.tbl The result of invoking function
@@ -185,6 +187,7 @@ extractBestBlastHits <- function(path.2.blast.tbl, exclude.accessions.lines.path
 #' the Best Blast method.
 #' @export
 bestBlastPredictions <- function(best.blast.tbl, blast.hit.goa) {
+    message("Function 'bestBlastPredictions' is deprecated")
     Reduce(rbind, mclapply(1:nrow(best.blast.tbl), function(i) {
         query.id <- best.blast.tbl[i, "query.ukb.short.id"]
         hit.id <- best.blast.tbl[i, "hit.ukb.short.id"]

@@ -2,7 +2,8 @@
 % Please edit documentation in R/performance.R
 \name{extractBestBlastHits}
 \alias{extractBestBlastHits}
-\title{Function to parse a Blastp output table, retain only the best non self Hits,
+\title{DEPRECATED
+Function to parse a Blastp output table, retain only the best non self Hits,
 where query and hit are identical, also discarding any hits that match
 protein identifiers given one per line in argument
 \code{exclude.accessions.lines.path}. This function expects protein
@@ -26,6 +27,7 @@ of the Query and Hit proteins respectively, eg. 'Q54IF9'. The other 12
 columns are obtained from the Blast tabular output.
 }
 \description{
+DEPRECATED
 Function to parse a Blastp output table, retain only the best non self Hits,
 where query and hit are identical, also discarding any hits that match
 protein identifiers given one per line in argument

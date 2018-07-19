@@ -2,7 +2,8 @@
 % Please edit documentation in R/performance.R
 \name{bestBlastPredictions}
 \alias{bestBlastPredictions}
-\title{Function to generate the annotations (GO Term predictions) for Best Blast.}
+\title{DEPRECATED
+Function to generate the annotations (GO Term predictions) for Best Blast.}
 \usage{
 bestBlastPredictions(best.blast.tbl, blast.hit.goa)
 }
@@ -22,5 +23,6 @@ holds the respective query proteins and 'GO' the GO predictions obtained by
 the Best Blast method.
 }
 \description{
+DEPRECATED
 Function to generate the annotations (GO Term predictions) for Best Blast.
 }

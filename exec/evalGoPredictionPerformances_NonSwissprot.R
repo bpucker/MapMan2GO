@@ -14,9 +14,9 @@ options(MapMan2GO.reference.genes = gold.standard.ids)
 
 
 #' Load the input GOA tables for the predictions and the gold standard genes:
-ukb.goa <- fread(input.args[[4]], sep = "\t", header = FALSE, quote = "", na.strings = "", 
+ukb.goa <- fread(input.args[[3]], sep = "\t", header = FALSE, quote = "", na.strings = "", 
     stringsAsFactors = FALSE)
-gold.standard.goas <- read.table(input.args[[5]], comment.char = "!", quote = "", 
+gold.standard.goas <- read.table(input.args[[4]], comment.char = "!", quote = "", 
     na.strings = "", sep = "\t", header = FALSE, stringsAsFactors = FALSE)[, c("V2", 
     "V5", "V7")]
 colnames(gold.standard.goas) <- c("gene", "GO", "ECO")
@@ -47,29 +47,7 @@ options(MapMan2GO.rga.anno.col = "GO")
 #' First consider the universe of all possible GO term annotations 'as is',
 #' that is without adding ancestral GO terms.
 
-best.blast.tbl.non.sprot <- extractBestBlastHits(input.args[[2]], NULL)
-blast.hit.goa <- as.data.frame(ukb.goa[ukb.goa[["V3"]] %in% best.blast.tbl.non.sprot$hit.ukb.short.id, 
-    ])
-best.blast.pred <- bestBlastPredictions(best.blast.tbl.non.sprot, blast.hit.goa)
-#' Performance on the whole of the Gene Ontology:
-options(MapMan2GO.performance.universe.annotations = GO.OBO$id)
-bb.annos.no.ref.anc.non.sprot <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
-    pa.anno.col = "GO", process.annos.funk = identity)
-#' Performance on the sub-ontology Biological Process (BP):
-options(MapMan2GO.performance.universe.annotations = GO.BP)
-bb.annos.no.ref.anc.non.sprot.BP <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
-    pa.anno.col = "GO", process.annos.funk = identity)
-#' Performance on the sub-ontology Cellular Component (CC):
-options(MapMan2GO.performance.universe.annotations = GO.CC)
-bb.annos.no.ref.anc.non.sprot.CC <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
-    pa.anno.col = "GO", process.annos.funk = identity)
-#' Performance on the sub-ontology Molecular Function (MF):
-options(MapMan2GO.performance.universe.annotations = GO.MF)
-bb.annos.no.ref.anc.non.sprot.MF <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
-    pa.anno.col = "GO", process.annos.funk = identity)
-
-
-ipr.annos.non.sprot <- read.table(input.args[[3]], sep = "\t", header = FALSE, 
+ipr.annos.non.sprot <- read.table(input.args[[2]], sep = "\t", header = FALSE, 
     comment.char = "", quote = "", na.strings = "", stringsAsFactors = FALSE)
 #' Performance on the whole of the Gene Ontology:
 options(MapMan2GO.performance.universe.annotations = GO.OBO$id)
@@ -133,29 +111,6 @@ options(MapMan2GO.performance.universe.annotations = GO.MF)
 ipr.annos.w.ref.anc.non.sprot.MF <- predictorPerformance(ipr.annos.non.sprot, pa.gene.col = "V1", 
     pa.anno.col = "V3")
 
-#' Performance on the whole of the Gene Ontology:
-options(MapMan2GO.performance.universe.annotations = GO.OBO$id)
-bb.annos.w.ref.anc.non.sprot <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
-    pa.anno.col = "GO")
-#' Performance on the sub-ontology Biological Process (BP):
-options(MapMan2GO.performance.universe.annotations = GO.BP)
-bb.annos.w.ref.anc.non.sprot.BP <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
-    pa.anno.col = "GO")
-#' Performance on the sub-ontology Cellular Component (CC):
-options(MapMan2GO.performance.universe.annotations = GO.CC)
-bb.annos.w.ref.anc.non.sprot.CC <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
-    pa.anno.col = "GO")
-#' Performance on the sub-ontology Molecular Function (MF):
-options(MapMan2GO.performance.universe.annotations = GO.MF)
-bb.annos.w.ref.anc.non.sprot.MF <- predictorPerformance(best.blast.pred, pa.gene.col = "query", 
-    pa.anno.col = "GO")
-
-
-#' Results in two flavours. Once including all gold standard proteins and
-#' another time just those where Blast had no Hits with 100% sequence identity!
-gold.standard.with.100.seq.sim.hits <- sort(unique(best.blast.tbl.non.sprot[which(best.blast.tbl.non.sprot$V3 == 
-    100), "query.ukb.short.id"]))
-
 
 
 #' Save results:
@@ -163,10 +118,7 @@ save(mercator.annos.non.sprot, mercator.annos.perf.non.sprot, mercator.annos.per
     mercator.annos.perf.non.sprot.CC, mercator.annos.perf.non.sprot.MF, ipr.annos.non.sprot, 
     ipr.annos.w.ref.anc.non.sprot, ipr.annos.w.ref.anc.non.sprot.BP, ipr.annos.w.ref.anc.non.sprot.CC, 
     ipr.annos.w.ref.anc.non.sprot.MF, ipr.annos.no.ref.anc.non.sprot, ipr.annos.no.ref.anc.non.sprot.BP, 
-    ipr.annos.no.ref.anc.non.sprot.CC, ipr.annos.no.ref.anc.non.sprot.MF, best.blast.tbl.non.sprot, 
-    bb.annos.no.ref.anc.non.sprot, bb.annos.no.ref.anc.non.sprot.BP, bb.annos.no.ref.anc.non.sprot.CC, 
-    bb.annos.no.ref.anc.non.sprot.MF, bb.annos.w.ref.anc.non.sprot, bb.annos.w.ref.anc.non.sprot.BP, 
-    bb.annos.w.ref.anc.non.sprot.CC, bb.annos.w.ref.anc.non.sprot.MF, gold.standard.with.100.seq.sim.hits, 
+    ipr.annos.no.ref.anc.non.sprot.CC, ipr.annos.no.ref.anc.non.sprot.MF,  
     file = file.path(input.args[[length(input.args)]], "data", "predictionPerformancesNonSwissProt.RData"))
 
 
