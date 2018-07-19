@@ -167,7 +167,9 @@ addAncestors <- function(go.terms, go.obo = getOption("MapMan2GO.go.obo", GO.OBO
 #' be used as the MapMan-Bin's compound GO Annotation, n.GO is the number of GO
 #' Terms in the MapMan-Bin's compound GO Annotation, median.n.GO is the median
 #' of the number of GO Terms in the genes' GOAs, and n.genes is the number of
-#' genes related to \code{map.man.bin}.
+#' genes related to \code{map.man.bin}. GO.TERM.INFO contains the ID, 'TRUE' or
+#' 'FALSE' indicating if the GO term was used or not used respectively and its' 
+#' GO depth for all terms.
 compoundGoAnnotationEntropy <- function(map.man.bin, mm.bins.vs.genes = getOption("MapMan2GO.seq.sim.tbl", 
     mm.bins.vs.sprot), mm.bin.col = getOption("MapMan2GO.seq.sim.tbl.bin.col", 
     "MapManBin"), mm.gene.col = getOption("MapMan2GO.seq.sim.tbl.gene.col", "Swissprot.Short.ID"), 

@@ -51,19 +51,20 @@ The following R script does the job, saves the resulting data.frames in binary f
 
 ### Analyze the names of MapMan Bins and GO Terms to identify shared informative words. 
 
-The following R script add the GO Terms which descriptions share words with the MapMan-Bin's description. When identified, the GO terms are added to the GOAs. Saves the resulting data.frames in binary format in the data folder and generates plots about the assignment's quality and information about the GO Terms added. This step can be ignored in order to keep the GOAs only as the intersection.
+The following R script add the GO Terms which descriptions share words with the MapMan-Bin's description. When identified, the GO terms are added to the GOAs. Saves the resulting data.frames in binary format in the data folder and generates plots about the assignment's quality and information about the GO Terms added. 
+This step can be ignored in order to keep the GOAs only as the intersection.
 
 `Rscript ./exec/addGOstoGOAs.R /path/2/MapMan2GO`
 
 ### Calculate and plot the mean, median and maximum values of GO depths.
 
-`Rscript ./exec/plotDepths.R /path/2/MapManBins2GO.RData /path/2/MapMan2GO`
+`Rscript ./exec/plotDepths.R path/2/MapMan2GO`
 
 Return plots which are stored in the in the R package.
 
 ### Performs a revision on the MapMan Bins - GOAs assignations, classifing GO Terms used and no used as Trusted or Untrusted.
 
-The following R script performs a revision on the MapMan Bins - GOAs assignation, classifying the GO Terms, both, used and no used, as Trusted or Untrusted according to their Evidence Codes (ECO). Returns plots of this analysis.
+The following R script performs a revision on the MapMan Bins - GOAs assignation, classifying the GO Terms, both, used and no used, as Trusted or Untrusted according to their Evidence Codes (ECO). Returns plots of this evaluation.
 
 `Rscript ./exec/mapBinsRevision.R /path/2/MapMan2GO`
 
@@ -75,7 +76,7 @@ Competetive methods are
 - Mercator (MapMan-Bins)
 - InterProScan (InterPro2GO)
 - Best Blast
-- Blasts2GO    (TO DO)
+- Blast2GO    (TO DO)
 
 ### Extract reference GOAs and InterPro-annotations from Swissprot's GOA
 

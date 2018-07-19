@@ -3,7 +3,7 @@ options(mc.cores = detectCores())
 
 message("USAGE: Rscript /path/2/MapMan2GO/mapBinsRevision.R /path/2/MapMan2GO ")
 
-input.args <- commandArgs(trailOnly = TRUE)
+input.args <- commandArgs(trailingOnly = TRUE)
 
 #' Retrieve the GOA and classify the GO Terms as 'Used' or 'Not Used'
 sh.entropy <- c()
@@ -25,7 +25,7 @@ for (i in 1:length(mm.2.go.df$MapManBin)) {
         sep = "")
     GO.joined <- sort(unique(unlist(eval(parse(text = b)))))
     no.used.gos <- setdiff(GO.joined, used.gos)
-    sh.entropy[i] <- shannonEntropy(table(as.character(no.used.gos)))
+#    sh.entropy[i] <- shannonEntropy(table(as.character(no.used.gos)))
 
 #' Analyze Evidence Codes
     eco.used.gos.all <- unique(unlist(mclapply(used.gos, function(x) { 
@@ -69,9 +69,9 @@ for (i in 1:length(duplicated.goas)) {
 }
 
 #' - Histogram of Entropies
-pdf(file.path(input.args[[1]], "inst", "GoTermsNotUsedEntropyHist.pdf"))
-plotDistAsHistAndBox(sh.entropy, "Shannon Entropy of not used GO Terms in GOAs per MapMan-Bin")
-dev.off()
+# pdf(file.path(input.args[[1]], "inst", "GoTermsNotUsedEntropyHist.pdf"))
+# plotDistAsHistAndBox(sh.entropy, "Shannon Entropy of not used GO Terms in GOAs per MapMan-Bin")
+# dev.off()
 
 #' - Histogram of Mean Relative Reference Protein Abundance
 pdf(file.path(input.args[[1]], "inst", "MeanRelativeReferenceProteinAbundanceHist.pdf"))
@@ -85,6 +85,6 @@ boxplot(trusted.used, untrusted.used, trusted.no.used, untrusted.no.used, col=c(
 legend("topright", inset=.05, c("Used","No used"), fill=c("lightgrey", "white"))
 dev.off()
 
-save(sh.entropy, means.bins.rel.ref.abund, trusted.used, untrusted.used, trusted.no.used, untrusted.no.used, file = file.path(input.args[[1]], 
+save(means.bins.rel.ref.abund, trusted.used, untrusted.used, trusted.no.used, untrusted.no.used, file = file.path(input.args[[1]], 
     "data", "MapManBinsRevision.RData"))
 

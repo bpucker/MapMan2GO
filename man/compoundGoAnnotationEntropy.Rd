@@ -21,7 +21,7 @@ compoundGoAnnotationEntropy(map.man.bin,
 \arguments{
 \item{map.man.bin}{The identifier of the MapMan Bin to assign GO terms to.}
 
-\item{mm.bins.vs.genes}{An instance of \code{data.frame} holding
+\item{mm.bins.vs.genes}{An instance of \code{data.table} holding
 MapManBin-Gene-Relations. Default is
 \code{getOption('MapMan2GO.seq.sim.tbl', mm.bins.vs.sprot)}.}
 
@@ -33,7 +33,7 @@ the MapMan-Bins. Default is \code{getOption('MapMan2GO.seq.sim.tbl.bin.col',
 the gene identifiers. Default is
 \code{getOption('MapMan2GO.seq.sim.tbl.gene.col', 'Swissprot.Short.ID')}.}
 
-\item{goa.tbl}{An instance of \code{data.frame} holding GOAs. Default is
+\item{goa.tbl}{An instance of \code{data.table} holding GOAs. Default is
 \code{getOption('MapMan2GO.goa.tbl', ukb.goa.hits)}}
 
 \item{gene.col}{The column of \code{goa.tbl} number or name in which to
@@ -47,6 +47,15 @@ the GO terms. Default is \code{getOption('MapMan2GO.goa.tbl.go.col',2)}}
 proteins' GOA with the ancestors of the respective GO Terms. Default is
 \code{getOption('MapMan2GO.extend.goa.with.ancestors', TRUE)}.}
 
+\item{bp.gos}{A character vector of the GO terms belonging to the Biological
+Process sub-ontology. Default is \code{getOption('MapMan2GO.bp.gos', GO.BP)}}
+
+\item{cc.gos}{A character vector of the GO terms belonging to the Cellular
+Component sub-ontology. Default is \code{getOption('MapMan2GO.cc.gos', GO.CC)}}
+
+\item{mf.gos}{A character vector of the GO terms belonging to the Molecular
+Function sub-ontology. Default is \code{getOption('MapMan2GO.mf.gos', GO.MF)}}
+
 \item{mm.bins.vs.genes}{An instance of \code{data.table} with at least two
 columns. It must hold mappings of \code{map.man.bin} to genes at least
 partially found in \code{goa.tbl}.}
@@ -54,13 +63,32 @@ partially found in \code{goa.tbl}.}
 \value{
 An instance of \code{list} with the following named entries:
 'Shannon.Entropy' is the measured entropy of compound GO annotations
-retrieved for the genes related to \code{map.man.bin}. The second entry
-'genes.goa' is a list with each genes' compound GO Annotations,
+retrieved for the genes related to \code{map.man.bin}. 'Shannon.Entropy.BP' 
+is the measured entropy of compound GO annotations retrieved for the genes related 
+to \code{map.man.bin}, for those GO terms belonging to the Biological Process 
+sub-ontology.'Shannon.Entropy.CC' is the measured entropy of compound GO 
+annotations retrieved for the genes related to \code{map.man.bin}, for those 
+GO terms belonging to the Cellular Component sub-ontology.'Shannon.Entropy.MF' 
+is the measured entropy of compound GO annotations retrieved for the genes related 
+to \code{map.man.bin}, for those GO terms belonging to the Molecular Function 
+sub-ontology. 'Shannon.Entropy.not.used' is the measured entropy of those GO terms 
+not included in the compound GO annotation for the genes related to 
+\code{map.man.bin}. 'Shannon.Entropy.not.used.BP' is the measured entropy of 
+those GO terms belonging to the Biological Process sub-ontology not included in 
+the compound GO annotation for the genes related to \code{map.man.bin}. 
+'Shannon.Entropy.not.used.CC' is the measured entropy of those GO terms belonging
+to the Cellular Component sub-ontology not included in the compound GO annotation 
+for the genes related to \code{map.man.bin}. 'Shannon.Entropy.not.used.MF' is the 
+measured entropy of those GO terms belonging to the Molecular Function 
+sub-ontology not included in the compound GO annotation for the genes related to 
+\code{map.man.bin}. 'genes.goa' is a list with each genes' compound GO Annotations,
 'MapManBin.GO' is the intersection of the genes' compound GO Annotations to
 be used as the MapMan-Bin's compound GO Annotation, n.GO is the number of GO
 Terms in the MapMan-Bin's compound GO Annotation, median.n.GO is the median
 of the number of GO Terms in the genes' GOAs, and n.genes is the number of
-genes related to \code{map.man.bin}.
+genes related to \code{map.man.bin}. GO.TERM.INFO contains the ID, 'TRUE' or
+'FALSE' indicating if the GO term was used or not used respectively and its' 
+GO depth for all terms.
 }
 \description{
 Infers the compound GO annotations found for the genes related to the

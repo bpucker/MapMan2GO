@@ -14,7 +14,7 @@ compoundGoAnnotation(gene.id, goa.tbl = getOption("MapMan2GO.goa.tbl",
 \arguments{
 \item{gene.id}{The unique identifier of the gene to lookup GOA for}
 
-\item{goa.tbl}{An instance of \code{data.frame} holding GOAs. Default is
+\item{goa.tbl}{An instance of \code{data.table} holding GOAs. Default is
 \code{getOption('MapMan2GO.goa.tbl', ukb.goa.hits)}}
 
 \item{gene.col}{The column of \code{goa.tbl} number or name in which to
