@@ -58,39 +58,6 @@ for (gs.set in c("all", "non100PercSeqSimHit")) {
 }
 
 
-#' - for BestBlast
-for (gs.set in c("all", "non100PercSeqSimHit")) {
-    for (score.i in scores) {
-        plot.vals <- if (gs.set == "all") {
-            bb.annos.w.ref.anc.non.sprot[, score.i]
-        } else {
-            bb.annos.w.ref.anc.non.sprot[which(bb.annos.w.ref.anc.non.sprot$gene %in% 
-                gold.standard.with.100.seq.sim.hits), score.i]
-        }
-        pdf(file.path(input.args[[length(input.args)]], "inst", paste("bestBlastWithAncRefGoTerms_", 
-            score.i, "_", gs.set, "_non_SwissProt_Hist.pdf", sep = "")))
-        plotDistAsHistAndBox(plot.vals, main = paste("Best Blast", score.i, "distribution (", 
-            gs.set, ")"), summary.as.title = TRUE)
-        dev.off()
-    }
-}
-for (gs.set in c("all", "non100PercSeqSimHit")) {
-    for (score.i in scores) {
-        plot.vals <- if (gs.set == "all") {
-            bb.annos.no.ref.anc.non.sprot[, score.i]
-        } else {
-            bb.annos.no.ref.anc.non.sprot[which(bb.annos.no.ref.anc.non.sprot$gene %in% 
-                gold.standard.with.100.seq.sim.hits), score.i]
-        }
-        pdf(file.path(input.args[[length(input.args)]], "inst", paste("bestBlastNoAncRefGoTerms_", 
-            score.i, "_", gs.set, "_non_SwissProt_Hist.pdf", sep = "")))
-        plotDistAsHistAndBox(plot.vals, main = paste("Best Blast", score.i, "distribution (", 
-            gs.set, ")"), summary.as.title = TRUE)
-        dev.off()
-    }
-}
-
-
 #' Scatterplots of of n.truth againt false positives, true positives and n.pred:
 scatter.y <- c("n.pred", "false.pos", "true.pos")
 
@@ -111,26 +78,6 @@ for (gs.set in c("all", "non100PercSeqSimHit")) {
         dev.off()
     }
 }
-
-
-#' - for Best Blast with ancestral GO Terms
-for (gs.set in c("all", "non100PercSeqSimHit")) {
-    plot.df <- if (gs.set == "all") {
-        bb.annos.w.ref.anc.non.sprot
-    } else {
-        bb.annos.w.ref.anc.non.sprot[which(!bb.annos.w.ref.anc.non.sprot$gene %in% 
-            gold.standard.with.100.seq.sim.hits), ]
-    }
-    for (scatter.i in scatter.y) {
-        pdf(file.path(input.args[[length(input.args)]], "inst", paste("bestBlast_", 
-            scatter.i, "_", gs.set, "_non_SwissProt_Scatter.pdf", sep = "")))
-        plot(plot.df$n.truth, plot.df[, scatter.i], xlab = "n.truth", ylab = scatter.i, 
-            pch = 20, main = paste("Best Blast", scatter.i, "distribution (", gs.set, 
-                ")"))
-        dev.off()
-    }
-}
-
 
 #' - for InterProScan with ancestral GO Terms
 for (gs.set in c("all", "non100PercSeqSimHit")) {
