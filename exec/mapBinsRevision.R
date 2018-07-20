@@ -25,7 +25,6 @@ for (i in 1:length(mm.2.go.df$MapManBin)) {
         sep = "")
     GO.joined <- sort(unique(unlist(eval(parse(text = b)))))
     no.used.gos <- setdiff(GO.joined, used.gos)
-#    sh.entropy[i] <- shannonEntropy(table(as.character(no.used.gos)))
 
 #' Analyze Evidence Codes
     eco.used.gos.all <- unique(unlist(mclapply(used.gos, function(x) { 
@@ -53,7 +52,6 @@ for (i in 1:length(mm.2.go.df$MapManBin)) {
 z <- mm.2.go.df[which(mm.2.go.df$MapManBin.GO != ""), "MapManBin.GO"]
 coords.duplicated.goas <- which(duplicated(z) | duplicated(z, fromLast = TRUE))
 duplicated.goas <- mm.2.go.df$MapManBin.GO[coords.duplicated.goas]
-# duplicated.bins <- mm.2.go.df$MapManBin[coords.duplicated.goas]
 means.bins.rel.ref.abund <- c()
 for (i in 1:length(duplicated.goas)) { 
 
@@ -67,11 +65,6 @@ for (i in 1:length(duplicated.goas)) {
     }
     means.bins.rel.ref.abund[i] <- mean(table(unlist(used.gos)) / length(used.gos))
 }
-
-#' - Histogram of Entropies
-# pdf(file.path(input.args[[1]], "inst", "GoTermsNotUsedEntropyHist.pdf"))
-# plotDistAsHistAndBox(sh.entropy, "Shannon Entropy of not used GO Terms in GOAs per MapMan-Bin")
-# dev.off()
 
 #' - Histogram of Mean Relative Reference Protein Abundance
 pdf(file.path(input.args[[1]], "inst", "MeanRelativeReferenceProteinAbundanceHist.pdf"))

@@ -235,7 +235,7 @@ The following script computes the F1-Scores and Matthews' correlation coeficient
 
 ```
 Done with the R script in this package: 
-Rscript ./exec/evalGoPredictionPerformances.R inst/nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_mercator_result.tsf inst/nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_vs_SwissProt_diamond_out.tsv inst/nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_interProScan_result.tsv ../goa_uniprot_all_tbl.txt ../performance_evaluation/gene_association.gramene_oryza path/2/MapMan2GO
+Rscript ./exec/evalGoPredictionPerformances_NonSwissprot.R inst/nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_mercator_result.tsf inst/nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_vs_SwissProt_diamond_out.tsv inst/nonSwissProtGenesWithNonElectMadeGOAs_trEMBL_interProScan_result.tsv ../goa_uniprot_all_tbl.txt ../performance_evaluation/gene_association.gramene_oryza path/2/MapMan2GO
 ```
 The R script saves the resulting data.frames with the different performances in this package's data folder.
 

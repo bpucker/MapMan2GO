@@ -1,114 +1,1098 @@
 Mercator performance on Oryza Non SwissProt Non Elect Inferred GOA:
-    n.truth           n.pred          true.pos         false.pos        precision          recall       false.pos.rate     
- Min.   :  0.00   Min.   :  0.00   Min.   :  0.000   Min.   :  0.00   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000000  
- 1st Qu.:  9.00   1st Qu.:  0.00   1st Qu.:  0.000   1st Qu.:  0.00   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000000  
- Median : 10.00   Median :  0.00   Median :  0.000   Median :  0.00   Median :0.0000   Median :0.0000   Median :0.0000000  
- Mean   : 15.98   Mean   : 18.95   Mean   :  5.499   Mean   : 13.34   Mean   :0.1251   Mean   :0.2290   Mean   :0.0002831  
- 3rd Qu.: 19.00   3rd Qu.: 34.25   3rd Qu.:  6.000   3rd Qu.: 20.00   3rd Qu.:0.1579   3rd Qu.:0.3333   3rd Qu.:0.0004246  
- Max.   :119.00   Max.   :128.00   Max.   :114.000   Max.   :104.00   Max.   :1.0000   Max.   :1.0000   Max.   :0.0022071  
-                                   NA's   :3         NA's   :3        NA's   :3        NA's   :3        NA's   :3          
-  specificity        f1.score           mcc            
- Min.   :0.9978   Min.   :0.0000   Min.   :-0.0005372  
- 1st Qu.:0.9996   1st Qu.:0.0000   1st Qu.: 0.0000000  
- Median :1.0000   Median :0.0000   Median : 0.0000000  
- Mean   :0.9997   Mean   :0.1392   Mean   : 0.1557366  
- 3rd Qu.:1.0000   3rd Qu.:0.2192   3rd Qu.: 0.2771853  
- Max.   :1.0000   Max.   :0.9231   Max.   : 0.9271310  
- NA's   :3        NA's   :3        NA's   :3           
+    n.truth           n.pred          true.pos         false.pos     
+ Min.   :  0.00   Min.   :  0.00   Min.   :  0.000   Min.   :  0.00  
+ 1st Qu.:  9.00   1st Qu.:  0.00   1st Qu.:  0.000   1st Qu.:  0.00  
+ Median :  9.00   Median :  0.00   Median :  0.000   Median :  0.00  
+ Mean   : 15.77   Mean   : 18.89   Mean   :  5.493   Mean   : 13.28  
+ 3rd Qu.: 19.00   3rd Qu.: 34.25   3rd Qu.:  6.000   3rd Qu.: 20.00  
+ Max.   :119.00   Max.   :127.00   Max.   :114.000   Max.   :103.00  
+                                   NA's   :3         NA's   :3       
+   precision          recall       false.pos.rate       specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000000   Min.   :0.9978  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000000   1st Qu.:0.9996  
+ Median :0.0000   Median :0.0000   Median :0.0000000   Median :1.0000  
+ Mean   :0.1254   Mean   :0.2313   Mean   :0.0002819   Mean   :0.9997  
+ 3rd Qu.:0.1579   3rd Qu.:0.3333   3rd Qu.:0.0004246   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.0021859   Max.   :1.0000  
+ NA's   :3        NA's   :3        NA's   :3           NA's   :3       
+    f1.score           mcc            
+ Min.   :0.0000   Min.   :-0.0005372  
+ 1st Qu.:0.0000   1st Qu.: 0.0000000  
+ Median :0.0000   Median : 0.0000000  
+ Mean   :0.1397   Mean   : 0.1557366  
+ 3rd Qu.:0.2222   3rd Qu.: 0.2771853  
+ Max.   :0.9268   Max.   : 0.9271310  
+ NA's   :3        NA's   :3           
 
 
 InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA:
-    n.truth           n.pred          true.pos         false.pos       precision          recall       false.pos.rate     
- Min.   :  0.00   Min.   :  0.00   Min.   :  0.000   Min.   : 0.00   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000000  
- 1st Qu.:  9.00   1st Qu.:  4.00   1st Qu.:  0.000   1st Qu.: 0.00   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000000  
- Median : 10.00   Median :  7.00   Median :  0.000   Median : 4.00   Median :0.0000   Median :0.0000   Median :0.0000849  
- Mean   : 15.98   Mean   : 15.34   Mean   :  4.406   Mean   :10.99   Mean   :0.1647   Mean   :0.1732   Mean   :0.0002332  
- 3rd Qu.: 19.00   3rd Qu.: 17.25   3rd Qu.:  3.000   3rd Qu.:14.00   3rd Qu.:0.1875   3rd Qu.:0.3333   3rd Qu.:0.0002971  
- Max.   :119.00   Max.   :120.00   Max.   :110.000   Max.   :98.00   Max.   :1.0000   Max.   :1.0000   Max.   :0.0020798  
-                                   NA's   :3         NA's   :3       NA's   :3        NA's   :3        NA's   :3          
-  specificity        f1.score           mcc            
- Min.   :0.9979   Min.   :0.0000   Min.   :-0.0006211  
- 1st Qu.:0.9997   1st Qu.:0.0000   1st Qu.:-0.0001273  
- Median :0.9999   Median :0.0000   Median : 0.0000000  
- Mean   :0.9998   Mean   :0.1438   Mean   : 0.1552272  
- 3rd Qu.:1.0000   3rd Qu.:0.2222   3rd Qu.: 0.2423400  
- Max.   :1.0000   Max.   :1.0000   Max.   : 1.0000000  
- NA's   :3        NA's   :3        NA's   :3           
+    n.truth           n.pred          true.pos         false.pos    
+ Min.   :  0.00   Min.   :  0.00   Min.   :  0.000   Min.   : 0.00  
+ 1st Qu.:  9.00   1st Qu.:  4.00   1st Qu.:  0.000   1st Qu.: 0.00  
+ Median :  9.00   Median :  7.00   Median :  0.000   Median : 4.00  
+ Mean   : 15.77   Mean   : 15.33   Mean   :  4.406   Mean   :10.98  
+ 3rd Qu.: 19.00   3rd Qu.: 17.25   3rd Qu.:  3.000   3rd Qu.:14.00  
+ Max.   :119.00   Max.   :120.00   Max.   :110.000   Max.   :98.00  
+                                   NA's   :3         NA's   :3      
+   precision          recall       false.pos.rate       specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000000   Min.   :0.9979  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000000   1st Qu.:0.9997  
+ Median :0.0000   Median :0.0000   Median :0.0000849   Median :0.9999  
+ Mean   :0.1653   Mean   :0.1737   Mean   :0.0002330   Mean   :0.9998  
+ 3rd Qu.:0.1875   3rd Qu.:0.3333   3rd Qu.:0.0002971   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.0020798   Max.   :1.0000  
+ NA's   :3        NA's   :3        NA's   :3           NA's   :3       
+    f1.score           mcc            
+ Min.   :0.0000   Min.   :-0.0006211  
+ 1st Qu.:0.0000   1st Qu.:-0.0001273  
+ Median :0.0000   Median : 0.0000000  
+ Mean   :0.1444   Mean   : 0.1552272  
+ 3rd Qu.:0.2222   3rd Qu.: 0.2423400  
+ Max.   :1.0000   Max.   : 1.0000000  
+ NA's   :3        NA's   :3           
 
 
 Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA:
-    n.truth           n.pred          true.pos        false.pos        precision          recall       false.pos.rate     
- Min.   :  0.00   Min.   :  0.00   Min.   :  0.00   Min.   :  0.00   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000000  
- 1st Qu.:  9.00   1st Qu.: 16.00   1st Qu.:  2.00   1st Qu.:  8.00   1st Qu.:0.0604   1st Qu.:0.2222   1st Qu.:0.0001698  
- Median : 10.00   Median : 49.00   Median :  9.00   Median : 32.00   Median :0.1429   Median :0.8000   Median :0.0006791  
- Mean   : 15.98   Mean   : 48.04   Mean   : 10.42   Mean   : 37.42   Mean   :0.1972   Mean   :0.6273   Mean   :0.0007942  
- 3rd Qu.: 19.00   3rd Qu.: 66.00   3rd Qu.:  9.00   3rd Qu.: 57.00   3rd Qu.:0.2647   3rd Qu.:1.0000   3rd Qu.:0.0012097  
- Max.   :119.00   Max.   :154.00   Max.   :114.00   Max.   :140.00   Max.   :1.0000   Max.   :1.0000   Max.   :0.0029711  
-                                   NA's   :3        NA's   :3        NA's   :3        NA's   :3        NA's   :3          
-  specificity        f1.score            mcc            
- Min.   :0.9970   Min.   :0.00000   Min.   :-0.0004893  
- 1st Qu.:0.9988   1st Qu.:0.08955   1st Qu.: 0.1411662  
- Median :0.9993   Median :0.21918   Median : 0.3305056  
- Mean   :0.9992   Mean   :0.26182   Mean   : 0.3252205  
- 3rd Qu.:0.9998   3rd Qu.:0.39474   3rd Qu.: 0.4841894  
- Max.   :1.0000   Max.   :1.00000   Max.   : 1.0000000  
- NA's   :3        NA's   :3         NA's   :3           
+    n.truth           n.pred          true.pos        false.pos     
+ Min.   :  0.00   Min.   :  0.00   Min.   :  0.00   Min.   :  0.00  
+ 1st Qu.:  9.00   1st Qu.: 16.00   1st Qu.:  2.00   1st Qu.:  8.00  
+ Median :  9.00   Median : 49.00   Median :  9.00   Median : 32.00  
+ Mean   : 15.77   Mean   : 47.96   Mean   : 10.41   Mean   : 37.34  
+ 3rd Qu.: 19.00   3rd Qu.: 66.00   3rd Qu.:  9.00   3rd Qu.: 57.00  
+ Max.   :119.00   Max.   :154.00   Max.   :114.00   Max.   :139.00  
+                                   NA's   :3        NA's   :3       
+   precision           recall       false.pos.rate       specificity    
+ Min.   :0.00000   Min.   :0.0000   Min.   :0.0000000   Min.   :0.9971  
+ 1st Qu.:0.06081   1st Qu.:0.2222   1st Qu.:0.0001698   1st Qu.:0.9988  
+ Median :0.14516   Median :0.8889   Median :0.0006791   Median :0.9993  
+ Mean   :0.19741   Mean   :0.6425   Mean   :0.0007925   Mean   :0.9992  
+ 3rd Qu.:0.26471   3rd Qu.:1.0000   3rd Qu.:0.0012097   3rd Qu.:0.9998  
+ Max.   :1.00000   Max.   :1.0000   Max.   :0.0029499   Max.   :1.0000  
+ NA's   :3         NA's   :3        NA's   :3           NA's   :3       
+    f1.score            mcc            
+ Min.   :0.00000   Min.   :-0.0004893  
+ 1st Qu.:0.08955   1st Qu.: 0.1411662  
+ Median :0.22222   Median : 0.3305056  
+ Mean   :0.26253   Mean   : 0.3252205  
+ 3rd Qu.:0.39474   3rd Qu.: 0.4841894  
+ Max.   :1.00000   Max.   : 1.0000000  
+ NA's   :3         NA's   :3           
+
+
+InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA excluding ancestral GO terms:
+    n.truth           n.pred          true.pos        false.pos     
+ Min.   : 0.000   Min.   : 0.000   Min.   :0.0000   Min.   : 0.000  
+ 1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.:0.0000   1st Qu.: 1.000  
+ Median : 1.000   Median : 1.000   Median :0.0000   Median : 1.000  
+ Mean   : 1.912   Mean   : 2.068   Mean   :0.1713   Mean   : 1.902  
+ 3rd Qu.: 2.000   3rd Qu.: 3.250   3rd Qu.:0.0000   3rd Qu.: 3.000  
+ Max.   :12.000   Max.   :12.000   Max.   :6.0000   Max.   :12.000  
+                                   NA's   :3        NA's   :3       
+   precision           recall        false.pos.rate       specificity    
+ Min.   :0.00000   Min.   :0.00000   Min.   :0.0000000   Min.   :0.9997  
+ 1st Qu.:0.00000   1st Qu.:0.00000   1st Qu.:0.0000212   1st Qu.:0.9999  
+ Median :0.00000   Median :0.00000   Median :0.0000212   Median :1.0000  
+ Mean   :0.04678   Mean   :0.05089   Mean   :0.0000404   Mean   :1.0000  
+ 3rd Qu.:0.00000   3rd Qu.:0.00000   3rd Qu.:0.0000637   3rd Qu.:1.0000  
+ Max.   :1.00000   Max.   :1.00000   Max.   :0.0002546   Max.   :1.0000  
+ NA's   :3         NA's   :3         NA's   :3           NA's   :3       
+    f1.score            mcc            
+ Min.   :0.00000   Min.   :-0.0001040  
+ 1st Qu.:0.00000   1st Qu.:-0.0000424  
+ Median :0.00000   Median :-0.0000300  
+ Mean   :0.04457   Mean   : 0.0465274  
+ 3rd Qu.:0.00000   3rd Qu.: 0.0000000  
+ Max.   :1.00000   Max.   : 1.0000000  
+ NA's   :3         NA's   :3           
+
+
+Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA excluding ancestral GO terms:
+    n.truth           n.pred          true.pos       false.pos     
+ Min.   : 0.000   Min.   : 0.000   Min.   :0.000   Min.   : 0.000  
+ 1st Qu.: 1.000   1st Qu.: 4.750   1st Qu.:0.000   1st Qu.: 3.000  
+ Median : 1.000   Median : 8.000   Median :1.000   Median : 7.000  
+ Mean   : 1.912   Mean   : 7.586   Mean   :0.894   Mean   : 6.679  
+ 3rd Qu.: 2.000   3rd Qu.:11.000   3rd Qu.:1.000   3rd Qu.:10.000  
+ Max.   :12.000   Max.   :21.000   Max.   :7.000   Max.   :19.000  
+                                   NA's   :3       NA's   :3       
+   precision          recall       false.pos.rate       specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000000   Min.   :0.9996  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000637   1st Qu.:0.9998  
+ Median :0.1000   Median :0.5000   Median :0.0001485   Median :0.9999  
+ Mean   :0.1033   Mean   :0.4933   Mean   :0.0001417   Mean   :0.9999  
+ 3rd Qu.:0.1429   3rd Qu.:1.0000   3rd Qu.:0.0002122   3rd Qu.:0.9999  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.0004032   Max.   :1.0000  
+ NA's   :3        NA's   :3        NA's   :3           NA's   :3       
+    f1.score           mcc            
+ Min.   :0.0000   Min.   :-0.0001684  
+ 1st Qu.:0.0000   1st Qu.: 0.0000000  
+ Median :0.1667   Median : 0.2356397  
+ Mean   :0.1556   Mean   : 0.2106427  
+ 3rd Qu.:0.2222   3rd Qu.: 0.3332520  
+ Max.   :1.0000   Max.   : 1.0000000  
+ NA's   :3        NA's   :3           
 
 
 Excluding those gold standard proteins for which Blast found Hits with 100 percent sequence similarity:
 
 Mercator performance on Oryza Non SwissProt Non Elect Inferred GOA:
-    n.truth           n.pred          true.pos         false.pos        precision          recall       false.pos.rate     
- Min.   :  0.00   Min.   :  0.00   Min.   :  0.000   Min.   :  0.00   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000000  
- 1st Qu.:  9.00   1st Qu.:  0.00   1st Qu.:  0.000   1st Qu.:  0.00   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000000  
- Median : 10.00   Median :  0.00   Median :  0.000   Median :  0.00   Median :0.0000   Median :0.0000   Median :0.0000000  
- Mean   : 16.77   Mean   : 19.26   Mean   :  5.885   Mean   : 13.24   Mean   :0.1264   Mean   :0.2284   Mean   :0.0002811  
- 3rd Qu.: 20.00   3rd Qu.: 35.00   3rd Qu.:  6.250   3rd Qu.: 20.00   3rd Qu.:0.1336   3rd Qu.:0.3846   3rd Qu.:0.0004246  
- Max.   :119.00   Max.   :128.00   Max.   :114.000   Max.   :104.00   Max.   :1.0000   Max.   :1.0000   Max.   :0.0022071  
-                                   NA's   :3         NA's   :3        NA's   :3        NA's   :3        NA's   :3          
-  specificity        f1.score           mcc            
- Min.   :0.9978   Min.   :0.0000   Min.   :-0.0005372  
- 1st Qu.:0.9996   1st Qu.:0.0000   1st Qu.: 0.0000000  
- Median :1.0000   Median :0.0000   Median : 0.0000000  
- Mean   :0.9997   Mean   :0.1377   Mean   : 0.1550507  
- 3rd Qu.:1.0000   3rd Qu.:0.2000   3rd Qu.: 0.2863266  
- Max.   :1.0000   Max.   :0.9231   Max.   : 0.9271310  
- NA's   :3        NA's   :3        NA's   :3           
+    n.truth           n.pred         true.pos         false.pos     
+ Min.   :  0.00   Min.   :  0.0   Min.   :  0.000   Min.   :  0.00  
+ 1st Qu.:  9.00   1st Qu.:  0.0   1st Qu.:  0.000   1st Qu.:  0.00  
+ Median :  9.00   Median :  0.0   Median :  0.000   Median :  0.00  
+ Mean   : 16.52   Mean   : 19.2   Mean   :  5.877   Mean   : 13.19  
+ 3rd Qu.: 20.00   3rd Qu.: 35.0   3rd Qu.:  6.250   3rd Qu.: 20.00  
+ Max.   :119.00   Max.   :127.0   Max.   :114.000   Max.   :103.00  
+                                  NA's   :3         NA's   :3       
+   precision          recall       false.pos.rate       specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000000   Min.   :0.9978  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000000   1st Qu.:0.9996  
+ Median :0.0000   Median :0.0000   Median :0.0000000   Median :1.0000  
+ Mean   :0.1268   Mean   :0.2311   Mean   :0.0002800   Mean   :0.9997  
+ 3rd Qu.:0.1364   3rd Qu.:0.4000   3rd Qu.:0.0004246   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.0021859   Max.   :1.0000  
+ NA's   :3        NA's   :3        NA's   :3           NA's   :3       
+    f1.score           mcc            
+ Min.   :0.0000   Min.   :-0.0005372  
+ 1st Qu.:0.0000   1st Qu.: 0.0000000  
+ Median :0.0000   Median : 0.0000000  
+ Mean   :0.1382   Mean   : 0.1550507  
+ 3rd Qu.:0.2000   3rd Qu.: 0.2863266  
+ Max.   :0.9268   Max.   : 0.9271310  
+ NA's   :3        NA's   :3           
 
 
 InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA:
-    n.truth           n.pred          true.pos         false.pos        precision          recall       false.pos.rate     
- Min.   :  0.00   Min.   :  0.00   Min.   :  0.000   Min.   : 0.000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000000  
- 1st Qu.:  9.00   1st Qu.:  0.00   1st Qu.:  0.000   1st Qu.: 0.000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000000  
- Median : 10.00   Median :  4.00   Median :  0.000   Median : 4.000   Median :0.0000   Median :0.0000   Median :0.0000849  
- Mean   : 16.77   Mean   : 14.08   Mean   :  4.502   Mean   : 9.637   Mean   :0.1628   Mean   :0.1486   Mean   :0.0002045  
- 3rd Qu.: 20.00   3rd Qu.: 16.50   3rd Qu.:  2.250   3rd Qu.: 9.250   3rd Qu.:0.1446   3rd Qu.:0.1136   3rd Qu.:0.0001966  
- Max.   :119.00   Max.   :120.00   Max.   :110.000   Max.   :98.000   Max.   :1.0000   Max.   :1.0000   Max.   :0.0020798  
-                                   NA's   :3         NA's   :3        NA's   :3        NA's   :3        NA's   :3          
-  specificity        f1.score           mcc            
- Min.   :0.9979   Min.   :0.0000   Min.   :-0.0006211  
- 1st Qu.:0.9998   1st Qu.:0.0000   1st Qu.:-0.0001273  
- Median :0.9999   Median :0.0000   Median : 0.0000000  
- Mean   :0.9998   Mean   :0.1316   Mean   : 0.1425920  
- 3rd Qu.:1.0000   3rd Qu.:0.1429   3rd Qu.: 0.1517640  
- Max.   :1.0000   Max.   :1.0000   Max.   : 1.0000000  
- NA's   :3        NA's   :3        NA's   :3           
+    n.truth           n.pred          true.pos         false.pos     
+ Min.   :  0.00   Min.   :  0.00   Min.   :  0.000   Min.   : 0.000  
+ 1st Qu.:  9.00   1st Qu.:  0.00   1st Qu.:  0.000   1st Qu.: 0.000  
+ Median :  9.00   Median :  4.00   Median :  0.000   Median : 4.000  
+ Mean   : 16.52   Mean   : 14.07   Mean   :  4.502   Mean   : 9.623  
+ 3rd Qu.: 20.00   3rd Qu.: 16.50   3rd Qu.:  2.250   3rd Qu.: 9.250  
+ Max.   :119.00   Max.   :120.00   Max.   :110.000   Max.   :98.000  
+                                   NA's   :3         NA's   :3       
+   precision          recall       false.pos.rate       specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000000   Min.   :0.9979  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000000   1st Qu.:0.9998  
+ Median :0.0000   Median :0.0000   Median :0.0000849   Median :0.9999  
+ Mean   :0.1636   Mean   :0.1490   Mean   :0.0002043   Mean   :0.9998  
+ 3rd Qu.:0.1446   3rd Qu.:0.1136   3rd Qu.:0.0001966   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.0020798   Max.   :1.0000  
+ NA's   :3        NA's   :3        NA's   :3           NA's   :3       
+    f1.score           mcc            
+ Min.   :0.0000   Min.   :-0.0006211  
+ 1st Qu.:0.0000   1st Qu.:-0.0001273  
+ Median :0.0000   Median : 0.0000000  
+ Mean   :0.1324   Mean   : 0.1425920  
+ 3rd Qu.:0.1429   3rd Qu.: 0.1517640  
+ Max.   :1.0000   Max.   : 1.0000000  
+ NA's   :3        NA's   :3           
 
 
 Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA:
-    n.truth           n.pred          true.pos        false.pos        precision          recall       false.pos.rate     
- Min.   :  0.00   Min.   :  0.00   Min.   :  0.00   Min.   :  0.00   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000000  
- 1st Qu.:  9.00   1st Qu.:  9.00   1st Qu.:  0.00   1st Qu.:  1.75   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000371  
- Median : 10.00   Median : 50.00   Median :  8.00   Median : 29.50   Median :0.1231   Median :0.7660   Median :0.0006264  
- Mean   : 16.77   Mean   : 47.95   Mean   : 10.35   Mean   : 37.36   Mean   :0.1893   Mean   :0.5692   Mean   :0.0007929  
- 3rd Qu.: 20.00   3rd Qu.: 67.00   3rd Qu.:  9.25   3rd Qu.: 57.00   3rd Qu.:0.2647   3rd Qu.:0.9091   3rd Qu.:0.0012097  
- Max.   :119.00   Max.   :154.00   Max.   :114.00   Max.   :140.00   Max.   :1.0000   Max.   :1.0000   Max.   :0.0029711  
-                                   NA's   :3        NA's   :3        NA's   :3        NA's   :3        NA's   :3          
-  specificity        f1.score           mcc            
- Min.   :0.9970   Min.   :0.0000   Min.   :-0.0004893  
- 1st Qu.:0.9988   1st Qu.:0.0000   1st Qu.: 0.0000000  
- Median :0.9994   Median :0.1981   Median : 0.3118372  
- Mean   :0.9992   Mean   :0.2430   Mean   : 0.3003712  
- 3rd Qu.:1.0000   3rd Qu.:0.3830   3rd Qu.: 0.4429529  
- Max.   :1.0000   Max.   :0.9623   Max.   : 0.9629091  
- NA's   :3        NA's   :3        NA's   :3           
+    n.truth           n.pred          true.pos        false.pos     
+ Min.   :  0.00   Min.   :  0.00   Min.   :  0.00   Min.   :  0.00  
+ 1st Qu.:  9.00   1st Qu.:  9.00   1st Qu.:  0.00   1st Qu.:  1.75  
+ Median :  9.00   Median : 49.00   Median :  8.00   Median : 29.50  
+ Mean   : 16.52   Mean   : 47.86   Mean   : 10.34   Mean   : 37.27  
+ 3rd Qu.: 20.00   3rd Qu.: 67.00   3rd Qu.:  9.25   3rd Qu.: 57.00  
+ Max.   :119.00   Max.   :154.00   Max.   :114.00   Max.   :139.00  
+                                   NA's   :3        NA's   :3       
+   precision          recall       false.pos.rate       specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000000   Min.   :0.9971  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000371   1st Qu.:0.9988  
+ Median :0.1231   Median :0.7701   Median :0.0006264   Median :0.9994  
+ Mean   :0.1895   Mean   :0.5871   Mean   :0.0007911   Mean   :0.9992  
+ 3rd Qu.:0.2647   3rd Qu.:0.9091   3rd Qu.:0.0012097   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.0029499   Max.   :1.0000  
+ NA's   :3        NA's   :3        NA's   :3           NA's   :3       
+    f1.score           mcc            
+ Min.   :0.0000   Min.   :-0.0004893  
+ 1st Qu.:0.0000   1st Qu.: 0.0000000  
+ Median :0.2000   Median : 0.3118372  
+ Mean   :0.2437   Mean   : 0.3003712  
+ 3rd Qu.:0.3830   3rd Qu.: 0.4429529  
+ Max.   :0.9623   Max.   : 0.9629091  
+ NA's   :3        NA's   :3           
+
+
+InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA excluding ancestral GO terms:
+    n.truth           n.pred          true.pos        false.pos     
+ Min.   : 0.000   Min.   : 0.000   Min.   :0.0000   Min.   : 0.000  
+ 1st Qu.: 1.000   1st Qu.: 0.000   1st Qu.:0.0000   1st Qu.: 0.000  
+ Median : 2.000   Median : 1.000   Median :0.0000   Median : 1.000  
+ Mean   : 2.033   Mean   : 1.713   Mean   :0.1942   Mean   : 1.523  
+ 3rd Qu.: 2.000   3rd Qu.: 3.000   3rd Qu.:0.0000   3rd Qu.: 2.000  
+ Max.   :12.000   Max.   :12.000   Max.   :6.0000   Max.   :12.000  
+                                   NA's   :3        NA's   :3       
+   precision           recall        false.pos.rate       specificity    
+ Min.   :0.00000   Min.   :0.00000   Min.   :0.0000000   Min.   :0.9997  
+ 1st Qu.:0.00000   1st Qu.:0.00000   1st Qu.:0.0000000   1st Qu.:1.0000  
+ Median :0.00000   Median :0.00000   Median :0.0000212   Median :1.0000  
+ Mean   :0.05065   Mean   :0.05486   Mean   :0.0000323   Mean   :1.0000  
+ 3rd Qu.:0.00000   3rd Qu.:0.00000   3rd Qu.:0.0000424   3rd Qu.:1.0000  
+ Max.   :1.00000   Max.   :1.00000   Max.   :0.0002546   Max.   :1.0000  
+ NA's   :3         NA's   :3         NA's   :3           NA's   :3       
+    f1.score            mcc            
+ Min.   :0.00000   Min.   :-0.0001040  
+ 1st Qu.:0.00000   1st Qu.:-0.0000368  
+ Median :0.00000   Median :-0.0000300  
+ Mean   :0.04789   Mean   : 0.0501345  
+ 3rd Qu.:0.00000   3rd Qu.: 0.0000000  
+ Max.   :1.00000   Max.   : 1.0000000  
+ NA's   :3         NA's   :3           
+
+
+Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA excluding ancestral GO terms:
+    n.truth           n.pred          true.pos        false.pos     
+ Min.   : 0.000   Min.   : 0.000   Min.   :0.0000   Min.   : 0.000  
+ 1st Qu.: 1.000   1st Qu.: 2.000   1st Qu.:0.0000   1st Qu.: 2.000  
+ Median : 2.000   Median : 7.000   Median :1.0000   Median : 6.000  
+ Mean   : 2.033   Mean   : 6.925   Mean   :0.8577   Mean   : 6.048  
+ 3rd Qu.: 2.000   3rd Qu.:10.000   3rd Qu.:1.0000   3rd Qu.: 9.000  
+ Max.   :12.000   Max.   :21.000   Max.   :7.0000   Max.   :19.000  
+                                   NA's   :3        NA's   :3       
+   precision          recall       false.pos.rate       specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000000   Min.   :0.9996  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000424   1st Qu.:0.9998  
+ Median :0.1000   Median :0.5000   Median :0.0001273   Median :0.9999  
+ Mean   :0.1012   Mean   :0.4161   Mean   :0.0001283   Mean   :0.9999  
+ 3rd Qu.:0.1429   3rd Qu.:0.5179   3rd Qu.:0.0001910   3rd Qu.:1.0000  
+ Max.   :0.7000   Max.   :1.0000   Max.   :0.0004032   Max.   :1.0000  
+ NA's   :3        NA's   :3        NA's   :3           NA's   :3       
+    f1.score           mcc            
+ Min.   :0.0000   Min.   :-0.0001684  
+ 1st Qu.:0.0000   1st Qu.: 0.0000000  
+ Median :0.1667   Median : 0.2181438  
+ Mean   :0.1490   Mean   : 0.1928787  
+ 3rd Qu.:0.2222   3rd Qu.: 0.2886261  
+ Max.   :0.7273   Max.   : 0.7559049  
+ NA's   :3        NA's   :3           
+
+
+
+Performance evaluation on the Biological Process category
+
+
+Mercator performance on Oryza Non SwissProt Non Elect Inferred GOA for BP:
+    n.truth          n.pred         true.pos        false.pos     
+ Min.   : 0.00   Min.   : 0.00   Min.   : 0.000   Min.   : 0.000  
+ 1st Qu.: 0.00   1st Qu.: 0.00   1st Qu.: 0.000   1st Qu.: 0.000  
+ Median : 0.00   Median : 0.00   Median : 1.000   Median : 0.000  
+ Mean   : 5.82   Mean   :10.99   Mean   : 9.312   Mean   : 5.586  
+ 3rd Qu.: 8.00   3rd Qu.:17.00   3rd Qu.: 9.750   3rd Qu.: 5.000  
+ Max.   :86.00   Max.   :82.00   Max.   :77.000   Max.   :51.000  
+                                 NA's   :430      NA's   :430     
+   precision          recall       false.pos.rate    specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.9983  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.9998  
+ Median :0.0526   Median :0.0602   Median :0.0000   Median :1.0000  
+ Mean   :0.3456   Mean   :0.3198   Mean   :0.0002   Mean   :0.9998  
+ 3rd Qu.:0.6667   3rd Qu.:0.6783   3rd Qu.:0.0002   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.0017   Max.   :1.0000  
+ NA's   :430      NA's   :430      NA's   :430      NA's   :430     
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.0561   Median :0.0570  
+ Mean   :0.3007   Mean   :0.3067  
+ 3rd Qu.:0.6591   3rd Qu.:0.6178  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :430      NA's   :430     
+
+
+InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA for BP:
+    n.truth          n.pred          true.pos       false.pos     
+ Min.   : 0.00   Min.   : 0.000   Min.   : 0.00   Min.   : 0.000  
+ 1st Qu.: 0.00   1st Qu.: 0.000   1st Qu.: 0.00   1st Qu.: 0.000  
+ Median : 0.00   Median : 2.000   Median : 1.00   Median : 0.000  
+ Mean   : 5.82   Mean   : 8.119   Mean   : 8.07   Mean   : 3.661  
+ 3rd Qu.: 8.00   3rd Qu.: 9.000   3rd Qu.: 8.00   3rd Qu.: 6.000  
+ Max.   :86.00   Max.   :82.000   Max.   :77.00   Max.   :76.000  
+                                  NA's   :430     NA's   :430     
+   precision          recall       false.pos.rate    specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.9974  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.9998  
+ Median :0.1429   Median :0.1250   Median :0.0000   Median :1.0000  
+ Mean   :0.3976   Mean   :0.2826   Mean   :0.0001   Mean   :0.9999  
+ 3rd Qu.:0.8182   3rd Qu.:0.5600   3rd Qu.:0.0002   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.0026   Max.   :1.0000  
+ NA's   :430      NA's   :430      NA's   :430      NA's   :430     
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.1333   Median :0.1138  
+ Mean   :0.3063   Mean   :0.3107  
+ 3rd Qu.:0.6207   3rd Qu.:0.6379  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :430      NA's   :430     
+
+
+Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA for BP:
+    n.truth          n.pred          true.pos       false.pos    
+ Min.   : 0.00   Min.   :  0.00   Min.   : 0.00   Min.   : 0.00  
+ 1st Qu.: 0.00   1st Qu.:  3.00   1st Qu.: 3.00   1st Qu.: 3.50  
+ Median : 0.00   Median : 21.00   Median : 8.00   Median :13.50  
+ Mean   : 5.82   Mean   : 27.92   Mean   :12.55   Mean   :20.41  
+ 3rd Qu.: 8.00   3rd Qu.: 47.00   3rd Qu.:15.75   3rd Qu.:30.00  
+ Max.   :86.00   Max.   :111.00   Max.   :77.00   Max.   :90.00  
+                                  NA's   :430     NA's   :430    
+   precision          recall       false.pos.rate   specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0e+00   Min.   :0.9970  
+ 1st Qu.:0.1429   1st Qu.:0.3141   1st Qu.:1e-04   1st Qu.:0.9990  
+ Median :0.3333   Median :0.7500   Median :5e-04   Median :0.9995  
+ Mean   :0.4175   Mean   :0.6367   Mean   :7e-04   Mean   :0.9993  
+ 3rd Qu.:0.6471   3rd Qu.:1.0000   3rd Qu.:1e-03   3rd Qu.:0.9999  
+ Max.   :1.0000   Max.   :1.0000   Max.   :3e-03   Max.   :1.0000  
+ NA's   :430      NA's   :430      NA's   :430     NA's   :430     
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.1442   1st Qu.:0.2236  
+ Median :0.3810   Median :0.4690  
+ Mean   :0.4180   Mean   :0.4619  
+ 3rd Qu.:0.6648   3rd Qu.:0.7070  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :430      NA's   :430     
+
+
+InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA for BP excluding ancestral GO terms:
+    n.truth           n.pred          true.pos        false.pos     
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.0000   Median :1.0000   Median :0.0000   Median :1.0000  
+ Mean   :0.5244   Mean   :0.6477   Mean   :0.1613   Mean   :0.7419  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:0.0000   3rd Qu.:1.0000  
+ Max.   :7.0000   Max.   :4.0000   Max.   :2.0000   Max.   :3.0000  
+                                   NA's   :430      NA's   :430     
+   precision          recall       false.pos.rate   specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0e+00   Min.   :0.9999  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0e+00   1st Qu.:1.0000  
+ Median :0.0000   Median :0.0000   Median :0e+00   Median :1.0000  
+ Mean   :0.0909   Mean   :0.0607   Mean   :0e+00   Mean   :1.0000  
+ 3rd Qu.:0.0000   3rd Qu.:0.0000   3rd Qu.:0e+00   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1e-04   Max.   :1.0000  
+ NA's   :430      NA's   :430      NA's   :430     NA's   :430     
+    f1.score           mcc         
+ Min.   :0.0000   Min.   :-0.0001  
+ 1st Qu.:0.0000   1st Qu.: 0.0000  
+ Median :0.0000   Median : 0.0000  
+ Mean   :0.0656   Mean   : 0.0738  
+ 3rd Qu.:0.0000   3rd Qu.: 0.0000  
+ Max.   :1.0000   Max.   : 1.0000  
+ NA's   :430      NA's   :430      
+
+
+Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA for BP excluding ancestral GO terms:
+    n.truth           n.pred          true.pos        false.pos     
+ Min.   :0.0000   Min.   : 0.000   Min.   :0.0000   Min.   : 0.000  
+ 1st Qu.:0.0000   1st Qu.: 1.000   1st Qu.:0.0000   1st Qu.: 2.000  
+ Median :0.0000   Median : 2.000   Median :1.0000   Median : 3.000  
+ Mean   :0.5244   Mean   : 2.672   Mean   :0.6505   Mean   : 3.199  
+ 3rd Qu.:1.0000   3rd Qu.: 4.000   3rd Qu.:1.0000   3rd Qu.: 5.000  
+ Max.   :7.0000   Max.   :13.000   Max.   :3.0000   Max.   :10.000  
+                                   NA's   :430      NA's   :430     
+   precision          recall       false.pos.rate   specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0e+00   Min.   :0.9997  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:1e-04   1st Qu.:0.9998  
+ Median :0.1250   Median :0.3333   Median :1e-04   Median :0.9999  
+ Mean   :0.1613   Mean   :0.4091   Mean   :1e-04   Mean   :0.9999  
+ 3rd Qu.:0.2500   3rd Qu.:1.0000   3rd Qu.:2e-04   3rd Qu.:0.9999  
+ Max.   :1.0000   Max.   :1.0000   Max.   :3e-04   Max.   :1.0000  
+ NA's   :430      NA's   :430      NA's   :430     NA's   :430     
+    f1.score           mcc         
+ Min.   :0.0000   Min.   :-0.0001  
+ 1st Qu.:0.0000   1st Qu.:-0.0001  
+ Median :0.2020   Median : 0.2052  
+ Mean   :0.2052   Mean   : 0.2565  
+ 3rd Qu.:0.4000   3rd Qu.: 0.5163  
+ Max.   :1.0000   Max.   : 1.0000  
+ NA's   :430      NA's   :430      
+
+
+Biological Process excluding those gold standard proteins for which Blast found Hits with 100 percent sequence similarity:
+
+Mercator performance on Oryza Non SwissProt Non Elect Inferred GOA for BP:
+    n.truth           n.pred         true.pos        false.pos     
+ Min.   : 0.000   Min.   : 0.00   Min.   : 0.000   Min.   : 0.000  
+ 1st Qu.: 0.000   1st Qu.: 0.00   1st Qu.: 0.000   1st Qu.: 0.000  
+ Median : 0.000   Median : 0.00   Median : 1.000   Median : 0.000  
+ Mean   : 6.432   Mean   :11.63   Mean   : 9.241   Mean   : 5.299  
+ 3rd Qu.: 8.000   3rd Qu.:19.00   3rd Qu.: 9.000   3rd Qu.: 4.750  
+ Max.   :86.000   Max.   :82.00   Max.   :77.000   Max.   :51.000  
+                                  NA's   :349      NA's   :349     
+   precision          recall       false.pos.rate    specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.9983  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.9998  
+ Median :0.0227   Median :0.0385   Median :0.0000   Median :1.0000  
+ Mean   :0.3404   Mean   :0.3034   Mean   :0.0002   Mean   :0.9998  
+ 3rd Qu.:0.6667   3rd Qu.:0.6000   3rd Qu.:0.0002   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.0017   Max.   :1.0000  
+ NA's   :349      NA's   :349      NA's   :349      NA's   :349     
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.0286   Median :0.0277  
+ Mean   :0.2892   Mean   :0.2954  
+ 3rd Qu.:0.6456   3rd Qu.:0.6168  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :349      NA's   :349     
+
+
+InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA for BP:
+    n.truth           n.pred          true.pos       false.pos     
+ Min.   : 0.000   Min.   : 0.000   Min.   : 0.00   Min.   : 0.000  
+ 1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 0.00   1st Qu.: 0.000  
+ Median : 0.000   Median : 0.000   Median : 1.00   Median : 0.000  
+ Mean   : 6.432   Mean   : 7.985   Mean   : 7.96   Mean   : 3.563  
+ 3rd Qu.: 8.000   3rd Qu.: 8.000   3rd Qu.: 7.75   3rd Qu.: 6.000  
+ Max.   :86.000   Max.   :82.000   Max.   :77.00   Max.   :76.000  
+                                   NA's   :349     NA's   :349     
+   precision          recall       false.pos.rate    specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.9974  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.9998  
+ Median :0.1429   Median :0.1250   Median :0.0000   Median :1.0000  
+ Mean   :0.3898   Mean   :0.2683   Mean   :0.0001   Mean   :0.9999  
+ 3rd Qu.:0.8182   3rd Qu.:0.5600   3rd Qu.:0.0002   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.0026   Max.   :1.0000  
+ NA's   :349      NA's   :349      NA's   :349      NA's   :349     
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.1333   Median :0.1138  
+ Mean   :0.2956   Mean   :0.2996  
+ 3rd Qu.:0.6207   3rd Qu.:0.6012  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :349      NA's   :349     
+
+
+Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA for BP:
+    n.truth           n.pred          true.pos       false.pos    
+ Min.   : 0.000   Min.   :  0.00   Min.   : 0.00   Min.   : 0.00  
+ 1st Qu.: 0.000   1st Qu.:  1.00   1st Qu.: 2.25   1st Qu.: 2.00  
+ Median : 0.000   Median : 25.00   Median : 8.00   Median :14.50  
+ Mean   : 6.432   Mean   : 30.13   Mean   :12.22   Mean   :20.59  
+ 3rd Qu.: 8.000   3rd Qu.: 47.00   3rd Qu.:14.00   3rd Qu.:30.00  
+ Max.   :86.000   Max.   :111.00   Max.   :77.00   Max.   :90.00  
+                                   NA's   :349     NA's   :349    
+   precision          recall       false.pos.rate   specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0e+00   Min.   :0.9970  
+ 1st Qu.:0.1429   1st Qu.:0.2500   1st Qu.:1e-04   1st Qu.:0.9990  
+ Median :0.3267   Median :0.7235   Median :5e-04   Median :0.9995  
+ Mean   :0.4089   Mean   :0.6169   Mean   :7e-04   Mean   :0.9993  
+ 3rd Qu.:0.6129   3rd Qu.:1.0000   3rd Qu.:1e-03   3rd Qu.:0.9999  
+ Max.   :1.0000   Max.   :1.0000   Max.   :3e-03   Max.   :1.0000  
+ NA's   :349      NA's   :349      NA's   :349     NA's   :349     
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.1333   1st Qu.:0.2141  
+ Median :0.3810   Median :0.4413  
+ Mean   :0.4021   Mean   :0.4473  
+ 3rd Qu.:0.6427   3rd Qu.:0.7001  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :349      NA's   :349     
+
+
+InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA for BP excluding ancestral GO terms:
+    n.truth           n.pred          true.pos        false.pos     
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.0000   Median :0.0000   Median :0.0000   Median :1.0000  
+ Mean   :0.5832   Mean   :0.5564   Mean   :0.1667   Mean   :0.6954  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:0.0000   3rd Qu.:1.0000  
+ Max.   :7.0000   Max.   :4.0000   Max.   :2.0000   Max.   :3.0000  
+                                   NA's   :349      NA's   :349     
+   precision          recall       false.pos.rate   specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0e+00   Min.   :0.9999  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0e+00   1st Qu.:1.0000  
+ Median :0.0000   Median :0.0000   Median :0e+00   Median :1.0000  
+ Mean   :0.0958   Mean   :0.0621   Mean   :0e+00   Mean   :1.0000  
+ 3rd Qu.:0.0000   3rd Qu.:0.0000   3rd Qu.:0e+00   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1e-04   Max.   :1.0000  
+ NA's   :349      NA's   :349      NA's   :349     NA's   :349     
+    f1.score           mcc         
+ Min.   :0.0000   Min.   :-0.0001  
+ 1st Qu.:0.0000   1st Qu.: 0.0000  
+ Median :0.0000   Median : 0.0000  
+ Mean   :0.0682   Mean   : 0.0768  
+ 3rd Qu.:0.0000   3rd Qu.: 0.0000  
+ Max.   :1.0000   Max.   : 1.0000  
+ NA's   :349      NA's   :349      
+
+
+Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA for BP excluding ancestral GO terms:
+    n.truth           n.pred        true.pos        false.pos     
+ Min.   :0.0000   Min.   : 0.0   Min.   :0.0000   Min.   : 0.000  
+ 1st Qu.:0.0000   1st Qu.: 1.0   1st Qu.:0.0000   1st Qu.: 2.000  
+ Median :0.0000   Median : 2.0   Median :0.5000   Median : 3.000  
+ Mean   :0.5832   Mean   : 2.7   Mean   :0.6149   Mean   : 3.161  
+ 3rd Qu.:1.0000   3rd Qu.: 4.0   3rd Qu.:1.0000   3rd Qu.: 5.000  
+ Max.   :7.0000   Max.   :13.0   Max.   :3.0000   Max.   :10.000  
+                                 NA's   :349      NA's   :349     
+   precision          recall       false.pos.rate   specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0e+00   Min.   :0.9997  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:1e-04   1st Qu.:0.9998  
+ Median :0.0500   Median :0.1000   Median :1e-04   Median :0.9999  
+ Mean   :0.1546   Mean   :0.3792   Mean   :1e-04   Mean   :0.9999  
+ 3rd Qu.:0.2500   3rd Qu.:1.0000   3rd Qu.:2e-04   3rd Qu.:0.9999  
+ Max.   :1.0000   Max.   :1.0000   Max.   :3e-04   Max.   :1.0000  
+ NA's   :349      NA's   :349      NA's   :349     NA's   :349     
+    f1.score           mcc         
+ Min.   :0.0000   Min.   :-0.0001  
+ 1st Qu.:0.0000   1st Qu.:-0.0001  
+ Median :0.0714   Median : 0.0912  
+ Mean   :0.1932   Mean   : 0.2449  
+ 3rd Qu.:0.3909   3rd Qu.: 0.5163  
+ Max.   :1.0000   Max.   : 1.0000  
+ NA's   :349      NA's   :349      
+
+
+
+Performance evaluation on the Cellular Component category
+
+
+Mercator performance on Oryza Non SwissProt Non Elect Inferred GOA for CC:
+    n.truth           n.pred          true.pos       false.pos    
+ Min.   : 0.000   Min.   : 0.000   Min.   : 0.00   Min.   : 0.00  
+ 1st Qu.: 8.000   1st Qu.: 0.000   1st Qu.: 0.00   1st Qu.: 0.00  
+ Median : 9.000   Median : 0.000   Median : 0.00   Median : 0.00  
+ Mean   : 8.067   Mean   : 3.951   Mean   : 2.06   Mean   : 2.18  
+ 3rd Qu.: 9.000   3rd Qu.: 6.250   3rd Qu.: 3.00   3rd Qu.: 3.00  
+ Max.   :24.000   Max.   :34.000   Max.   :19.00   Max.   :25.00  
+                                   NA's   :98      NA's   :98     
+   precision          recall       false.pos.rate     specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.00000   Min.   :0.9940  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.9993  
+ Median :0.0000   Median :0.0000   Median :0.00000   Median :1.0000  
+ Mean   :0.1895   Mean   :0.2088   Mean   :0.00052   Mean   :0.9995  
+ 3rd Qu.:0.3333   3rd Qu.:0.3333   3rd Qu.:0.00072   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.00601   Max.   :1.0000  
+ NA's   :98       NA's   :98       NA's   :98        NA's   :98      
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.0000   Median :0.0000  
+ Mean   :0.1835   Mean   :0.1878  
+ 3rd Qu.:0.2727   3rd Qu.:0.2759  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :98       NA's   :98      
+
+
+InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA for CC:
+    n.truth           n.pred          true.pos        false.pos     
+ Min.   : 0.000   Min.   : 0.000   Min.   : 0.000   Min.   : 0.000  
+ 1st Qu.: 8.000   1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 0.000  
+ Median : 9.000   Median : 0.000   Median : 0.000   Median : 0.000  
+ Mean   : 8.067   Mean   : 2.346   Mean   : 1.282   Mean   : 1.456  
+ 3rd Qu.: 9.000   3rd Qu.: 2.000   3rd Qu.: 1.000   3rd Qu.: 1.000  
+ Max.   :24.000   Max.   :19.000   Max.   :19.000   Max.   :12.000  
+                                   NA's   :98       NA's   :98      
+   precision          recall       false.pos.rate     specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.00000   Min.   :0.9971  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.9998  
+ Median :0.0000   Median :0.0000   Median :0.00000   Median :1.0000  
+ Mean   :0.1393   Mean   :0.1275   Mean   :0.00035   Mean   :0.9997  
+ 3rd Qu.:0.2500   3rd Qu.:0.1111   3rd Qu.:0.00024   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.00288   Max.   :1.0000  
+ NA's   :98       NA's   :98       NA's   :98        NA's   :98      
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.0000   Median :0.0000  
+ Mean   :0.1252   Mean   :0.1269  
+ 3rd Qu.:0.1818   3rd Qu.:0.2351  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :98       NA's   :98      
+
+
+Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA for CC:
+    n.truth           n.pred         true.pos        false.pos     
+ Min.   : 0.000   Min.   : 0.00   Min.   : 0.000   Min.   : 0.000  
+ 1st Qu.: 8.000   1st Qu.: 0.00   1st Qu.: 0.000   1st Qu.: 0.000  
+ Median : 9.000   Median : 8.00   Median : 8.000   Median : 1.000  
+ Mean   : 8.067   Mean   :11.44   Mean   : 6.388   Mean   : 5.577  
+ 3rd Qu.: 9.000   3rd Qu.:20.00   3rd Qu.: 9.000   3rd Qu.:12.000  
+ Max.   :24.000   Max.   :37.00   Max.   :24.000   Max.   :27.000  
+                                  NA's   :98       NA's   :98      
+   precision          recall       false.pos.rate     specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.00000   Min.   :0.9936  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.9971  
+ Median :0.4104   Median :1.0000   Median :0.00024   Median :0.9998  
+ Mean   :0.4829   Mean   :0.6705   Mean   :0.00134   Mean   :0.9987  
+ 3rd Qu.:0.9000   3rd Qu.:1.0000   3rd Qu.:0.00288   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.00649   Max.   :1.0000  
+ NA's   :98       NA's   :98       NA's   :98        NA's   :98      
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.5454   Median :0.5659  
+ Mean   :0.5292   Mean   :0.5422  
+ 3rd Qu.:0.9474   3rd Qu.:0.9486  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :98       NA's   :98      
+
+
+InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA for CC excluding ancestral GO terms:
+    n.truth           n.pred          true.pos         false.pos     
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.00000   Min.   :0.0000  
+ 1st Qu.:1.0000   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.0000  
+ Median :1.0000   Median :0.0000   Median :0.00000   Median :0.0000  
+ Mean   :0.9091   Mean   :0.4578   Mean   :0.03668   Mean   :0.4904  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:0.00000   3rd Qu.:1.0000  
+ Max.   :3.0000   Max.   :3.0000   Max.   :1.00000   Max.   :3.0000  
+                                   NA's   :98        NA's   :98      
+   precision           recall        false.pos.rate     specificity    
+ Min.   :0.00000   Min.   :0.00000   Min.   :0.00000   Min.   :0.9993  
+ 1st Qu.:0.00000   1st Qu.:0.00000   1st Qu.:0.00000   1st Qu.:0.9998  
+ Median :0.00000   Median :0.00000   Median :0.00000   Median :1.0000  
+ Mean   :0.02799   Mean   :0.03475   Mean   :0.00012   Mean   :0.9999  
+ 3rd Qu.:0.00000   3rd Qu.:0.00000   3rd Qu.:0.00024   3rd Qu.:1.0000  
+ Max.   :1.00000   Max.   :1.00000   Max.   :0.00072   Max.   :1.0000  
+ NA's   :98        NA's   :98        NA's   :98        NA's   :98      
+    f1.score            mcc          
+ Min.   :0.00000   Min.   :-0.00056  
+ 1st Qu.:0.00000   1st Qu.:-0.00019  
+ Median :0.00000   Median : 0.00000  
+ Mean   :0.02992   Mean   : 0.03063  
+ 3rd Qu.:0.00000   3rd Qu.: 0.00000  
+ Max.   :1.00000   Max.   : 1.00000  
+ NA's   :98        NA's   :98        
+
+
+Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA for CC excluding ancestral GO terms:
+    n.truth           n.pred          true.pos        false.pos    
+ Min.   :0.0000   Min.   : 0.000   Min.   :0.0000   Min.   :0.000  
+ 1st Qu.:1.0000   1st Qu.: 0.000   1st Qu.:0.0000   1st Qu.:0.000  
+ Median :1.0000   Median : 1.000   Median :1.0000   Median :1.000  
+ Mean   :0.9091   Mean   : 2.502   Mean   :0.6583   Mean   :1.931  
+ 3rd Qu.:1.0000   3rd Qu.: 5.000   3rd Qu.:1.0000   3rd Qu.:4.000  
+ Max.   :3.0000   Max.   :10.000   Max.   :2.0000   Max.   :9.000  
+                                   NA's   :98       NA's   :98     
+   precision          recall       false.pos.rate     specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.00000   Min.   :0.9979  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.9990  
+ Median :0.1667   Median :1.0000   Median :0.00024   Median :0.9998  
+ Mean   :0.3195   Mean   :0.6184   Mean   :0.00046   Mean   :0.9995  
+ 3rd Qu.:0.5000   3rd Qu.:1.0000   3rd Qu.:0.00096   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.00216   Max.   :1.0000  
+ NA's   :98       NA's   :98       NA's   :98        NA's   :98      
+    f1.score           mcc          
+ Min.   :0.0000   Min.   :-0.00065  
+ 1st Qu.:0.0000   1st Qu.: 0.00000  
+ Median :0.2857   Median : 0.35332  
+ Mean   :0.3746   Mean   : 0.40762  
+ 3rd Qu.:0.6667   3rd Qu.: 0.70704  
+ Max.   :1.0000   Max.   : 1.00000  
+ NA's   :98       NA's   :98        
+
+
+Cellular Component excluding those gold standard proteins for which Blast found Hits with 100 percent sequence similarity:
+
+Mercator performance on Oryza Non SwissProt Non Elect Inferred GOA for CC:
+    n.truth           n.pred          true.pos       false.pos     
+ Min.   : 0.000   Min.   : 0.000   Min.   : 0.00   Min.   : 0.000  
+ 1st Qu.: 8.000   1st Qu.: 0.000   1st Qu.: 0.00   1st Qu.: 0.000  
+ Median : 9.000   Median : 0.000   Median : 0.00   Median : 0.000  
+ Mean   : 7.994   Mean   : 3.629   Mean   : 2.09   Mean   : 1.797  
+ 3rd Qu.: 9.000   3rd Qu.: 6.000   3rd Qu.: 3.00   3rd Qu.: 1.000  
+ Max.   :24.000   Max.   :34.000   Max.   :19.00   Max.   :25.000  
+                                   NA's   :90      NA's   :90      
+   precision          recall       false.pos.rate     specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.00000   Min.   :0.9940  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.9998  
+ Median :0.0000   Median :0.0000   Median :0.00000   Median :1.0000  
+ Mean   :0.1948   Mean   :0.2099   Mean   :0.00043   Mean   :0.9996  
+ 3rd Qu.:0.3462   3rd Qu.:0.2222   3rd Qu.:0.00024   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.00601   Max.   :1.0000  
+ NA's   :90       NA's   :90       NA's   :90        NA's   :90      
+    f1.score          mcc        
+ Min.   :0.000   Min.   :0.0000  
+ 1st Qu.:0.000   1st Qu.:0.0000  
+ Median :0.000   Median :0.0000  
+ Mean   :0.185   Mean   :0.1898  
+ 3rd Qu.:0.300   3rd Qu.:0.3002  
+ Max.   :1.000   Max.   :1.0000  
+ NA's   :90      NA's   :90      
+
+
+InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA for CC:
+    n.truth           n.pred          true.pos        false.pos      
+ Min.   : 0.000   Min.   : 0.000   Min.   : 0.000   Min.   : 0.0000  
+ 1st Qu.: 8.000   1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 0.0000  
+ Median : 9.000   Median : 0.000   Median : 0.000   Median : 0.0000  
+ Mean   : 7.994   Mean   : 1.457   Mean   : 1.048   Mean   : 0.6721  
+ 3rd Qu.: 9.000   3rd Qu.: 0.000   3rd Qu.: 0.000   3rd Qu.: 0.0000  
+ Max.   :24.000   Max.   :19.000   Max.   :19.000   Max.   :12.0000  
+                                   NA's   :90       NA's   :90       
+   precision          recall       false.pos.rate     specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.00000   Min.   :0.9971  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:1.0000  
+ Median :0.0000   Median :0.0000   Median :0.00000   Median :1.0000  
+ Mean   :0.1206   Mean   :0.1004   Mean   :0.00016   Mean   :0.9998  
+ 3rd Qu.:0.0000   3rd Qu.:0.0000   3rd Qu.:0.00000   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.00288   Max.   :1.0000  
+ NA's   :90       NA's   :90       NA's   :90        NA's   :90      
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.0000   Median :0.0000  
+ Mean   :0.1017   Mean   :0.1037  
+ 3rd Qu.:0.0000   3rd Qu.:0.0000  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :90       NA's   :90      
+
+
+Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA for CC:
+    n.truth           n.pred         true.pos        false.pos    
+ Min.   : 0.000   Min.   : 0.00   Min.   : 0.000   Min.   : 0.00  
+ 1st Qu.: 8.000   1st Qu.: 0.00   1st Qu.: 0.000   1st Qu.: 0.00  
+ Median : 9.000   Median : 8.00   Median : 8.000   Median : 0.00  
+ Mean   : 7.994   Mean   : 9.39   Mean   : 5.912   Mean   : 3.63  
+ 3rd Qu.: 9.000   3rd Qu.:15.00   3rd Qu.: 9.000   3rd Qu.: 6.00  
+ Max.   :24.000   Max.   :37.00   Max.   :24.000   Max.   :25.00  
+                                  NA's   :90       NA's   :90     
+   precision          recall      false.pos.rate     specificity    
+ Min.   :0.0000   Min.   :0.000   Min.   :0.00000   Min.   :0.9940  
+ 1st Qu.:0.0000   1st Qu.:0.000   1st Qu.:0.00000   1st Qu.:0.9986  
+ Median :0.4737   Median :1.000   Median :0.00000   Median :1.0000  
+ Mean   :0.4982   Mean   :0.611   Mean   :0.00087   Mean   :0.9991  
+ 3rd Qu.:0.9000   3rd Qu.:1.000   3rd Qu.:0.00145   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.000   Max.   :0.00601   Max.   :1.0000  
+ NA's   :90       NA's   :90      NA's   :90        NA's   :90      
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.5806   Median :0.6185  
+ Mean   :0.5252   Mean   :0.5343  
+ 3rd Qu.:0.9474   3rd Qu.:0.9486  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :90       NA's   :90      
+
+
+InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA for CC excluding ancestral GO terms:
+    n.truth           n.pred          true.pos         false.pos     
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.00000   Min.   :0.0000  
+ 1st Qu.:1.0000   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.0000  
+ Median :1.0000   Median :0.0000   Median :0.00000   Median :0.0000  
+ Mean   :0.9025   Mean   :0.2428   Mean   :0.04388   Mean   :0.2379  
+ 3rd Qu.:1.0000   3rd Qu.:0.0000   3rd Qu.:0.00000   3rd Qu.:0.0000  
+ Max.   :3.0000   Max.   :3.0000   Max.   :1.00000   Max.   :3.0000  
+                                   NA's   :90        NA's   :90      
+   precision           recall        false.pos.rate     specificity    
+ Min.   :0.00000   Min.   :0.00000   Min.   :0.00000   Min.   :0.9993  
+ 1st Qu.:0.00000   1st Qu.:0.00000   1st Qu.:0.00000   1st Qu.:1.0000  
+ Median :0.00000   Median :0.00000   Median :0.00000   Median :1.0000  
+ Mean   :0.03349   Mean   :0.04157   Mean   :0.00006   Mean   :0.9999  
+ 3rd Qu.:0.00000   3rd Qu.:0.00000   3rd Qu.:0.00000   3rd Qu.:1.0000  
+ Max.   :1.00000   Max.   :1.00000   Max.   :0.00072   Max.   :1.0000  
+ NA's   :90        NA's   :90        NA's   :90        NA's   :90      
+    f1.score           mcc          
+ Min.   :0.0000   Min.   :-0.00046  
+ 1st Qu.:0.0000   1st Qu.: 0.00000  
+ Median :0.0000   Median : 0.00000  
+ Mean   :0.0358   Mean   : 0.03668  
+ 3rd Qu.:0.0000   3rd Qu.: 0.00000  
+ Max.   :1.0000   Max.   : 1.00000  
+ NA's   :90       NA's   :90        
+
+
+Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA for CC excluding ancestral GO terms:
+    n.truth           n.pred         true.pos        false.pos    
+ Min.   :0.0000   Min.   :0.000   Min.   :0.0000   Min.   :0.000  
+ 1st Qu.:1.0000   1st Qu.:0.000   1st Qu.:0.0000   1st Qu.:0.000  
+ Median :1.0000   Median :1.000   Median :1.0000   Median :0.000  
+ Mean   :0.9025   Mean   :1.885   Mean   :0.5958   Mean   :1.263  
+ 3rd Qu.:1.0000   3rd Qu.:3.000   3rd Qu.:1.0000   3rd Qu.:2.000  
+ Max.   :3.0000   Max.   :8.000   Max.   :2.0000   Max.   :7.000  
+                                  NA's   :90       NA's   :90     
+   precision          recall       false.pos.rate     specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.00000   Min.   :0.9983  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.9995  
+ Median :0.2000   Median :1.0000   Median :0.00000   Median :1.0000  
+ Mean   :0.3456   Mean   :0.5516   Mean   :0.00030   Mean   :0.9997  
+ 3rd Qu.:0.5000   3rd Qu.:1.0000   3rd Qu.:0.00048   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.00168   Max.   :1.0000  
+ NA's   :90       NA's   :90       NA's   :90        NA's   :90      
+    f1.score           mcc          
+ Min.   :0.0000   Min.   :-0.00065  
+ 1st Qu.:0.0000   1st Qu.: 0.00000  
+ Median :0.3333   Median : 0.40798  
+ Mean   :0.3898   Mean   : 0.41191  
+ 3rd Qu.:0.6667   3rd Qu.: 0.70704  
+ Max.   :1.0000   Max.   : 1.00000  
+ NA's   :90       NA's   :90        
+
+
+
+Performance evaluation on the Molecular Function category
+
+
+Mercator performance on Oryza Non SwissProt Non Elect Inferred GOA for MF:
+    n.truth           n.pred         true.pos        false.pos    
+ Min.   : 0.000   Min.   : 0.00   Min.   : 0.000   Min.   : 0.00  
+ 1st Qu.: 0.000   1st Qu.: 0.00   1st Qu.: 0.000   1st Qu.: 0.00  
+ Median : 0.000   Median : 0.00   Median : 3.000   Median : 0.00  
+ Mean   : 1.683   Mean   : 3.95   Mean   : 4.271   Mean   : 2.09  
+ 3rd Qu.: 0.000   3rd Qu.: 8.00   3rd Qu.: 6.000   3rd Qu.: 2.00  
+ Max.   :30.000   Max.   :29.00   Max.   :29.000   Max.   :17.00  
+                                  NA's   :483      NA's   :483    
+   precision          recall       false.pos.rate    specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.9985  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.9998  
+ Median :0.1765   Median :0.1875   Median :0.0000   Median :1.0000  
+ Mean   :0.3813   Mean   :0.4199   Mean   :0.0002   Mean   :0.9998  
+ 3rd Qu.:0.8571   3rd Qu.:0.8571   3rd Qu.:0.0002   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.0015   Max.   :1.0000  
+ NA's   :483      NA's   :483      NA's   :483      NA's   :483     
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.2609   Median :0.2965  
+ Mean   :0.3731   Mean   :0.3848  
+ 3rd Qu.:0.8000   3rd Qu.:0.7998  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :483      NA's   :483     
+
+
+InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA for MF:
+    n.truth           n.pred          true.pos       false.pos     
+ Min.   : 0.000   Min.   : 0.000   Min.   : 0.00   Min.   : 0.000  
+ 1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 0.00   1st Qu.: 0.000  
+ Median : 0.000   Median : 4.000   Median : 1.00   Median : 0.000  
+ Mean   : 1.683   Mean   : 4.864   Mean   : 4.03   Mean   : 1.444  
+ 3rd Qu.: 0.000   3rd Qu.: 7.000   3rd Qu.: 5.00   3rd Qu.: 1.000  
+ Max.   :30.000   Max.   :29.000   Max.   :29.00   Max.   :17.000  
+                                   NA's   :483     NA's   :483     
+   precision          recall       false.pos.rate    specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.9985  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.9999  
+ Median :0.2500   Median :0.2500   Median :0.0000   Median :1.0000  
+ Mean   :0.4187   Mean   :0.4027   Mean   :0.0001   Mean   :0.9999  
+ 3rd Qu.:1.0000   3rd Qu.:0.8333   3rd Qu.:0.0001   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.0015   Max.   :1.0000  
+ NA's   :483      NA's   :483      NA's   :483      NA's   :483     
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.3333   Median :0.3332  
+ Mean   :0.3869   Mean   :0.3975  
+ 3rd Qu.:0.8333   3rd Qu.:0.8451  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :483      NA's   :483     
+
+
+Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA for MF:
+    n.truth           n.pred          true.pos        false.pos     
+ Min.   : 0.000   Min.   : 0.000   Min.   : 0.000   Min.   : 0.000  
+ 1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 1.000   1st Qu.: 0.000  
+ Median : 0.000   Median : 8.000   Median : 5.000   Median : 0.000  
+ Mean   : 1.683   Mean   : 8.602   Mean   : 5.549   Mean   : 3.241  
+ 3rd Qu.: 0.000   3rd Qu.:13.000   3rd Qu.: 7.000   3rd Qu.: 5.000  
+ Max.   :30.000   Max.   :44.000   Max.   :29.000   Max.   :20.000  
+                                   NA's   :483      NA's   :483     
+   precision          recall      false.pos.rate    specificity    
+ Min.   :0.0000   Min.   :0.000   Min.   :0.0000   Min.   :0.9982  
+ 1st Qu.:0.2727   1st Qu.:0.250   1st Qu.:0.0000   1st Qu.:0.9996  
+ Median :0.5833   Median :0.800   Median :0.0000   Median :1.0000  
+ Mean   :0.5849   Mean   :0.611   Mean   :0.0003   Mean   :0.9997  
+ 3rd Qu.:1.0000   3rd Qu.:1.000   3rd Qu.:0.0004   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.000   Max.   :0.0018   Max.   :1.0000  
+ NA's   :483      NA's   :483     NA's   :483      NA's   :483     
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.2609   1st Qu.:0.2965  
+ Median :0.5000   Median :0.5771  
+ Mean   :0.5290   Mean   :0.5569  
+ 3rd Qu.:0.9091   3rd Qu.:0.9128  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :483      NA's   :483     
+
+
+InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA for MF excluding ancestral GO terms:
+    n.truth           n.pred          true.pos        false.pos     
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.0000   Median :1.0000   Median :0.0000   Median :0.0000  
+ Mean   :0.2825   Mean   :0.9627   Mean   :0.4211   Mean   :0.7368  
+ 3rd Qu.:0.0000   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000  
+ Max.   :4.0000   Max.   :5.0000   Max.   :3.0000   Max.   :3.0000  
+                                   NA's   :483      NA's   :483     
+   precision          recall       false.pos.rate   specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0e+00   Min.   :0.9997  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0e+00   1st Qu.:0.9999  
+ Median :0.0000   Median :0.0000   Median :0e+00   Median :1.0000  
+ Mean   :0.1931   Mean   :0.2613   Mean   :1e-04   Mean   :0.9999  
+ 3rd Qu.:0.3333   3rd Qu.:0.5000   3rd Qu.:1e-04   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :3e-04   Max.   :1.0000  
+ NA's   :483      NA's   :483      NA's   :483     NA's   :483     
+    f1.score           mcc         
+ Min.   :0.0000   Min.   :-0.0001  
+ 1st Qu.:0.0000   1st Qu.:-0.0001  
+ Median :0.0000   Median : 0.0000  
+ Mean   :0.2108   Mean   : 0.2188  
+ 3rd Qu.:0.5000   3rd Qu.: 0.5773  
+ Max.   :1.0000   Max.   : 1.0000  
+ NA's   :483      NA's   :483      
+
+
+Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA for MF excluding ancestral GO terms:
+    n.truth           n.pred         true.pos        false.pos   
+ Min.   :0.0000   Min.   :0.000   Min.   :0.0000   Min.   :0.00  
+ 1st Qu.:0.0000   1st Qu.:0.000   1st Qu.:0.0000   1st Qu.:1.00  
+ Median :0.0000   Median :2.000   Median :0.0000   Median :1.00  
+ Mean   :0.2825   Mean   :2.412   Mean   :0.6466   Mean   :1.91  
+ 3rd Qu.:0.0000   3rd Qu.:4.000   3rd Qu.:1.0000   3rd Qu.:3.00  
+ Max.   :4.0000   Max.   :9.000   Max.   :3.0000   Max.   :6.00  
+                                  NA's   :483      NA's   :483   
+   precision          recall      false.pos.rate   specificity    
+ Min.   :0.0000   Min.   :0.000   Min.   :0e+00   Min.   :0.9995  
+ 1st Qu.:0.0000   1st Qu.:0.000   1st Qu.:1e-04   1st Qu.:0.9997  
+ Median :0.0000   Median :0.000   Median :1e-04   Median :0.9999  
+ Mean   :0.1959   Mean   :0.438   Mean   :2e-04   Mean   :0.9998  
+ 3rd Qu.:0.3333   3rd Qu.:1.000   3rd Qu.:3e-04   3rd Qu.:0.9999  
+ Max.   :1.0000   Max.   :1.000   Max.   :5e-04   Max.   :1.0000  
+ NA's   :483      NA's   :483     NA's   :483     NA's   :483     
+    f1.score          mcc         
+ Min.   :0.000   Min.   :-0.0002  
+ 1st Qu.:0.000   1st Qu.:-0.0001  
+ Median :0.000   Median : 0.0000  
+ Mean   :0.255   Mean   : 0.2834  
+ 3rd Qu.:0.500   3rd Qu.: 0.5773  
+ Max.   :1.000   Max.   : 1.0000  
+ NA's   :483     NA's   :483      
+
+
+Molecular Functin excluding those gold standard proteins for which Blast found Hits with 100 percent sequence similarity:
+
+Mercator performance on Oryza Non SwissProt Non Elect Inferred GOA for MF:
+    n.truth           n.pred          true.pos        false.pos     
+ Min.   : 0.000   Min.   : 0.000   Min.   : 0.000   Min.   : 0.000  
+ 1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 0.000  
+ Median : 0.000   Median : 0.000   Median : 3.000   Median : 0.000  
+ Mean   : 1.864   Mean   : 3.943   Mean   : 4.379   Mean   : 1.992  
+ 3rd Qu.: 0.000   3rd Qu.: 8.000   3rd Qu.: 6.000   3rd Qu.: 2.000  
+ Max.   :30.000   Max.   :29.000   Max.   :29.000   Max.   :17.000  
+                                   NA's   :399      NA's   :399     
+   precision          recall       false.pos.rate    specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.9985  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.9998  
+ Median :0.2792   Median :0.4018   Median :0.0000   Median :1.0000  
+ Mean   :0.3885   Mean   :0.4277   Mean   :0.0002   Mean   :0.9998  
+ 3rd Qu.:0.8616   3rd Qu.:0.9167   3rd Qu.:0.0002   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.0015   Max.   :1.0000  
+ NA's   :399      NA's   :399      NA's   :399      NA's   :399     
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.2609   Median :0.3705  
+ Mean   :0.3805   Mean   :0.3922  
+ 3rd Qu.:0.8000   3rd Qu.:0.8040  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :399      NA's   :399     
+
+
+InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA for MF:
+    n.truth           n.pred          true.pos        false.pos     
+ Min.   : 0.000   Min.   : 0.000   Min.   : 0.000   Min.   : 0.000  
+ 1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 0.000  
+ Median : 0.000   Median : 4.000   Median : 1.000   Median : 0.000  
+ Mean   : 1.864   Mean   : 4.625   Mean   : 4.048   Mean   : 1.371  
+ 3rd Qu.: 0.000   3rd Qu.: 6.000   3rd Qu.: 5.000   3rd Qu.: 1.000  
+ Max.   :30.000   Max.   :29.000   Max.   :29.000   Max.   :17.000  
+                                   NA's   :399      NA's   :399     
+   precision          recall       false.pos.rate    specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.9985  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.9999  
+ Median :0.2500   Median :0.2500   Median :0.0000   Median :1.0000  
+ Mean   :0.4087   Mean   :0.3923   Mean   :0.0001   Mean   :0.9999  
+ 3rd Qu.:1.0000   3rd Qu.:0.8000   3rd Qu.:0.0001   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.0015   Max.   :1.0000  
+ NA's   :399      NA's   :399      NA's   :399      NA's   :399     
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.3167   Median :0.3332  
+ Mean   :0.3753   Mean   :0.3865  
+ 3rd Qu.:0.8083   3rd Qu.:0.8236  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :399      NA's   :399     
+
+
+Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA for MF:
+    n.truth           n.pred          true.pos        false.pos     
+ Min.   : 0.000   Min.   : 0.000   Min.   : 0.000   Min.   : 0.000  
+ 1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 1.000   1st Qu.: 0.000  
+ Median : 0.000   Median : 8.000   Median : 5.000   Median : 0.000  
+ Mean   : 1.864   Mean   : 8.342   Mean   : 5.573   Mean   : 2.952  
+ 3rd Qu.: 0.000   3rd Qu.:11.000   3rd Qu.: 7.000   3rd Qu.: 5.000  
+ Max.   :30.000   Max.   :44.000   Max.   :29.000   Max.   :17.000  
+                                   NA's   :399      NA's   :399     
+   precision          recall       false.pos.rate    specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.9985  
+ 1st Qu.:0.2727   1st Qu.:0.2500   1st Qu.:0.0000   1st Qu.:0.9996  
+ Median :0.5833   Median :0.8000   Median :0.0000   Median :1.0000  
+ Mean   :0.5891   Mean   :0.6028   Mean   :0.0003   Mean   :0.9997  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:0.0004   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0.0015   Max.   :1.0000  
+ NA's   :399      NA's   :399      NA's   :399      NA's   :399     
+    f1.score           mcc        
+ Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.2902   1st Qu.:0.3467  
+ Median :0.5000   Median :0.5772  
+ Mean   :0.5254   Mean   :0.5539  
+ 3rd Qu.:0.9091   3rd Qu.:0.9128  
+ Max.   :1.0000   Max.   :1.0000  
+ NA's   :399      NA's   :399     
+
+
+InterProScan performance on Oryza Non SwissProt Non Elect Inferred GOA for MF excluding ancestral GO terms:
+    n.truth           n.pred         true.pos        false.pos     
+ Min.   :0.0000   Min.   :0.000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.000   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.0000   Median :1.000   Median :0.0000   Median :0.0000  
+ Mean   :0.3155   Mean   :0.914   Mean   :0.4274   Mean   :0.7258  
+ 3rd Qu.:0.0000   3rd Qu.:1.000   3rd Qu.:1.0000   3rd Qu.:1.0000  
+ Max.   :4.0000   Max.   :5.000   Max.   :3.0000   Max.   :3.0000  
+                                  NA's   :399      NA's   :399     
+   precision          recall      false.pos.rate   specificity    
+ Min.   :0.0000   Min.   :0.000   Min.   :0e+00   Min.   :0.9997  
+ 1st Qu.:0.0000   1st Qu.:0.000   1st Qu.:0e+00   1st Qu.:0.9999  
+ Median :0.0000   Median :0.000   Median :0e+00   Median :1.0000  
+ Mean   :0.1870   Mean   :0.256   Mean   :1e-04   Mean   :0.9999  
+ 3rd Qu.:0.3333   3rd Qu.:0.500   3rd Qu.:1e-04   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.000   Max.   :3e-04   Max.   :1.0000  
+ NA's   :399      NA's   :399     NA's   :399     NA's   :399     
+    f1.score           mcc         
+ Min.   :0.0000   Min.   :-0.0001  
+ 1st Qu.:0.0000   1st Qu.: 0.0000  
+ Median :0.0000   Median : 0.0000  
+ Mean   :0.2046   Mean   : 0.2128  
+ 3rd Qu.:0.5000   3rd Qu.: 0.5193  
+ Max.   :1.0000   Max.   : 1.0000  
+ NA's   :399      NA's   :399      
+
+
+Best Blast performance on Oryza Non SwissProt Non Elect Inferred GOA for MF excluding ancestral GO terms:
+    n.truth           n.pred        true.pos        false.pos    
+ Min.   :0.0000   Min.   :0.00   Min.   :0.0000   Min.   :0.000  
+ 1st Qu.:0.0000   1st Qu.:0.00   1st Qu.:0.0000   1st Qu.:1.000  
+ Median :0.0000   Median :2.00   Median :0.0000   Median :1.000  
+ Mean   :0.3155   Mean   :2.34   Mean   :0.6532   Mean   :1.887  
+ 3rd Qu.:0.0000   3rd Qu.:4.00   3rd Qu.:1.0000   3rd Qu.:3.000  
+ Max.   :4.0000   Max.   :9.00   Max.   :3.0000   Max.   :6.000  
+                                 NA's   :399      NA's   :399    
+   precision          recall       false.pos.rate   specificity    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0e+00   Min.   :0.9995  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:1e-04   1st Qu.:0.9997  
+ Median :0.0000   Median :0.0000   Median :1e-04   Median :0.9999  
+ Mean   :0.1915   Mean   :0.4294   Mean   :2e-04   Mean   :0.9998  
+ 3rd Qu.:0.3333   3rd Qu.:1.0000   3rd Qu.:3e-04   3rd Qu.:0.9999  
+ Max.   :1.0000   Max.   :1.0000   Max.   :5e-04   Max.   :1.0000  
+ NA's   :399      NA's   :399      NA's   :399     NA's   :399     
+    f1.score           mcc         
+ Min.   :0.0000   Min.   :-0.0002  
+ 1st Qu.:0.0000   1st Qu.:-0.0001  
+ Median :0.0000   Median : 0.0000  
+ Mean   :0.2504   Mean   : 0.2786  
+ 3rd Qu.:0.5000   3rd Qu.: 0.5773  
+ Max.   :1.0000   Max.   : 1.0000  
+ NA's   :399      NA's   :399      
