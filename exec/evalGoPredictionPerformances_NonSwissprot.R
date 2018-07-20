@@ -1,7 +1,7 @@
 require(MapMan2GO)
 options(mc.cores = detectCores())
 
-message("USAGE: Rscript path/2/MapMan2GO/exec/evalGoPredictionPerformances.R path/2/mercator_result.txt path/2/blast_result_table path/2/interpro_scan_results_preprocessed path/2/preprocessed_uniprot_goa_table gold_standard_goa path/2/MapMan2GO")
+message("USAGE: Rscript path/2/MapMan2GO/exec/evalGoPredictionPerformances.R path/2/mercator_result.txt path/2/interpro_scan_results_preprocessed path/2/preprocessed_uniprot_goa_table gold_standard_goa path/2/MapMan2GO")
 
 input.args <- commandArgs(trailingOnly = TRUE)
 
