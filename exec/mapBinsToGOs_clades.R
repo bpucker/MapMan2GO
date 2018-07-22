@@ -19,7 +19,7 @@ mm.2.go.work <- setNames(mclapply(mm.leaf.bins.work, compoundGoAnnotationEntropy
     mm.leaf.bins.work)
 mm.2.go.df.work <- Reduce(rbind, mclapply(names(mm.2.go.work), function(x) {
     y <- mm.2.go.work[[x]]
-    data.frame(MapManBin = x, MapManBin.GO = y[["MapManBin.GO"]], Shannon.Entropy = y[["Shannon.Entropy"]], 
+   data.frame(MapManBin = x, MapManBin.GO = y[["MapManBin.GO"]], Shannon.Entropy = y[["Shannon.Entropy"]], Shannon.Entropy.BP = y[["Shannon.Entropy.BP"]], Shannon.Entropy.CC = y[["Shannon.Entropy.CC"]], Shannon.Entropy.MF = y[["Shannon.Entropy.MF"]], Shannon.Entropy.not.used = y[["Shannon.Entropy.not.used"]], Shannon.Entropy.not.used.BP = y[["Shannon.Entropy.not.used.BP"]], Shannon.Entropy.not.used.CC = y[["Shannon.Entropy.not.used.CC"]], Shannon.Entropy.not.used.MF = y[["Shannon.Entropy.not.used.MF"]],  
         n.GO = y[["n.GO"]], n.genes = y[["n.genes"]], median.n.GO = y[["median.n.GO"]], 
         stringsAsFactors = FALSE)
 }))
@@ -55,7 +55,7 @@ if (length(go.terms.not.in.db) > 0) {
 
 
 #' Add the MapMan Bins Descriptions to the above table:
-mr.full <- readMercatorResultTable(input.args[[2]], add.go.terms = FALSE)
+mr.full <- as.data.frame( readMercatorResultTable(input.args[[2]], add.go.terms = FALSE) )
 mm.desc.df.work <- unique(mr.full[, c("BINCODE", "NAME")])
 names(mm.desc.df.work) <- c("MapManBin", "Description")
 
@@ -75,22 +75,22 @@ mm.2.full.desc.work$Bin.Description <- as.character(unlist(mclapply(mm.2.full.de
 
 #' Some statistics:
 #' - Histogram of Number of GO Terms per MapMan-Bin GOA     # when successful, repeat this plot, it was overwritten, now the name is corrected
-fl.name <- paste(ref.set.name, "NumberOfGoTermsPerMapManBinGoaHist.pdf", sep = "_")
+fl.name <- paste(subset.name, "NumberOfGoTermsPerMapManBinGoaHist.pdf", sep = "_")
 pdf(file.path(input.args[[1]], "inst", fl.name))
 plotDistAsHistAndBox(mm.2.go.df.work$n.GO, "Number of GO Terms per MapMan-Bin GOA")
 dev.off()
 #' - Histogram of Entropies
-fl.name <- paste(ref.set.name, "MapManBinGoaEntropyHist.pdf", sep = "_")
+fl.name <- paste(subset.name, "MapManBinGoaEntropyHist.pdf", sep = "_")
 pdf(file.path(input.args[[1]], "inst", fl.name))
 plotDistAsHistAndBox(mm.2.go.df.work$Shannon.Entropy, "Shannon Entropy of compound GO Annotations per MapMan-Bin")
 dev.off()
 #' - Histogram of Sizes in terms of number of genes
-fl.name <- paste(ref.set.name, "GenesPerMapManBinHist.pdf", sep = "_")
+fl.name <- paste(subset.name, "GenesPerMapManBinHist.pdf", sep = "_")
 pdf(file.path(input.args[[1]], "inst", fl.name))
 plotDistAsHistAndBox(mm.2.go.df.work$n.genes, "Number of genes per MapMan-Bin")
 dev.off()
 #' - Number of genes vs Number of GO Terms in the Bin-GOA:                     # Do again
-fl.name <- paste(ref.set.name, "NumberOfGenesVsNumberOfGoTermsInMapManBinGOA.pdf", 
+fl.name <- paste(subset.name, "NumberOfGenesVsNumberOfGoTermsInMapManBinGOA.pdf", 
     sep = "_")
 pdf(file.path(input.args[[1]], "inst", fl.name))
 plot(mm.2.go.df.work$n.genes, mm.2.go.df.work$n.GO, xlab = "Number of genes per MapMan-Bin", 
@@ -105,20 +105,13 @@ dev.off()
 
 
 #' Save results:
-fl.name <- paste(ref.set.name, "MapManBins2GO.txt", sep = "_")
+fl.name <- paste(subset.name, "MapManBins2GO.txt", sep = "_")
 write.table(mm.2.full.desc.work, file.path(input.args[[1]], "inst", fl.name), sep = "\t", 
     row.names = FALSE)
 
 #' Save binary results:
-rdata.file <- (file = file.path(input.args[[1]], "data", "MapManBins2GO.RData"))
-ref.set.results <- c(paste("mm.2.go", ref.set.name, sep = "."), paste("mm.2.go.df", 
-    ref.set.name, sep = "."), paste("mm.2.full.desc", ref.set.name, sep = "."), 
-    paste("mm.desc.df ", ref.set.name, sep = "."))
-assign(ref.set.results[[1]], mm.2.go.work)
-assign(ref.set.results[[2]], mm.2.go.df.work)
-assign(ref.set.results[[3]], mm.2.full.desc.work)
-assign(ref.set.results[[4]], mm.desc.df.work)
-appendToRData(list = ref.set.results, file = rdata.file)
-
+fl.name <- paste(subset.name, "MapManBins2GO.RData", sep = "_")
+save(mm.2.go.work, mm.2.go.df.work, mm.2.full.desc.work, mm.desc.df.work, file = file.path(input.args[[1]], 
+    "data", fl.name))
 
 message("DONE")
